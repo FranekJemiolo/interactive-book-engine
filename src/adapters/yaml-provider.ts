@@ -6,49 +6,61 @@ export class YAMLProvider implements BookProvider {
   private nodeCache: Map<string, Node> = new Map();
   private chapterCache: Map<string, Chapter> = new Map();
 
-  constructor(private basePath: string = "") {}
+  constructor(private basePath: string = "/content") {}
 
   async loadBook(): Promise<Book> {
     if (this.bookCache) {
+      console.log('[YAMLProvider] Returning cached book');
       return this.bookCache;
     }
 
     try {
+      console.log('[YAMLProvider] Loading book from:', `${this.basePath}/book.yaml`);
       const response = await fetch(`${this.basePath}/book.yaml`);
+      console.log('[YAMLProvider] Response status:', response.status);
       if (!response.ok) {
         throw new Error(`Failed to load book: ${response.statusText}`);
       }
 
       const text = await response.text();
+      console.log('[YAMLProvider] Book YAML loaded, length:', text.length);
       const data = yaml.load(text) as any;
+      console.log('[YAMLProvider] Book parsed:', data);
 
       this.bookCache = this.parseBook(data);
+      console.log('[YAMLProvider] Book cached');
       return this.bookCache;
     } catch (error) {
-      console.error("Error loading book:", error);
+      console.error("[YAMLProvider] Error loading book:", error);
       throw error;
     }
   }
 
   async getNode(id: string): Promise<Node> {
     if (this.nodeCache.has(id)) {
+      console.log('[YAMLProvider] Returning cached node:', id);
       return this.nodeCache.get(id)!;
     }
 
     try {
+      console.log('[YAMLProvider] Loading node from:', `${this.basePath}/nodes/${id}.yaml`);
       const response = await fetch(`${this.basePath}/nodes/${id}.yaml`);
+      console.log('[YAMLProvider] Node response status:', response.status);
       if (!response.ok) {
         throw new Error(`Failed to load node ${id}: ${response.statusText}`);
       }
 
       const text = await response.text();
+      console.log('[YAMLProvider] Node YAML loaded, length:', text.length);
       const data = yaml.load(text) as any;
+      console.log('[YAMLProvider] Node parsed:', data);
 
       const node = this.parseNode(data);
       this.nodeCache.set(id, node);
+      console.log('[YAMLProvider] Node cached');
       return node;
     } catch (error) {
-      console.error(`Error loading node ${id}:`, error);
+      console.error("[YAMLProvider] Error loading node:", error);
       throw error;
     }
   }

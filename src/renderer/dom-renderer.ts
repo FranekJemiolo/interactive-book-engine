@@ -5,6 +5,7 @@ export class DOMRenderer {
   private contentContainer!: HTMLElement;
   private choicesContainer!: HTMLElement;
   private onChoiceSelect?: (choiceId: string) => void;
+  private onShare?: () => void;
 
   constructor(containerId: string) {
     this.container = document.getElementById(containerId)!;
@@ -20,15 +21,28 @@ export class DOMRenderer {
       <div class="book-container">
         <div class="content-area" id="content-area"></div>
         <div class="choices-area" id="choices-area"></div>
+        <button class="share-button" id="share-button">📤 Share</button>
       </div>
     `;
 
     this.contentContainer = this.container.querySelector("#content-area")!;
     this.choicesContainer = this.container.querySelector("#choices-area")!;
+    
+    // Set up share button
+    const shareButton = this.container.querySelector("#share-button") as HTMLButtonElement;
+    if (shareButton) {
+      shareButton.addEventListener("click", () => {
+        this.onShare?.();
+      });
+    }
   }
 
   setChoiceHandler(handler: (choiceId: string) => void): void {
     this.onChoiceSelect = handler;
+  }
+
+  setShareHandler(handler: () => void): void {
+    this.onShare = handler;
   }
 
   renderFrame(frame: Frame): void {

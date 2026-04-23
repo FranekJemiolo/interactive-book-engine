@@ -23,6 +23,10 @@ export class PacingSystem {
     if (this.fastForwardMode) return;
 
     const delay = frameDelay || this.getEffectiveDelay("frame");
+    if (delay === Infinity || delay === -1) {
+      // Infinite wait - never resolve
+      return new Promise(() => {});
+    }
     if (delay) {
       await this.delay(delay);
     }
@@ -45,34 +49,34 @@ export class PacingSystem {
     return this.fastForwardMode;
   }
 
-  private getEffectiveDelay(type: "intro" | "frame" | "suspense"): number {
+  getEffectiveDelay(type: "intro" | "frame" | "suspense"): number {
     const arcPacing = this.arcPacing?.pacing;
     const nodePacing = this.currentPacing;
 
     switch (type) {
       case "intro":
-        return nodePacing?.introDelay || arcPacing?.frameDelay || 0;
+        return nodePacing?.introDelay || arcPacing?.frameDelay || 30000; // Default 30 seconds
       case "frame":
-        const baseDelay = arcPacing?.frameDelay || 0;
+        const baseDelay = arcPacing?.frameDelay || 30000; // Default 30 seconds
         const multiplier = nodePacing?.frameDelayMultiplier || 1;
         return Math.floor(baseDelay * multiplier);
       case "suspense":
-        return nodePacing?.suspensePauseBeforeChoices || this.getSuspenseDelay(arcPacing?.suspense) || 0;
+        return nodePacing?.suspensePauseBeforeChoices || this.getSuspenseDelay(arcPacing?.suspense) || 30000;
       default:
-        return 0;
+        return 30000; // Default 30 seconds
     }
   }
 
   private getSuspenseDelay(suspense?: "low" | "medium" | "high"): number {
     switch (suspense) {
       case "low":
-        return 500;
+        return 30000; // 30 seconds for auto progression
       case "medium":
-        return 1000;
+        return 30000; // 30 seconds for auto progression
       case "high":
-        return 2000;
+        return 30000; // 30 seconds for auto progression
       default:
-        return 0;
+        return 30000; // Default to 30 seconds for auto progression
     }
   }
 

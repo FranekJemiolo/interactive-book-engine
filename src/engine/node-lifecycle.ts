@@ -103,9 +103,16 @@ export class NodeLifecycleEngine {
       await this.pacingSystem.applyFrameDelay(frame.delay);
     }
 
-    // Handle pause frames
+    // Handle pause frames with configurable multiplier
     if (frame.type === "pause") {
-      await this.delay(frame.duration);
+      let duration = frame.duration || 0;
+      
+      // If duration is 0 or very short (less than 1 second), use default pacing
+      if (duration < 1000) {
+        duration = this.pacingSystem.getEffectiveDelay("frame");
+      }
+      
+      await this.delay(duration);
     }
   }
 
@@ -149,6 +156,10 @@ export class NodeLifecycleEngine {
   }
 
   private delay(ms: number): Promise<void> {
+    if (ms === Infinity || ms === -1) {
+      // Infinite wait - never resolve
+      return new Promise(() => {});
+    }
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 

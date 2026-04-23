@@ -47,16 +47,55 @@ class InteractiveBookApp {
     // Setup chapter selection event listener
     window.addEventListener('selectChapter', async (e: any) => {
       console.log('[App] Chapter selection event:', e.detail);
+      // Reset state when selecting chapter from home screen
+      this.stateStore.reset();
       if (!this.currentBook) {
         console.log('[App] Book not loaded, loading...');
         const book = await this.bookProvider.loadBook();
         this.currentBook = book;
+        // Re-render React component with loaded book
+        this.renderReactComponent();
       }
       this.loadChapter(e.detail.chapterId, this.currentBook).then(() => {
         this.startChapter();
       }).catch((error) => {
         console.error('[App] Failed to load chapter:', error);
       });
+    });
+
+    // Setup continue reading event listener
+    window.addEventListener('continueReading', async () => {
+      console.log('[App] Continue reading event');
+      if (!this.currentBook) {
+        console.log('[App] Book not loaded, loading...');
+        const book = await this.bookProvider.loadBook();
+        this.currentBook = book;
+      }
+      // Load state from URL
+      const urlState = URLStateManager.loadStateFromURL();
+      if (urlState) {
+        console.log('[App] Loading state from URL:', urlState);
+        this.stateStore.deserialize(JSON.stringify(urlState));
+        // Navigate to the last visited node
+        const chapterId = urlState.chapter.id;
+        // Get the last visited node from the state
+        const state = this.stateStore.getState();
+        const lastVisitedNode = state.meta.visitedNodes[state.meta.visitedNodes.length - 1];
+        if (lastVisitedNode) {
+          this.loadChapter(chapterId, this.currentBook).then(() => {
+            this.navigateToNode(lastVisitedNode);
+          }).catch((error) => {
+            console.error('[App] Failed to load chapter:', error);
+          });
+        } else {
+          // If no visited nodes, just start the chapter
+          this.loadChapter(chapterId, this.currentBook).then(() => {
+            this.startChapter();
+          }).catch((error) => {
+            console.error('[App] Failed to load chapter:', error);
+          });
+        }
+      }
     });
   }
 
@@ -141,6 +180,15 @@ class InteractiveBookApp {
     this.reactRoot = createRoot(container);
     console.log('[App] React root created, rendering ReactBookRenderer');
     
+    this.renderReactComponent();
+  }
+
+  private renderReactComponent(): void {
+    if (!this.reactRoot) return;
+    
+    const urlState = URLStateManager.loadStateFromURL();
+    const hasUrlState = !!urlState;
+    
     this.reactRoot.render(
       React.createElement(ReactBookRenderer, {
         onChoiceSelect: (choiceId: string) => {
@@ -163,14 +211,18 @@ class InteractiveBookApp {
           this.returnToHome();
         },
         chapters: this.currentBook?.chapters || [],
-        currentChapterId: this.chapterSystem.getCurrentChapter()?.id
+        currentChapterId: this.chapterSystem.getCurrentChapter()?.id,
+        hasUrlState
       })
     );
     console.log('[App] ReactBookRenderer rendered');
     
-    setTimeout(() => {
-      console.log('[App] Container innerHTML after render:', container.innerHTML);
-    }, 1000);
+    const container = document.getElementById('app');
+    if (container) {
+      setTimeout(() => {
+        console.log('[App] Container innerHTML after render:', container.innerHTML);
+      }, 1000);
+    }
   }
 
   private handleChoice(choiceId: string): void {
@@ -205,6 +257,9 @@ class InteractiveBookApp {
       const book = await this.bookProvider.loadBook();
       this.currentBook = book;
       console.log("Book loaded:", book.title);
+
+      // Re-render React component with loaded book
+      this.renderReactComponent();
 
       // Check for URL state first, then fall back to localStorage progress
       const urlState = URLStateManager.loadStateFromURL();

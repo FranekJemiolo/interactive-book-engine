@@ -5,8 +5,9 @@ interface ReactBookRendererProps {
   onChoiceSelect: (choiceId: string) => void;
   onShare: () => void;
   onBack: () => void;
-  chapters?: Chapter[];
+  chapters?: any[];
   currentChapterId?: string;
+  hasUrlState?: boolean;
 }
 
 export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
@@ -14,7 +15,8 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
   onShare,
   onBack,
   chapters = [],
-  currentChapterId
+  currentChapterId,
+  hasUrlState = false
 }) => {
   const [frames, setFrames] = useState<Frame[]>([]);
   const [choices, setChoices] = useState<Choice[]>([]);
@@ -138,14 +140,19 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
           An interactive narrative exploring identity, consciousness, and the boundaries between human and artificial intelligence.
         </p>
         
-        {/* Start Reading Button */}
+        {/* Start/Continue Reading Button */}
         <button
           onClick={() => {
-            console.log('[ReactBookRenderer] Start Reading clicked');
+            console.log('[ReactBookRenderer] Start/Continue Reading clicked, hasUrlState:', hasUrlState);
             setShowHomeScreen(false);
-            // Trigger first chapter load via window event
-            const firstChapterId = chapters.length > 0 ? (typeof chapters[0] === 'string' ? chapters[0] : chapters[0].id) : 'chapter_1';
-            window.dispatchEvent(new CustomEvent('selectChapter', { detail: { chapterId: firstChapterId } }));
+            if (hasUrlState) {
+              // Load state from URL and continue
+              window.dispatchEvent(new CustomEvent('continueReading'));
+            } else {
+              // Trigger first chapter load via window event
+              const firstChapterId = chapters.length > 0 ? (typeof chapters[0] === 'string' ? chapters[0] : chapters[0].id) : 'chapter_1';
+              window.dispatchEvent(new CustomEvent('selectChapter', { detail: { chapterId: firstChapterId } }));
+            }
           }}
           style={{
             backgroundColor: '#4a9eff',
@@ -160,7 +167,7 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
             marginBottom: '2rem'
           }}
         >
-          Start Reading
+          {hasUrlState ? 'Continue Reading' : 'Start Reading'}
         </button>
         
         {/* Chapter List */}

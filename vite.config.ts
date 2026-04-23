@@ -9,8 +9,7 @@ export default defineConfig({
       input: {
         main: './index.html'
       }
-    },
-    copyPublicDir: false
+    }
   },
   server: {
     port: 3000,
@@ -19,5 +18,6 @@ export default defineConfig({
       strict: false
     }
   },
-  assetsInclude: ['**/*.yaml']
+  assetsInclude: ['**/*.yaml'],
+  publicDir: 'content'
 })

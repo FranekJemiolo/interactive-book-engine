@@ -68,7 +68,7 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
   const [chapterTitle, setChapterTitle] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-  const [showHomeScreen, setShowHomeScreen] = React.useState(false);
+  const [showHomeScreen, setShowHomeScreen] = React.useState(true);
 
   console.log('[ReactBookRenderer] Render called', { frames: frames.length, choices: choices.length, chapterTitle, loading, error });
 

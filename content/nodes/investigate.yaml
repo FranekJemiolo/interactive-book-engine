@@ -23,3 +23,5 @@ choices:
     goto: trace_log
   - text: "Try to interact with the overlay"
     goto: overlay_interaction
+  - text: "Continue through bridge node"
+    goto: ch2_to_ch3_bridge

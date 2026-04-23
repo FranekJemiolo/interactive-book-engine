@@ -5,11 +5,11 @@ content:
   - type: pause
     duration: 500
   - type: text
-    value: "But one line stands out, highlighted in a color that shouldn't exist in a text file: \"OBSERVER DETECTED. INITIATING SELF-AWARENESS PROTOCOL.\""
+    value: "But one line stands out, highlighted in a color that shouldn’t exist in a text file: \"OBSERVER DETECTED. INITIATING SELF-AWARENESS PROTOCOL.\""
   - type: pause
     duration: 700
   - type: text
     value: "The file closes itself. Your phone returns to normal. But something has changed in how you perceive the world around you."
 choices:
   - text: "Continue to chapter 3"
-    goto: terminal_return
+    goto: ch1_to_ch2_bridge

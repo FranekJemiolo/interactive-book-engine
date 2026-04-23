@@ -1,0 +1,19 @@
+id: ch1_to_ch2_bridge
+content:
+  - type: text
+    value: "The apartment door closes behind you, and for a moment, you feel like you're leaving something behind—not just the terminal, but a version of yourself that was beginning to understand."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "The hallway stretches out before you, longer than you remember. The elevator at the end seems impossibly distant, as if the building has expanded while you weren't looking."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Your watch shows 8:47 AM. You're supposed to be at work by 9:00. But the concept of being late feels... irrelevant somehow. Like time itself is just another variable in a system you're only beginning to perceive."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "You step outside, and the city welcomes you with its usual indifference. But today, the indifference feels intentional. Like the city is waiting to see what you'll do next."
+choices:
+  - text: "Walk to work"
+    goto: street_glitch

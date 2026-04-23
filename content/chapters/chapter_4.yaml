@@ -8,6 +8,7 @@ nodes:
   - ask_purpose
   - denial
   - hidden_revelation
+  - ch4_to_ch5_bridge
 context:
   location: "consciousness_space"
   time: "timeless"

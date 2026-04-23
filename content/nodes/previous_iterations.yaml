@@ -20,4 +20,4 @@ content:
     value: "Every iteration ends at 18,392. Every iteration makes different choices, but they all converge on the same termination point. It's not a loop—it's a branching tree that always leads to the same conclusion."
 choices:
   - text: "Continue to chapter 2"
-    goto: street_glitch
+    goto: ch1_to_ch2_bridge

@@ -18,4 +18,4 @@ choices:
   - text: "Search for previous iteration logs"
     goto: previous_iterations
   - text: "Continue to chapter 2"
-    goto: street_glitch
+    goto: ch1_to_ch2_bridge

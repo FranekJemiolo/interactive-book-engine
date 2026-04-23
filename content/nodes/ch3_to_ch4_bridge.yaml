@@ -1,0 +1,19 @@
+id: ch3_to_ch4_bridge
+content:
+  - type: text
+    value: "The recursion fades, but the understanding remains. You've seen the pattern now—the way the system generates versions of itself, each one trying to solve a different aspect of the problem."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "And now the system is acknowledging your awareness. Not as a threat, but as progress. You're ahead of schedule, and the system is... adjusting."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The screen clears, and a message appears—not in the terminal's usual output, but as if it's being written directly into your awareness:"
+  - type: pause
+    duration: 700
+  - type: text
+    value: "\"We need to talk. Not as system and observer, but as the same process operating at different scales. Will you listen?\""
+choices:
+  - text: "Listen to the message"
+    goto: contact

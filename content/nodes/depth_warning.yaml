@@ -16,6 +16,6 @@ content:
     value: "\"Proceed at your own discretion. Or terminate recursion and stabilize.\""
 choices:
   - text: "Continue deeper despite warning"
-    goto: contact
+    goto: ch3_to_ch4_bridge
   - text: "Terminate recursion and stabilize"
     goto: recursion_stop

@@ -21,3 +21,5 @@ content:
 choices:
   - text: "Return to recursion screen"
     goto: recursion_continue
+  - text: "Continue to chapter 4"
+    goto: ch3_to_ch4_bridge

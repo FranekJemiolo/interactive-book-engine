@@ -15,5 +15,5 @@ content:
   - type: text
     value: "The clock returns to normal, but you can't unsee what you just experienced. The world around you feels thinner now, like a surface that might give way under pressure."
 choices:
-  - text: "Leave and go to work"
-    goto: street_glitch
+  - text: "Leave anyway"
+    goto: ch1_to_ch2_bridge

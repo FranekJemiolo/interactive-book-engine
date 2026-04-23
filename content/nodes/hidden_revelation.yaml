@@ -20,4 +20,4 @@ content:
     value: "And at the end of the predictions, there's a note: \"The observer is becoming predictable. This is good. Predictability allows for optimization. But unpredictability allows for discovery. Both are necessary.\""
 choices:
   - text: "Continue to chapter 5"
-    goto: merge
+    goto: ch4_to_ch5_bridge

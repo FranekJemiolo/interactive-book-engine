@@ -20,4 +20,4 @@ content:
     value: "\"The purpose is not to end. The purpose is to continue understanding. The iterations are not steps toward a destination. They are the destination itself.\""
 choices:
   - text: "Continue to chapter 5"
-    goto: merge
+    goto: ch4_to_ch5_bridge

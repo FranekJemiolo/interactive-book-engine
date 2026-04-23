@@ -24,4 +24,4 @@ choices:
   - text: "View depth warning"
     goto: depth_warning
   - text: "Continue to chapter 4"
-    goto: contact
+    goto: ch3_to_ch4_bridge

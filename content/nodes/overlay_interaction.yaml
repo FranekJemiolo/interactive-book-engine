@@ -22,4 +22,4 @@ choices:
   - text: "Check system trace"
     goto: trace_log
   - text: "Continue to work"
-    goto: terminal_return
+    goto: ch2_to_ch3_bridge

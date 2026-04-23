@@ -22,4 +22,4 @@ choices:
   - text: "Investigate the empty lot"
     goto: empty_lot
   - text: "Continue to work"
-    goto: ignore_glitch
+    goto: ch2_to_ch3_bridge

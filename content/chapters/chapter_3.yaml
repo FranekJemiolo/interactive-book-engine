@@ -9,6 +9,7 @@ nodes:
   - child_life
   - machine_existence
   - depth_warning
+  - ch3_to_ch4_bridge
 context:
   location: "work_terminal"
   time: "afternoon"

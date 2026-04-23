@@ -12,4 +12,4 @@ content:
     value: "The screen displays one final line before fading: \"OBSERVER CHOICE RECORDED. PROCEEDING TO NEXT LAYER.\""
 choices:
   - text: "Continue to chapter 4"
-    goto: contact
+    goto: ch3_to_ch4_bridge

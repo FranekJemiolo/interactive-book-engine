@@ -1,15 +1,15 @@
 id: reflection_anomaly
 content:
   - type: text
-    value: "As you continue toward work, you pass a shop window with a large mirror. You catch your reflection, but something is wrong."
+    value: "You check your reflection in the office mirror. It shows you what you expect to see—your face, your clothes, the office behind you. But the timing is wrong."
   - type: pause
     duration: 500
   - type: text
-    value: "Your reflection is there, but it's delayed—not by much, maybe a fraction of a second. Like the mirror is rendering you from a slightly earlier moment in time."
+    value: "You move your hand, and the reflection doesn't respond immediately. There's a delay—just a fraction of a second, but noticeable. Like the reflection is being rendered from a remote server with network latency."
   - type: pause
     duration: 500
   - type: text
-    value: "You stop and experiment. You wave your hand, and your reflection waves back a moment later. You make a face, and the reflection follows with the same delay."
+    value: "You move your head faster, and the reflection struggles to keep up. For a moment, you see two versions of your face—the one you're making now, and the one from a moment ago, overlapping in the glass."
   - type: pause
     duration: 500
   - type: text
@@ -22,4 +22,4 @@ choices:
   - text: "Touch the mirror"
     goto: mirror_touch
   - text: "Walk away quickly"
-    goto: ignore_glitch
+    goto: ch2_to_ch3_bridge

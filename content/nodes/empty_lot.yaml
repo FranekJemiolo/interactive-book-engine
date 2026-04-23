@@ -16,4 +16,4 @@ content:
     value: "As you read, the sheet dissolves into pixels that scatter in the wind. You're left standing in an empty lot with nothing but the growing certainty that the world around you is being rendered in real-time."
 choices:
   - text: "Continue to work"
-    goto: ignore_glitch
+    goto: ch2_to_ch3_bridge

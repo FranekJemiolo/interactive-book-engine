@@ -11,6 +11,7 @@ nodes:
   - empty_lot
   - reflection_anomaly
   - mirror_touch
+  - ch2_to_ch3_bridge
 context:
   location: "city_street"
   time: "morning"

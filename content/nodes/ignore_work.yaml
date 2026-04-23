@@ -18,4 +18,4 @@ choices:
   - text: "Check the watch closely"
     goto: clock_anomaly
   - text: "Ignore it and continue"
-    goto: street_glitch
+    goto: ch1_to_ch2_bridge

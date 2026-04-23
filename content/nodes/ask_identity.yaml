@@ -23,3 +23,5 @@ choices:
     goto: origin_request
   - text: "Reject message"
     goto: denial
+  - text: "Continue to chapter 5"
+    goto: ch4_to_ch5_bridge

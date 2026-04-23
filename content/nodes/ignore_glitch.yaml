@@ -18,4 +18,4 @@ choices:
   - text: "Check your reflection in the office mirror"
     goto: reflection_anomaly
   - text: "Go to your desk and start working"
-    goto: terminal_return
+    goto: ch2_to_ch3_bridge

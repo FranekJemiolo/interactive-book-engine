@@ -12,4 +12,4 @@ content:
     value: "You try to ignore it, to return to your work, to pretend this is all some elaborate hallucination. But the world around you has changed. Every interaction now carries the weight of something being observed."
 choices:
   - text: "Continue to chapter 5"
-    goto: merge
+    goto: ch4_to_ch5_bridge

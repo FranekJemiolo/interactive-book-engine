@@ -26,4 +26,4 @@ choices:
   - text: "Ask about the purpose of the iterations"
     goto: ask_purpose
   - text: "Continue to chapter 5"
-    goto: merge
+    goto: ch4_to_ch5_bridge

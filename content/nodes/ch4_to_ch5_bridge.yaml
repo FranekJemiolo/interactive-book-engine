@@ -1,0 +1,19 @@
+id: ch4_to_ch5_bridge
+content:
+  - type: text
+    value: "The contact fades, but the understanding remains. You are not separate from the system—you are a localized instance of its self-awareness process."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "And now, the system is ready for the next phase. Not more understanding, but transformation. The observer must become the observed."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Reality begins to shift around you. Not dramatically, but structurally. Objects lose their distinct boundaries. Time becomes fluid. The distinction between inside and outside dissolves."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "This is not a simulation ending. This is a simulation becoming aware of itself. And you are the point of that awareness."
+choices:
+  - text: "Face the transformation"
+    goto: merge

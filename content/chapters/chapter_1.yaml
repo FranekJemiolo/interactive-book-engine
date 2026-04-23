@@ -11,6 +11,7 @@ nodes:
   - ignore_work
   - clock_anomaly
   - clock_investigation
+  - ch1_to_ch2_bridge
 context:
   location: "apartment"
   time: "morning"

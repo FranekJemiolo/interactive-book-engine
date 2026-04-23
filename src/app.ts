@@ -25,6 +25,7 @@ class InteractiveBookApp {
   private reactRoot: any;
 
   constructor() {
+    console.log('[App] Constructor called');
     this.stateStore = new StateStore();
     this.bookProvider = new YAMLProvider();
     this.renderer = new DOMRenderer("app");
@@ -34,12 +35,14 @@ class InteractiveBookApp {
     this.progressManager = new ProgressManager();
     this.immersiveMode = new ImmersiveMode("app");
 
+    console.log('[App] Setting up React renderer in constructor');
+    this.setupReactRenderer();
+
     this.setupNodeEngine();
     this.setupRenderer();
     this.setupImmersiveToggle();
     this.setupHomeScreen();
     this.setupShareHandler();
-    this.setupReactRenderer();
   }
 
   private setupNodeEngine(): void {

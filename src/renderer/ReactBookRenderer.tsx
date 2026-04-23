@@ -82,7 +82,8 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
       case 'text':
         return <p key={index} className="text-frame" style={{ fontSize: '1.1rem', lineHeight: '1.8', color: '#e0e0e0', marginBottom: '0.25rem' }}>{(frame as any).value}</p>;
       case 'image':
-        return <img key={index} src={(frame as any).src} alt="" className="image-frame" style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', margin: '0.5rem 0', display: 'block' }} />;
+        const imageSrc = (frame as any).src.startsWith('/') ? (frame as any).src : `/content/${(frame as any).src}`;
+        return <img key={index} src={imageSrc} alt="" className="image-frame" style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', margin: '0.5rem 0', display: 'block' }} />;
       case 'pause':
         return <div key={index} className="pause-frame" style={{ height: (frame as any).duration + 'px' }} />;
       default:

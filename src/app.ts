@@ -47,8 +47,8 @@ class InteractiveBookApp {
     // Setup chapter selection event listener
     window.addEventListener('selectChapter', async (e: any) => {
       console.log('[App] Chapter selection event:', e.detail);
-      // Reset state when selecting chapter from home screen
-      this.stateStore.reset();
+      // Don't reset state when selecting chapter - preserve visited nodes for pause skipping
+      // this.stateStore.reset();
       if (!this.currentBook) {
         console.log('[App] Book not loaded, loading...');
         const book = await this.bookProvider.loadBook();

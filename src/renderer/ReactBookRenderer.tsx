@@ -281,12 +281,12 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
         </button>
       </div>
 
-      {/* Chapter Indicator */}
+      {/* Chapter Indicator - Left Side */}
       {chapterTitle && (
         <div style={{ 
           position: 'fixed', 
           top: '1rem', 
-          right: '1rem', 
+          left: '6rem', 
           backgroundColor: '#2a2a4e', 
           border: '1px solid #4a9eff',
           color: '#e0e0e0',
@@ -296,7 +296,7 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
           fontWeight: 'bold',
           zIndex: 1000
         }}>
-          {chapterTitle}
+          ▸ {chapterTitle}
         </div>
       )}
 

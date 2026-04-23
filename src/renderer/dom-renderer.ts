@@ -32,11 +32,9 @@ export class DOMRenderer {
   }
 
   renderFrame(frame: Frame): void {
-    console.log("Rendering frame:", frame);
     const element = this.createFrameElement(frame);
     this.contentContainer.appendChild(element);
     this.scrollToBottom();
-    console.log("Frame rendered, content container children:", this.contentContainer.children.length);
   }
 
   private createFrameElement(frame: Frame): HTMLElement {

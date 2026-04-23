@@ -169,9 +169,9 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
   if (showHomeScreen) {
     console.log('[ReactBookRenderer] Rendering home screen');
     // Check URL state dynamically
-    const urlState = new URLSearchParams(window.location.hash.slice(1)).get('state');
-    const hasUrlStateDynamic = !!urlState;
-    console.log('[ReactBookRenderer] hasUrlState dynamic:', hasUrlStateDynamic);
+    const hash = window.location.hash.slice(1);
+    const hasUrlStateDynamic = hash.length > 0;
+    console.log('[ReactBookRenderer] hasUrlState dynamic:', hasUrlStateDynamic, 'hash:', hash);
     
     return (
       <div className="home-screen" style={{ textAlign: 'center', padding: '3rem 1rem', backgroundColor: '#1a1a2e', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>

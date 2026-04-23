@@ -196,11 +196,6 @@ class InteractiveBookApp {
   private renderReactComponent(chaptersOverride?: any[]): void {
     if (!this.reactRoot) return;
     
-    // Check if current node has been visited to skip animations
-    const state = this.stateStore.getState();
-    const currentNodeId = this.chapterSystem.getCurrentNodeId();
-    const skipAnimations = currentNodeId && state.meta.visitedNodes.includes(currentNodeId) ? true : false;
-    
     this.reactRoot.render(
       React.createElement(ReactBookRenderer, {
         onChoiceSelect: (choiceId: string) => {
@@ -223,8 +218,7 @@ class InteractiveBookApp {
           this.returnToHome();
         },
         chapters: chaptersOverride || this.currentBook?.chapters || [],
-        currentChapterId: this.chapterSystem.getCurrentChapter()?.id,
-        skipAnimations
+        currentChapterId: this.chapterSystem.getCurrentChapter()?.id
       })
     );
     console.log('[App] ReactBookRenderer rendered');

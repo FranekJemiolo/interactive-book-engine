@@ -181,35 +181,12 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     const hasUrlStateDynamic = hash.length > 0;
     console.log('[ReactBookRenderer] hasUrlState dynamic:', hasUrlStateDynamic, 'hash:', hash);
     
-    // Find current chapter title
-    const currentChapter = chapters.find((chapter: any) => {
-      const chapterId = typeof chapter === 'string' ? chapter : chapter.id;
-      return chapterId === localCurrentChapterId;
-    });
-    const currentChapterTitle = currentChapter ? (typeof currentChapter === 'string' ? currentChapter : (currentChapter.title || currentChapter.id)) : '';
-    
     return (
       <div className="home-screen" style={{ textAlign: 'center', padding: '3rem 1rem', backgroundColor: '#1a1a2e', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
         <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1rem', color: '#4a9eff' }}>Echoes of the Last Compiler</h1>
         <p style={{ fontSize: '1.2rem', color: '#e0e0e0', marginBottom: '3rem', maxWidth: '600px' }}>
           An interactive narrative exploring identity, consciousness, and the boundaries between human and artificial intelligence.
         </p>
-        
-        {/* Current Chapter Indicator */}
-        {currentChapterTitle && (
-          <div style={{
-            backgroundColor: '#2a2a4e',
-            border: '2px solid #4a9eff',
-            color: '#e0e0e0',
-            padding: '0.75rem 1.5rem',
-            borderRadius: '8px',
-            fontSize: '1rem',
-            fontWeight: 'bold',
-            marginBottom: '2rem'
-          }}>
-            ▸ {currentChapterTitle}
-          </div>
-        )}
         
         {/* Start/Continue Reading Button */}
         <button
@@ -280,25 +257,6 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
           ← Back
         </button>
       </div>
-
-      {/* Chapter Indicator - Left Side */}
-      {chapterTitle && (
-        <div style={{ 
-          position: 'fixed', 
-          top: '1rem', 
-          left: '6rem', 
-          backgroundColor: '#2a2a4e', 
-          border: '1px solid #4a9eff',
-          color: '#e0e0e0',
-          padding: '0.5rem 1rem',
-          borderRadius: '6px',
-          fontSize: '0.9rem',
-          fontWeight: 'bold',
-          zIndex: 1000
-        }}>
-          ▸ {chapterTitle}
-        </div>
-      )}
 
       {/* Content */}
       <div id="app-content" style={{ maxWidth: '800px', margin: '0 auto', paddingBottom: '4rem' }}>

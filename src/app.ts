@@ -167,6 +167,8 @@ class InteractiveBookApp {
     if (rendererAPI) {
       rendererAPI.clearContent();
     }
+    // Set a flag to show home screen instead of auto-loading first chapter
+    localStorage.setItem('showHomeScreen', 'true');
     // Reload the page to return to initial state
     window.location.href = window.location.pathname + window.location.search;
   }
@@ -214,6 +216,16 @@ class InteractiveBookApp {
       } else {
         this.renderer.setLoading(false);
       }
+      
+      // Check if we should show home screen instead of auto-loading first chapter
+      const shouldShowHomeScreen = localStorage.getItem('showHomeScreen') === 'true';
+      if (shouldShowHomeScreen) {
+        localStorage.removeItem('showHomeScreen');
+        // Render HomeScreen
+        await this.homeScreen.render(book, progress);
+        return;
+      }
+      
       // Don't render HomeScreen - use React renderer instead
       // await this.homeScreen.render(book, progress);
       

@@ -1,0 +1,25 @@
+id: overlay_interaction
+content:
+  - type: text
+    value: "You reach out to touch the overlay text. Your finger passes through it, but the text responds—highlighting, shifting, as if it's aware of your interaction."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "New text appears: \"OBSERVER ATTEMPTING DIRECT INTERACTION. NOT AUTHORIZED. INITIATING COMPENSATION PROTOCOL.\""
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The overlay fades, but reality around you changes. The colors become more saturated. The sounds become clearer. It's as if the system is compensating for your awareness by improving the simulation quality."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "A message appears in your peripheral vision, like a notification you can't dismiss: \"We see you noticing. This is expected. Please continue.\""
+  - type: pause
+    duration: 700
+  - type: text
+    value: "The message fades. The world returns to normal. But you have the distinct impression that something is now watching you more closely."
+choices:
+  - text: "Check system trace"
+    goto: trace_log
+  - text: "Continue to work"
+    goto: terminal_return

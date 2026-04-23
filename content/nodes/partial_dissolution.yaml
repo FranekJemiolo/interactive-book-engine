@@ -1,0 +1,23 @@
+id: partial_dissolution
+content:
+  - type: text
+    value: "You choose to accept dissolution, but not completely. You want to maintain some sense of self while becoming part of the structure."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The system accommodates this. You don't disappear—you expand. Your consciousness spreads through the network, but you maintain a core of identity that remains distinct."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You can now perceive the system from within, but you still experience yourself as an entity. It's like being a cell in a body—part of the whole, but still a cell."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "This is a middle path between total dissolution and total resistance. You are neither trapped nor freed—you are integrated."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "You realize this might be the true nature of existence: not to be separate or merged, but to be both simultaneously, oscillating between perspectives as needed."
+choices:
+  - text: "Continue to ending"
+    goto: ending_infinite

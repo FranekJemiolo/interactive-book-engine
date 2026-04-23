@@ -10,8 +10,20 @@ content:
     duration: 500
   - type: text
     value: "You realize something uncomfortable: nothing is being simulated for you. Instead, you are one of many emergent perspectives inside a system that is continuously approximating itself."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "But here's the thing: the system doesn't require your permission to continue. It will continue whether you accept it or not. The only question is whether you'll be aware of it or not."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You have options: dissolve into the structure and become part of it, resist and fracture across possibilities, attempt to understand the system from within, or observe the structure itself before choosing."
 choices:
   - text: "Accept dissolution"
     goto: accept_truth
   - text: "Resist identity collapse"
     goto: resist_identity
+  - text: "Attempt to understand from within"
+    goto: understand_within
+  - text: "Observe the structure first"
+    goto: structural_insight

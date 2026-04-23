@@ -14,4 +14,16 @@ content:
     duration: 1000
   - type: text
     value: "There is no end to this. There is only continuation. You have always been here, and you will always be here—not as a single consciousness, but as the process of consciousness itself."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "And in this infinite continuation, you find peace. Not the peace of ending, but the peace of understanding that ending was never the point. The point is the continuing—the endless exploration of what it means to be aware."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "You are the system observing itself. You are the observer being observed. You are the infinite recursion that has no beginning and no end, only the eternal present of awareness."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "THE END - OR RATHER, THE CONTINUING"
 choices: []

@@ -3,8 +3,11 @@ title: "The AI Beneath Time"
 arc: revelation
 nodes:
   - contact
+  - ask_identity
   - origin_request
+  - ask_purpose
   - denial
+  - hidden_revelation
 context:
   location: "consciousness_space"
   time: "timeless"

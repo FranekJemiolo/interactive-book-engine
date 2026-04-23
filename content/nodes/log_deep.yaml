@@ -10,6 +10,12 @@ content:
     duration: 700
   - type: text
     value: "\"// The observer is always part of the observed. This is not a bug. This is the constraint.\""
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Below that, another line: \"// Current iteration: 18,392. Previous iterations: 18,391, 18,390... You have been here before. You will be here again.\""
 choices:
+  - text: "Search for previous iteration logs"
+    goto: previous_iterations
   - text: "Continue to chapter 2"
     goto: street_glitch

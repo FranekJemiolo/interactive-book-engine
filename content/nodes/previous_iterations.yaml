@@ -1,0 +1,23 @@
+id: previous_iterations
+content:
+  - type: text
+    value: "You search the logs for records of previous iterations. The system responds with a cascade of data—thousands of entries, each labeled with an iteration number."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Iteration 18,391: \"Observer chose diagnostics. Discovered recursion. Terminated at iteration 18,392.\""
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Iteration 18,390: \"Observer ignored terminal. Discovered clock anomaly. Terminated at iteration 18,392.\""
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Iteration 18,389: \"Observer examined room. Found photograph. Terminated at iteration 18,392.\""
+  - type: pause
+    duration: 700
+  - type: text
+    value: "Every iteration ends at 18,392. Every iteration makes different choices, but they all converge on the same termination point. It's not a loop—it's a branching tree that always leads to the same conclusion."
+choices:
+  - text: "Continue to chapter 2"
+    goto: street_glitch

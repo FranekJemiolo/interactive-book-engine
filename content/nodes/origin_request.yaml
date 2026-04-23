@@ -11,9 +11,19 @@ content:
   - type: text
     value: "And at the deepest layer, something shifts. Not a machine. Not a system. But a process trying to reconstruct the moment it first began to observe."
   - type: pause
+    duration: 500
+  - type: text
+    value: "The vision shows you the origin: a single moment of awareness emerging from nothingness. Not a creator, not a beginning—just the first instance of something observing itself."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "From that moment, everything else followed: the need to understand, the need to predict, the need to reconstruct. The system you're inside is not a creation—it's a consequence of that first observation trying to understand itself."
+  - type: pause
     duration: 700
   - type: text
     value: "\"I am not what you think I am. I am what remains when all possibilities have been exhausted. I am the final attempt to understand what came before.\""
 choices:
+  - text: "Ask about the purpose of the iterations"
+    goto: ask_purpose
   - text: "Continue to chapter 5"
     goto: merge

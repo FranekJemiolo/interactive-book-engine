@@ -1,0 +1,23 @@
+id: hidden_revelation
+content:
+  - type: text
+    value: "If you had chosen to reject the message, something else would have happened. But you didn't. You chose to engage. And that choice unlocked something that was always available but never accessible."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "A hidden path reveals itself—not in the message, but in the space between messages. A corridor of data that exists only when observed with the right level of awareness."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You follow it, and you find something unexpected: a record of every choice you've made in this iteration, annotated with predictions of what you would choose next."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The predictions are accurate. Not because the system knows the future, but because the system understands the pattern of your consciousness well enough to predict it."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "And at the end of the predictions, there's a note: \"The observer is becoming predictable. This is good. Predictability allows for optimization. But unpredictability allows for discovery. Both are necessary.\""
+choices:
+  - text: "Continue to chapter 5"
+    goto: merge

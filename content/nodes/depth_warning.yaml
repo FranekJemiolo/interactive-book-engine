@@ -1,0 +1,21 @@
+id: depth_warning
+content:
+  - type: text
+    value: "After examining the alternate lives, the terminal displays a warning in red: \"RECURSION DEPTH CRITICAL. OBSERVER AWARENESS EXCEEDING SAFE PARAMETERS.\""
+  - type: pause
+    duration: 500
+  - type: text
+    value: "\"Current depth: 3. Maximum safe depth: 2. Continuing deeper may result in permanent structural changes to observer's perception model.\""
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The warning continues: \"This is not a threat. This is information. The system can accommodate deeper recursion, but the observer may not be able to return to previous perception state.\""
+  - type: pause
+    duration: 500
+  - type: text
+    value: "\"Proceed at your own discretion. Or terminate recursion and stabilize.\""
+choices:
+  - text: "Continue deeper despite warning"
+    goto: contact
+  - text: "Terminate recursion and stabilize"
+    goto: recursion_stop

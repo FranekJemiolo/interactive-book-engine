@@ -10,6 +10,12 @@ content:
     duration: 500
   - type: text
     value: "On your wrist, your watch ticks forward, but every few seconds it hesitates—not breaking, not stopping, just reconsidering whether time should continue in exactly this way."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You try to ignore it, to focus on your routine, but the watch's hesitation feels like it's waiting for something—permission, perhaps, or calculation."
 choices:
-  - text: "Continue to chapter 2"
+  - text: "Check the watch closely"
+    goto: clock_anomaly
+  - text: "Ignore it and continue"
     goto: street_glitch

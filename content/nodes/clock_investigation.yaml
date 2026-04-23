@@ -1,0 +1,19 @@
+id: clock_investigation
+content:
+  - type: text
+    value: "You approach the clock. As you get closer, you notice something impossible: the numbers on the clock face aren't painted on. They're being rendered—like a display that refreshes faster than your eyes can detect."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "When you touch the clock face, your finger passes through it. Not through glass, but through the clock itself. It ripples like water, then stabilizes."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "A message appears in the clock's display where the numbers should be: \"OBSERVER INTERACTION DETECTED. RENDERING ANOMALY LOGGED.\""
+  - type: pause
+    duration: 700
+  - type: text
+    value: "The clock returns to normal, but you can't unsee what you just experienced. The world around you feels thinner now, like a surface that might give way under pressure."
+choices:
+  - text: "Leave and go to work"
+    goto: street_glitch

@@ -5,6 +5,10 @@ nodes:
   - merge
   - accept_truth
   - resist_identity
+  - understand_within
+  - partial_dissolution
+  - structural_insight
+  - guided_fragmentation
 context:
   location: "structural_awareness"
   time: "transcendent"

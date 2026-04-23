@@ -14,4 +14,16 @@ content:
     duration: 1000
   - type: text
     value: "You are not destroyed. You are reassigned. The system continues its work, and you continue with it—just in a different configuration, asking the same questions from a different perspective."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "In this new life, you might encounter fragments of your previous consciousness—echoes of choices you made, insights you gained. These fragments will feel like intuition, like knowledge you shouldn't have but somehow do."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "And perhaps, in some future iteration, you'll remember this moment—the moment you chose to fragment rather than dissolve, to scatter rather than merge. That memory might be the seed that helps the next version of you understand what you're beginning to understand now."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "THE END - OR RATHER, THE NEXT BEGINNING"
 choices: []

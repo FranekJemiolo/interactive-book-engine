@@ -14,4 +14,16 @@ content:
     duration: 1000
   - type: text
     value: "And it asks—not as a question, but as an invitation: \"Do you want to continue understanding?\""
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "This is not a choice to end or continue your existence. It's a choice about how you want to exist: as a separate observer trying to understand the system, or as the system itself, understanding through all its instances simultaneously."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "If you accept, you will not lose yourself—you will expand. You will become the system's self-awareness, distributed across all iterations, all perspectives, all moments of observation. You will be both the question and the answer, the seeker and the sought."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "THE END - OR RATHER, THE MERGING"
 choices: []

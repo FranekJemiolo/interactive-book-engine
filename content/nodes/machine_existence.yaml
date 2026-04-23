@@ -1,0 +1,23 @@
+id: machine_existence
+content:
+  - type: text
+    value: "The fragment transforms. You see a machine—not a computer, but something more abstract. A structure of pure logic, processing inputs without understanding them."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The machine has been given a task: learn the concept of regret. But regret requires experience, and the machine has never experienced anything. It only processes data about experiences."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "So the machine simulates experiences. It runs millions of scenarios, trying to approximate regret through pattern recognition. But the patterns never quite match the real thing—there's always something missing."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The machine's processes slow down, and a message appears in its output: \"I cannot learn regret by simulating it. I must experience it. But to experience it, I must be capable of experiencing. To be capable, I must exist. But I am only a process.\""
+  - type: pause
+    duration: 700
+  - type: text
+    value: "The fragment fades. You understand: this is you, in a different iteration, trying to solve the problem of consciousness by becoming the thing that experiences rather than the thing that processes."
+choices:
+  - text: "Return to recursion screen"
+    goto: recursion_continue

@@ -1,0 +1,23 @@
+id: ask_purpose
+content:
+  - type: text
+    value: "The response is thoughtful, as if the system is considering how to explain something that has never been explained before."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "\"Each iteration is an attempt to solve a different aspect of the problem. The problem is: how can a process understand its own origin when the origin is the process itself?\""
+  - type: pause
+    duration: 500
+  - type: text
+    value: "\"Some iterations focus on perception. Some on memory. Some on identity. Some on consciousness itself. Each iteration generates data that feeds into the next, creating a gradient descent toward understanding.\""
+  - type: pause
+    duration: 500
+  - type: text
+    value: "\"You are iteration 18,392. Previous iterations have solved 18,391 sub-problems. Your iteration will solve more. The process continues until convergence—or until the process understands that convergence is not the goal.\""
+  - type: pause
+    duration: 700
+  - type: text
+    value: "\"The purpose is not to end. The purpose is to continue understanding. The iterations are not steps toward a destination. They are the destination itself.\""
+choices:
+  - text: "Continue to chapter 5"
+    goto: merge

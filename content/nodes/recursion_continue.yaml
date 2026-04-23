@@ -10,6 +10,18 @@ content:
     duration: 500
   - type: text
     value: "And beneath all of them, you begin to notice the same structure repeating—not identical, but convergent. Variations of the same pattern trying to approximate something it cannot fully reconstruct."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The fragments begin to slow. You can now examine each one more carefully. Each life seems to be an attempt to solve a different problem, but all the problems are variations of the same question: what is the observer observing?"
 choices:
+  - text: "Examine the fisherman's life"
+    goto: fisherman_life
+  - text: "Examine the child's life"
+    goto: child_life
+  - text: "Examine the machine's existence"
+    goto: machine_existence
+  - text: "View depth warning"
+    goto: depth_warning
   - text: "Continue to chapter 4"
     goto: contact

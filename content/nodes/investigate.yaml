@@ -10,6 +10,16 @@ content:
     duration: 500
   - type: text
     value: "\"SIMULATION FRAME: 18,392\". The number does not feel symbolic. It feels operational, like a system metric that was never meant to be seen by anything inside the system it describes."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "More text appears below it: \"RENDER BUDGET: 87%. ENTITY COUNT: 1,247,892. ANOMALY DETECTED: observer self-reference.\""
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The pedestrian is gone now—not walked away, but unrendered. The space they occupied is now filled by other pedestrians who seem to have always been there, as if the system corrected for the anomaly by replacing it with more consistent data."
 choices:
   - text: "Check system trace"
     goto: trace_log
+  - text: "Try to interact with the overlay"
+    goto: overlay_interaction

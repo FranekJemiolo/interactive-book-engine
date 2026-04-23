@@ -1,0 +1,17 @@
+id: clock_anomaly
+content:
+  - type: text
+    value: "As you prepare to leave, you notice the clock on the wall. It's an analog clock, but the second hand doesn't move smoothly—it jumps in discrete increments, like a digital approximation of analog motion."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You watch it for a moment. The jumps are irregular: sometimes it skips a second, sometimes it holds on one second longer than it should. Not broken, but... calculated."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "When you look away and back, the time hasn't changed. It's as if time only progresses when you're observing it directly."
+choices:
+  - text: "Investigate the clock"
+    goto: clock_investigation
+  - text: "Leave anyway"
+    goto: street_glitch

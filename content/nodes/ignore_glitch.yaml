@@ -10,6 +10,12 @@ content:
     duration: 500
   - type: text
     value: "You arrive at work, but the building feels different—not changed, but interpreted. As if someone else described it to you, and you are now experiencing their description rather than the thing itself."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Your coworkers are there, but their conversations feel scripted—not in a bad way, but in a way that suggests they're following a pattern optimized for something you can't identify."
 choices:
-  - text: "Continue to chapter 3"
+  - text: "Check your reflection in the office mirror"
+    goto: reflection_anomaly
+  - text: "Go to your desk and start working"
     goto: terminal_return

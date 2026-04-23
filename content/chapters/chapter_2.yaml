@@ -4,8 +4,13 @@ arc: tension_rise
 nodes:
   - street_glitch
   - investigate
+  - overlay_interaction
   - trace_log
   - ignore_glitch
+  - follow_pedestrian
+  - empty_lot
+  - reflection_anomaly
+  - mirror_touch
 context:
   location: "city_street"
   time: "morning"

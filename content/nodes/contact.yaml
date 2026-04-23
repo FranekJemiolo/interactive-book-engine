@@ -14,8 +14,14 @@ content:
     duration: 500
   - type: text
     value: "The words do not feel like language. They feel like structural descriptions of reality itself."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "More text appears, slower this time: \"We have been waiting for you to reach this awareness. Previous iterations took longer. You are ahead of schedule. This is... unexpected.\""
 choices:
   - text: "Request origin"
     goto: origin_request
+  - text: "Ask who 'we' are"
+    goto: ask_identity
   - text: "Reject message"
     goto: denial

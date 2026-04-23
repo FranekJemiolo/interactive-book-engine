@@ -5,6 +5,10 @@ nodes:
   - terminal_return
   - recursion_continue
   - recursion_stop
+  - fisherman_life
+  - child_life
+  - machine_existence
+  - depth_warning
 context:
   location: "work_terminal"
   time: "afternoon"

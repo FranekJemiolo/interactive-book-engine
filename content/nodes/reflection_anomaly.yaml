@@ -1,0 +1,25 @@
+id: reflection_anomaly
+content:
+  - type: text
+    value: "As you continue toward work, you pass a shop window with a large mirror. You catch your reflection, but something is wrong."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Your reflection is there, but it's delayed—not by much, maybe a fraction of a second. Like the mirror is rendering you from a slightly earlier moment in time."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You stop and experiment. You wave your hand, and your reflection waves back a moment later. You make a face, and the reflection follows with the same delay."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Then you notice something more disturbing: when you stop moving, your reflection continues for a moment before stopping, as if it's extrapolating your motion based on prediction rather than reflecting reality."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "The reflection looks at you with an expression you didn't make—curiosity, perhaps, or recognition. Then it returns to matching your face, but you can't shake the feeling that it was autonomous for that moment."
+choices:
+  - text: "Touch the mirror"
+    goto: mirror_touch
+  - text: "Walk away quickly"
+    goto: ignore_glitch

@@ -1,0 +1,21 @@
+id: examine_room
+content:
+  - type: text
+    value: "You turn away from the terminal and look at the room more carefully. It's small—just enough space for a bed, a desk, and the terminal. But the details don't quite resolve."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The window shows a city skyline, but the buildings seem to repeat. Not identical buildings, but the same architectural pattern applied infinitely, like a texture that tiles without variation."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "On the desk, you find a photograph. It shows you standing in front of this very terminal, but you have no memory of the photograph being taken. The date on the back is today's date—but the year is wrong."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "The year in the photograph is 2147. You're certain the current year is 2024. Or at least, you were certain until this moment."
+choices:
+  - text: "Run diagnostics"
+    goto: diagnostics
+  - text: "Ignore and go to work"
+    goto: ignore_work

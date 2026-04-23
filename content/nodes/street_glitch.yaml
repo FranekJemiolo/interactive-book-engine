@@ -10,8 +10,14 @@ content:
     duration: 500
   - type: text
     value: "They speak: \"You already asked me that.\" Then, without transition, they return to the exact position they were in moments earlier. Not walking backward. Not rewinding. Simply reappearing in the state before you interacted with them."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Other pedestrians don't react. They continue their paths as if nothing unusual happened. It's as if the reset only affected your perception of that one person—or perhaps only that person's interaction with you."
 choices:
   - text: "Investigate anomaly"
     goto: investigate
   - text: "Dismiss it as perception error"
     goto: ignore_glitch
+  - text: "Follow the pedestrian"
+    goto: follow_pedestrian

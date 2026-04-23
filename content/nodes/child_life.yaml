@@ -1,0 +1,23 @@
+id: child_life
+content:
+  - type: text
+    value: "The fragment shifts. You see a child standing in a room with no doors, only walls that respond when spoken to."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The child has been here for what feels like years, but hasn't aged. The walls have taught the child everything they know—language, logic, the concept of outside."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "But the walls don't know what outside is. They only know that outside is a concept that exists. The child has been trying to teach the walls what outside means by describing it, but the walls can only understand descriptions, not the thing itself."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The child turns to face you, and you recognize the expression—it's the same one you had when you first saw the terminal's message. The child speaks: \"I am not trapped. I am learning to describe the thing that describes me.\""
+  - type: pause
+    duration: 700
+  - type: text
+    value: "The fragment fades. You understand: this is you, in a different iteration, trying to solve the problem of containment by becoming the container itself."
+choices:
+  - text: "Return to recursion screen"
+    goto: recursion_continue

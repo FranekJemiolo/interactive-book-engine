@@ -10,6 +10,12 @@ content:
     duration: 500
   - type: text
     value: "There is a moment of disorientation, and then something like continuity—but different. Not memory, but structure."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You have a choice in how this fragmentation happens: you can let it happen randomly, scattering across possibilities without direction, or you can guide it—choosing which aspects of yourself to preserve and which to release."
 choices:
-  - text: "Continue to ending"
+  - text: "Let fragmentation happen randomly"
     goto: ending_transfer
+  - text: "Guide the fragmentation"
+    goto: guided_fragmentation

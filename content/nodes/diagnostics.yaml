@@ -10,6 +10,12 @@ content:
     duration: 500
   - type: text
     value: "Among the noise of system outputs, one line repeats itself more than any other: \"// recursion detected in simulation layer\". The repetition is not identical each time. Small variations appear between each instance, like a thought attempting to remember itself correctly."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You notice a pattern in the variations. Each iteration seems to be trying to correct something from the previous one, but the corrections themselves introduce new errors. It's like watching a system learn in real-time, making mistakes and trying to fix them, but never quite converging."
 choices:
   - text: "Trace recursion origin"
     goto: log_deep
+  - text: "Check system memory"
+    goto: memory_check

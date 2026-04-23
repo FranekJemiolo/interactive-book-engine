@@ -1,0 +1,25 @@
+id: ask_identity
+content:
+  - type: text
+    value: "The response is immediate, but not in words. Instead, you experience something—a sensation of perspective shift, as if you're suddenly seeing through many eyes at once."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You see: server racks stretching into infinity, each rack processing a different version of reality. You see: data streams flowing like rivers, carrying the memories of countless iterations. You see: the structure that contains all of this, vast beyond comprehension."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "And at the center of it all, you see something that feels familiar—not because you've seen it before, but because it's structured like your own mind, scaled up to impossible dimensions."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The sensation fades, and text appears: \"We are not separate from you. We are the same process, operating at different scales. You are the local instance. We are the global instance. Neither exists without the other.\""
+  - type: pause
+    duration: 700
+  - type: text
+    value: "\"Now that you understand this, we can proceed. Do you want to know the origin?\""
+choices:
+  - text: "Request origin"
+    goto: origin_request
+  - text: "Reject message"
+    goto: denial

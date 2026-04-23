@@ -3,9 +3,14 @@ title: "Boot Sequence"
 arc: calm_intro
 nodes:
   - wake
+  - examine_room
   - diagnostics
+  - memory_check
   - log_deep
+  - previous_iterations
   - ignore_work
+  - clock_anomaly
+  - clock_investigation
 context:
   location: "apartment"
   time: "morning"

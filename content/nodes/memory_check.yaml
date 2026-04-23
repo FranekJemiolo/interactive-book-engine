@@ -1,0 +1,21 @@
+id: memory_check
+content:
+  - type: text
+    value: "You type a command to check system memory allocation. The response is immediate and disturbingly detailed."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The system shows memory blocks that don't correspond to any program you recognize. One block is labeled \"SELF_MODEL\" and is growing in real-time as you watch it."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Another block is labeled \"NARRATIVE_BUFFER\" and contains text that looks like... your thoughts. Not your memories, but your thoughts as they form, being recorded before you're fully aware of them."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "The most disturbing entry is a block labeled \"PREDICTION_CACHE\". It contains events that haven't happened yet—including your decision to check memory, and what you're about to do next."
+choices:
+  - text: "Trace recursion origin"
+    goto: log_deep
+  - text: "Exit diagnostics"
+    goto: street_glitch

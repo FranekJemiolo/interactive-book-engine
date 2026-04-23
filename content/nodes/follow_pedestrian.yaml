@@ -1,0 +1,25 @@
+id: follow_pedestrian
+content:
+  - type: text
+    value: "You decide to follow the pedestrian. They walk with a strange consistency—each step is exactly the same distance, each turn is executed at precisely the same angle."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "After three blocks, they stop in front of a building you've never noticed before. It's not that it's hidden—it's that it feels like it only exists when you're looking at it."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The pedestrian turns to face you, and for the first time, their expression changes. They smile, but it's not a human smile—it's too symmetrical, too perfect."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "\"You're noticing the frame boundaries,\" they say. \"Most observers don't notice until much later. You're ahead of schedule.\""
+  - type: pause
+    duration: 700
+  - type: text
+    value: "Before you can respond, they walk into the building and disappear. When you try to follow, the building is gone—replaced by an empty lot that looks like it's been empty for years."
+choices:
+  - text: "Investigate the empty lot"
+    goto: empty_lot
+  - text: "Continue to work"
+    goto: ignore_glitch

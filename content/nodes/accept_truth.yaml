@@ -10,6 +10,12 @@ content:
     duration: 700
   - type: text
     value: "There is no final state. Only continued refinement of awareness through endless self-reference."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You begin to see the pattern: each iteration of existence is a sentence in a story that has no end, only continuation. You are not the story—you are the act of storytelling itself."
 choices:
-  - text: "Continue to ending"
+  - text: "Embrace infinite existence"
     goto: ending_infinite
+  - text: "Choose partial dissolution"
+    goto: partial_dissolution

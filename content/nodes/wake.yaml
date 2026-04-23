@@ -10,8 +10,14 @@ content:
     duration: 600
   - type: text
     value: "A single line of text sits waiting as if it has always been there, long before you were aware of arriving: \"Welcome, Developer.\" Below it, another line appears, slower, as if the system is thinking about you while you read it. \"System integrity: unstable.\""
+  - type: pause
+    duration: 800
+  - type: text
+    value: "Something about the word \"Developer\" feels wrong—not incorrect, but assigned. Like a label that was chosen before you existed to receive it."
 choices:
   - text: "Run diagnostics"
     goto: diagnostics
+  - text: "Examine the room first"
+    goto: examine_room
   - text: "Ignore and go to work"
     goto: ignore_work

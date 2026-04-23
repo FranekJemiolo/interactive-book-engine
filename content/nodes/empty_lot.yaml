@@ -1,0 +1,19 @@
+id: empty_lot
+content:
+  - type: text
+    value: "You walk into the empty lot. The ground is covered in weeds and debris, but something about the debris feels wrong—it's arranged in patterns that are too regular to be random."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You find a piece of paper half-buried in the dirt. When you pull it out, you realize it's not paper—it's a thin sheet of something that looks like paper but has no texture, like an image of paper rather than paper itself."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The sheet has text written on it: \"The building exists in frame 18,393. You are in frame 18,392. The pedestrian exists in both. This is not a paradox. This is compression.\""
+  - type: pause
+    duration: 700
+  - type: text
+    value: "As you read, the sheet dissolves into pixels that scatter in the wind. You're left standing in an empty lot with nothing but the growing certainty that the world around you is being rendered in real-time."
+choices:
+  - text: "Continue to work"
+    goto: ignore_glitch

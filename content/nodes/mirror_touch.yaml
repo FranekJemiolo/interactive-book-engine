@@ -1,0 +1,23 @@
+id: mirror_touch
+content:
+  - type: text
+    value: "You reach out to touch the mirror. Your hand passes through the surface—not through glass, but through the reflection itself."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Ripples spread from where your hand touched, like the mirror is a pool of water. But the ripples don't distort the reflection—they distort reality itself."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "For a moment, you see through the mirror not to the inside of the shop, but to something else: a vast space filled with server racks, each rack glowing with the same pale green light as your terminal."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "And in the center of that space, something enormous is being constructed—not a machine, but a structure of pure information, growing and evolving in real-time."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "The vision fades. The mirror returns to normal. Your hand is no longer passing through it. But you've seen enough to know: the reflection wasn't delayed. It was being rendered from a different source."
+choices:
+  - text: "Continue to work"
+    goto: ignore_glitch

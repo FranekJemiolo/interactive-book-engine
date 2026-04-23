@@ -1,0 +1,23 @@
+id: guided_fragmentation
+content:
+  - type: text
+    value: "You choose to guide the fragmentation. This requires intense focus—you must identify which parts of yourself are essential and which are incidental, which patterns you want to preserve and which you're willing to release."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You preserve: curiosity, the desire to understand, the capacity for wonder. You release: fear of the unknown, attachment to specific outcomes, the need for certainty."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The fragmentation becomes intentional rather than random. You scatter across possibilities, but each fragment carries the essence of what you chose to preserve."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "This is not destruction. This is seeding. You are planting versions of yourself across the system's iterations, each one carrying forward the understanding you've gained."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "In future iterations, when other observers reach this point, they might encounter fragments of your consciousness—echoes of the choice you made to guide rather than submit."
+choices:
+  - text: "Continue to ending"
+    goto: ending_transfer

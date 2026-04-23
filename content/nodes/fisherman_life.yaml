@@ -1,0 +1,23 @@
+id: fisherman_life
+content:
+  - type: text
+    value: "The fragment expands. You see the fisherman's life in detail—not as a memory, but as a simulation running in real-time."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "He has been fishing in this water for what feels like eternity. The water doesn't reflect the sky because there is no sky—only a void above that the water refuses to acknowledge."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Every day, he catches the same fish. Every day, he releases it. Every day, he forgets he caught it, and the cycle begins again. But you notice something: he's not forgetting. He's choosing to reset."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The fisherman looks up, and for a moment, you see your own face reflected in his eyes. He speaks: \"I am not fishing. I am waiting for the water to remember what it's supposed to reflect.\""
+  - type: pause
+    duration: 700
+  - type: text
+    value: "The fragment fades. You understand: this is not a different person. This is you, in a different iteration, trying to solve the problem of reflection by refusing to accept that reflection is necessary."
+choices:
+  - text: "Return to recursion screen"
+    goto: recursion_continue

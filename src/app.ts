@@ -285,6 +285,11 @@ class InteractiveBookApp {
         // Load state from URL
         this.stateStore.deserialize(JSON.stringify(urlState));
         console.log("Loaded state from URL");
+        // Don't auto-load chapter, show home screen instead
+        const rendererAPI = (window as any).rendererAPI;
+        if (rendererAPI) {
+          rendererAPI.showHomeScreen();
+        }
       } else {
         // Check for saved progress from localStorage
         this.progressManager.loadProgress();

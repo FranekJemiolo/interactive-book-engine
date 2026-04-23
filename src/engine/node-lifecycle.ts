@@ -1,17 +1,22 @@
-import { Node, State, NodeRuntimePhase, Choice, AutoTransition } from "../types";
+import { Node, State, NodeRuntimePhase, Choice, AutoTransition, Arc } from "../types";
 import { ConditionEvaluator } from "../core/conditions";
 import { StateStore } from "../state/store";
+import { PacingSystem } from "./pacing-system";
 
 export class NodeLifecycleEngine {
   private currentPhase: NodeRuntimePhase = "enter";
   private currentNode: Node | null = null;
+  private pacingSystem: PacingSystem;
 
   constructor(
     private stateStore: StateStore,
     private onPhaseChange?: (phase: NodeRuntimePhase) => void,
     private onFrameRender?: (frame: any, index: number) => void,
-    private onChoicesRender?: (choices: Choice[]) => void
-  ) {}
+    private onChoicesRender?: (choices: Choice[]) => void,
+    arcPacing?: Arc
+  ) {
+    this.pacingSystem = new PacingSystem(arcPacing);
+  }
 
   async executeNode(node: Node): Promise<void> {
     this.currentNode = node;
@@ -26,10 +31,11 @@ export class NodeLifecycleEngine {
     // APPLY CHAPTER CONTEXT
     this.setPhase("pacing");
 
+    // Set pacing for this node
+    this.pacingSystem.setPacing(node.pacing || null);
+
     // RUN PACING (optional)
-    if (node.pacing) {
-      await this.runPacing(node.pacing);
-    }
+    await this.pacingSystem.applyIntroDelay();
 
     // RENDER FRAMES (sequential)
     this.setPhase("render");
@@ -45,6 +51,9 @@ export class NodeLifecycleEngine {
       this.setPhase("exit");
       throw new AutoTransitionError(autoTransition.goto);
     }
+
+    // SUSPENSE PAUSE BEFORE CHOICES
+    await this.pacingSystem.applySuspensePause();
 
     // RENDER CHOICES
     this.setPhase("choice");
@@ -86,18 +95,12 @@ export class NodeLifecycleEngine {
     this.onPhaseChange?.(phase);
   }
 
-  private async runPacing(pacing: any): Promise<void> {
-    if (pacing.introDelay) {
-      await this.delay(pacing.introDelay);
-    }
-  }
-
   private async renderFrame(frame: any, index: number): Promise<void> {
     this.onFrameRender?.(frame, index);
 
-    // Handle frame delays
+    // Handle frame delays using pacing system
     if (frame.delay) {
-      await this.delay(frame.delay);
+      await this.pacingSystem.applyFrameDelay(frame.delay);
     }
 
     // Handle pause frames
@@ -152,8 +155,7 @@ export class NodeLifecycleEngine {
   skip(mode: "visual" | "full"): void {
     if (mode === "visual") {
       // Visual skip - affects rendering only
-      // For MVP, we'll just continue immediately
-      // In a full implementation, this would skip animations
+      this.pacingSystem.setFastForward(true);
     } else if (mode === "full") {
       // Full advance skip - completes node immediately
       // This would trigger auto-transitions if valid

@@ -1,27 +1,36 @@
 import { StateStore } from "./state/store";
 import { YAMLProvider } from "./adapters/yaml-provider";
 import { DOMRenderer } from "./renderer/dom-renderer";
+import { HomeScreen } from "./renderer/home-screen";
 import { NodeLifecycleEngine, AutoTransitionError } from "./engine/node-lifecycle";
 import { ChapterSystem } from "./engine/chapter-system";
 import { ProgressManager } from "./utils/progress";
+import { ImmersiveMode } from "./engine/immersive-mode";
 
 class InteractiveBookApp {
   private stateStore: StateStore;
   private bookProvider: YAMLProvider;
   private renderer: DOMRenderer;
+  private homeScreen: HomeScreen;
   private nodeEngine!: NodeLifecycleEngine;
   private chapterSystem: ChapterSystem;
   private progressManager: ProgressManager;
+  private immersiveMode: ImmersiveMode;
+  private currentBook: any = null;
 
   constructor() {
     this.stateStore = new StateStore();
     this.bookProvider = new YAMLProvider();
     this.renderer = new DOMRenderer("app");
+    this.homeScreen = new HomeScreen("app");
     this.chapterSystem = new ChapterSystem(this.bookProvider, this.stateStore);
     this.progressManager = new ProgressManager();
+    this.immersiveMode = new ImmersiveMode("app");
 
     this.setupNodeEngine();
     this.setupRenderer();
+    this.setupImmersiveToggle();
+    this.setupHomeScreen();
   }
 
   private setupNodeEngine(): void {
@@ -29,7 +38,8 @@ class InteractiveBookApp {
       this.stateStore,
       (phase) => console.log("Phase:", phase),
       (frame) => this.renderer.renderFrame(frame),
-      (choices) => this.renderer.renderChoices(choices)
+      (choices) => this.renderer.renderChoices(choices),
+      undefined // arc pacing will be set when chapter loads
     );
   }
 
@@ -45,30 +55,53 @@ class InteractiveBookApp {
     });
   }
 
+  private setupImmersiveToggle(): void {
+    const button = document.createElement("button");
+    button.className = "immersive-toggle";
+    button.textContent = "📖 Immersive";
+    button.onclick = () => {
+      this.immersiveMode.toggle();
+      button.textContent = this.immersiveMode.isEnabled()
+        ? "✕ Exit Immersive"
+        : "📖 Immersive";
+    };
+    document.body.appendChild(button);
+  }
+
+  private setupHomeScreen(): void {
+    this.homeScreen.setStartChapterHandler(async (chapterId: string) => {
+      this.homeScreen.hide();
+      await this.loadChapter(chapterId, this.currentBook);
+      await this.startChapter();
+    });
+
+    this.homeScreen.setResumeHandler(async () => {
+      const progress = this.progressManager.loadProgress();
+      if (progress && progress.lastChapter) {
+        this.homeScreen.hide();
+        await this.loadChapter(progress.lastChapter, this.currentBook);
+        if (progress.lastNode) {
+          await this.navigateToNode(progress.lastNode);
+        }
+      }
+    });
+  }
+
   async start(): Promise<void> {
     try {
       this.renderer.setLoading(true);
 
       // Load book
       const book = await this.bookProvider.loadBook();
+      this.currentBook = book;
       console.log("Book loaded:", book.title);
 
       // Check for saved progress
       const progress = this.progressManager.loadProgress();
-      if (progress && progress.lastChapter) {
-        console.log("Resuming from:", progress.lastChapter);
-        await this.loadChapter(progress.lastChapter);
-        // Navigate to last node if available
-        if (progress.lastNode) {
-          await this.navigateToNode(progress.lastNode);
-        }
-      } else {
-        // Start from first chapter
-        await this.loadChapter(book.chapters[0].id);
-        await this.startChapter();
-      }
 
+      // Show home screen
       this.renderer.setLoading(false);
+      this.homeScreen.render(book, progress);
     } catch (error) {
       console.error("Error starting app:", error);
       this.renderer.showError("Failed to load book");
@@ -76,14 +109,28 @@ class InteractiveBookApp {
     }
   }
 
-  private async loadChapter(chapterId: string): Promise<void> {
+  private async loadChapter(chapterId: string, book: any): Promise<void> {
     try {
       const chapter = await this.chapterSystem.loadChapter(chapterId);
       this.renderer.showChapterTitle(chapter);
+
+      // Get arc pacing for this chapter
+      const arc = book.arcs[chapter.arc];
+      this.setupNodeEngineWithArc(arc);
     } catch (error) {
       console.error("Error loading chapter:", error);
       throw error;
     }
+  }
+
+  private setupNodeEngineWithArc(arc: any): void {
+    this.nodeEngine = new NodeLifecycleEngine(
+      this.stateStore,
+      (phase) => console.log("Phase:", phase),
+      (frame) => this.renderer.renderFrame(frame),
+      (choices) => this.renderer.renderChoices(choices),
+      arc
+    );
   }
 
   private async startChapter(): Promise<void> {

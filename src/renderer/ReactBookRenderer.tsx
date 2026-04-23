@@ -108,6 +108,14 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     }
   }, [currentTypingFrame, frames]);
 
+  // Auto-scroll to bottom when typing text changes
+  useEffect(() => {
+    const contentElement = document.getElementById('app-content');
+    if (contentElement) {
+      contentElement.scrollTop = contentElement.scrollHeight;
+    }
+  }, [typingText]);
+
   console.log('[ReactBookRenderer] Render called', { frames: frames.length, choices: choices.length, chapterTitle, loading, error });
 
   const addFrame = (frame: Frame) => {

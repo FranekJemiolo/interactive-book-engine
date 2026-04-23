@@ -10,6 +10,47 @@ interface ReactBookRendererProps {
   hasUrlState?: boolean;
 }
 
+const ChapterList: React.FC<{ chapters: any[]; onSelectChapter: (chapterId: string) => void }> = ({ chapters, onSelectChapter }) => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center', marginBottom: '2rem' }}>
+      {chapters.map((chapter: any) => {
+        const chapterTitle = typeof chapter === 'string' ? chapter : (chapter.title || chapter.id);
+        return (
+          <button
+            key={typeof chapter === 'string' ? chapter : chapter.id}
+            onClick={() => {
+              console.log('[ChapterList] Chapter selected:', typeof chapter === 'string' ? chapter : chapter.id);
+              onSelectChapter(typeof chapter === 'string' ? chapter : chapter.id);
+            }}
+            style={{
+              backgroundColor: '#2a2a4e',
+              border: '1px solid #4a9eff',
+              color: '#e0e0e0',
+              padding: '0.75rem 2rem',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontSize: '1rem',
+              fontWeight: 'normal',
+              minWidth: '300px',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor = '#4a9eff';
+              e.currentTarget.style.color = '#1a1a2e';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor = '#2a2a4e';
+              e.currentTarget.style.color = '#e0e0e0';
+            }}
+          >
+            {chapterTitle}
+          </button>
+        );
+      })}
+    </div>
+  );
+};
+
 export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
   onChoiceSelect,
   onShare,
@@ -175,41 +216,14 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
           <h2 style={{ fontSize: '1.5rem', color: '#e0e0e0', marginBottom: '1.5rem' }}>Chapters</h2>
         </div>
         
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center', marginBottom: '2rem' }}>
-          {chapters.map((chapter: any) => (
-            <button
-              key={typeof chapter === 'string' ? chapter : chapter.id}
-              onClick={() => {
-                console.log('[ReactBookRenderer] Chapter selected:', typeof chapter === 'string' ? chapter : chapter.id);
-                setShowHomeScreen(false);
-                // Trigger chapter load via window event
-                window.dispatchEvent(new CustomEvent('selectChapter', { detail: { chapterId: typeof chapter === 'string' ? chapter : chapter.id } }));
-              }}
-              style={{
-                backgroundColor: '#2a2a4e',
-                border: '1px solid #4a9eff',
-                color: '#e0e0e0',
-                padding: '0.75rem 2rem',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontSize: '1rem',
-                fontWeight: 'normal',
-                minWidth: '300px',
-                transition: 'all 0.2s ease'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.backgroundColor = '#4a9eff';
-                e.currentTarget.style.color = '#1a1a2e';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.backgroundColor = '#2a2a4e';
-                e.currentTarget.style.color = '#e0e0e0';
-              }}
-            >
-              {typeof chapter === 'string' ? `Chapter ${chapter}` : chapter.title || chapter.id}
-            </button>
-          ))}
-        </div>
+        <ChapterList 
+          chapters={chapters} 
+          onSelectChapter={(chapterId) => {
+            console.log('[ReactBookRenderer] Chapter selected:', chapterId);
+            setShowHomeScreen(false);
+            window.dispatchEvent(new CustomEvent('selectChapter', { detail: { chapterId } }));
+          }}
+        />
       </div>
     );
   }

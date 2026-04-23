@@ -53,8 +53,18 @@ class InteractiveBookApp {
         console.log('[App] Book not loaded, loading...');
         const book = await this.bookProvider.loadBook();
         this.currentBook = book;
+        // Load full chapter data with titles
+        const chaptersWithTitles = await Promise.all(
+          book.chapters.map(async (chapter) => {
+            if (typeof chapter === 'string') {
+              const fullChapter = await this.bookProvider.getChapter(chapter);
+              return fullChapter;
+            }
+            return chapter;
+          })
+        );
         // Re-render React component with loaded book
-        this.renderReactComponent();
+        this.renderReactComponent(chaptersWithTitles);
       }
       this.loadChapter(e.detail.chapterId, this.currentBook).then(() => {
         this.startChapter();
@@ -183,7 +193,7 @@ class InteractiveBookApp {
     this.renderReactComponent();
   }
 
-  private renderReactComponent(): void {
+  private renderReactComponent(chaptersOverride?: any[]): void {
     if (!this.reactRoot) return;
     
     const urlState = URLStateManager.loadStateFromURL();
@@ -210,7 +220,7 @@ class InteractiveBookApp {
           console.log('[App] React onBack called');
           this.returnToHome();
         },
-        chapters: this.currentBook?.chapters || [],
+        chapters: chaptersOverride || this.currentBook?.chapters || [],
         currentChapterId: this.chapterSystem.getCurrentChapter()?.id,
         hasUrlState
       })
@@ -258,8 +268,19 @@ class InteractiveBookApp {
       this.currentBook = book;
       console.log("Book loaded:", book.title);
 
-      // Re-render React component with loaded book
-      this.renderReactComponent();
+      // Load full chapter data with titles
+      const chaptersWithTitles = await Promise.all(
+        book.chapters.map(async (chapter) => {
+          if (typeof chapter === 'string') {
+            const fullChapter = await this.bookProvider.getChapter(chapter);
+            return fullChapter;
+          }
+          return chapter;
+        })
+      );
+
+      // Update React component with loaded chapters
+      this.renderReactComponent(chaptersWithTitles);
 
       // Check for URL state first, then fall back to localStorage progress
       const urlState = URLStateManager.loadStateFromURL();

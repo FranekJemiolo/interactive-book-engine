@@ -8,10 +8,15 @@ export default defineConfig({
       input: {
         main: './index.html'
       }
-    }
+    },
+    copyPublicDir: true
   },
   server: {
     port: 3000,
-    open: true
-  }
+    open: true,
+    fs: {
+      strict: false
+    }
+  },
+  publicDir: 'content'
 })

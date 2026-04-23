@@ -1,15 +1,38 @@
-import { Book, Chapter, Progress } from "../types";
+import { Book, Progress, Chapter } from "../types";
+import { BookProvider } from "../types";
 
 export class HomeScreen {
   private container: HTMLElement;
   private onStartChapter?: (chapterId: string) => void;
   private onResume?: () => void;
+  private bookProvider?: BookProvider;
+  private loadedChapters: Map<string, Chapter> = new Map();
 
   constructor(containerId: string) {
     this.container = document.getElementById(containerId)!;
   }
 
-  render(book: Book, progress: Progress | null): void {
+  setBookProvider(provider: BookProvider): void {
+    this.bookProvider = provider;
+  }
+
+  async render(book: Book, progress: Progress | null): Promise<void> {
+    // Load all chapter data
+    const chapterData: Chapter[] = [];
+    for (const chapterId of book.chapters) {
+      if (typeof chapterId === 'string') {
+        try {
+          const chapter = await this.bookProvider!.getChapter(chapterId);
+          this.loadedChapters.set(chapterId, chapter);
+          chapterData.push(chapter);
+        } catch (error) {
+          console.error(`Failed to load chapter ${chapterId}:`, error);
+        }
+      } else {
+        chapterData.push(chapterId);
+      }
+    }
+
     this.container.innerHTML = `
       <div class="home-screen">
         <h1 class="book-title">${book.title}</h1>
@@ -26,7 +49,7 @@ export class HomeScreen {
         <div class="chapters-section">
           <h2>Chapters</h2>
           <div class="chapters-list">
-            ${book.chapters.map(chapter => this.renderChapterCard(chapter, progress)).join('')}
+            ${chapterData.map(chapter => this.renderChapterCard(chapter, progress)).join('')}
           </div>
         </div>
       </div>
@@ -41,7 +64,7 @@ export class HomeScreen {
     }
 
     // Attach chapter click handlers
-    book.chapters.forEach(chapter => {
+    chapterData.forEach(chapter => {
       const card = document.getElementById(`chapter-${chapter.id}`);
       if (card) {
         card.addEventListener("click", () => {
@@ -54,15 +77,15 @@ export class HomeScreen {
   private renderChapterCard(chapter: Chapter, progress: Progress | null): string {
     const chapterProgress = progress?.chapters[chapter.id];
     const visitedCount = chapterProgress?.visitedNodes?.length || 0;
-    const totalNodes = chapter.nodes.length;
-    const isCompleted = visitedCount === totalNodes;
+    const totalNodes = chapter.nodes?.length || 0;
+    const isCompleted = visitedCount === totalNodes && totalNodes > 0;
     const isInProgress = visitedCount > 0 && !isCompleted;
 
     return `
       <div class="chapter-card" id="chapter-${chapter.id}">
         <div class="chapter-info">
-          <h3>${chapter.title}</h3>
-          <span class="chapter-arc">${chapter.arc}</span>
+          <h3>${chapter.title || chapter.id}</h3>
+          <span class="chapter-arc">${chapter.arc || ''}</span>
         </div>
         <div class="chapter-progress">
           ${isCompleted 

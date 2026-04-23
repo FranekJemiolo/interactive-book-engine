@@ -32,7 +32,11 @@ export class ImmersiveMode {
 
     // Request fullscreen
     if (document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen().catch((err) => {
+      document.documentElement.requestFullscreen().catch((err: Error) => {
+        console.log("Fullscreen request failed:", err);
+      });
+    } else if ((document.documentElement as any).webkitRequestFullscreen) {
+      (document.documentElement as any).webkitRequestFullscreen().catch((err: Error) => {
         console.log("Fullscreen request failed:", err);
       });
     }
@@ -49,7 +53,11 @@ export class ImmersiveMode {
 
     // Exit fullscreen
     if (document.exitFullscreen) {
-      document.exitFullscreen().catch((err) => {
+      document.exitFullscreen().catch((err: Error) => {
+        console.log("Fullscreen exit failed:", err);
+      });
+    } else if ((document as any).webkitExitFullscreen) {
+      (document as any).webkitExitFullscreen().catch((err: Error) => {
         console.log("Fullscreen exit failed:", err);
       });
     }

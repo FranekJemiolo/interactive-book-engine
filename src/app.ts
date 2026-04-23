@@ -23,6 +23,7 @@ class InteractiveBookApp {
     this.bookProvider = new YAMLProvider();
     this.renderer = new DOMRenderer("app");
     this.homeScreen = new HomeScreen("app");
+    this.homeScreen.setBookProvider(this.bookProvider);
     this.chapterSystem = new ChapterSystem(this.bookProvider, this.stateStore);
     this.progressManager = new ProgressManager();
     this.immersiveMode = new ImmersiveMode("app");
@@ -101,7 +102,7 @@ class InteractiveBookApp {
 
       // Show home screen
       this.renderer.setLoading(false);
-      this.homeScreen.render(book, progress);
+      await this.homeScreen.render(book, progress);
     } catch (error) {
       console.error("Error starting app:", error);
       this.renderer.showError("Failed to load book");

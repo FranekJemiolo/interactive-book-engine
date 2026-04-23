@@ -78,6 +78,21 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     }
   }, [currentChapterId]);
 
+  // Also check URL state on mount for chapter highlighting
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      try {
+        const state = JSON.parse(atob(hash));
+        if (state.chapter && state.chapter.id) {
+          setLocalCurrentChapterId(state.chapter.id);
+        }
+      } catch (e) {
+        console.error('Failed to parse URL state:', e);
+      }
+    }
+  }, []);
+
   // Auto-scroll to bottom when frames change
   useEffect(() => {
     const contentElement = document.getElementById('app-content');

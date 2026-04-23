@@ -96,16 +96,6 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     setChapterTitle(chapter.title);
   };
 
-  const showErrorHandler = (message: string) => {
-    console.log('[ReactBookRenderer] showError called:', message);
-    setError(message);
-  };
-
-  const setLoadingHandler = (isLoading: boolean) => {
-    console.log('[ReactBookRenderer] setLoading called:', isLoading);
-    setLoading(isLoading);
-  };
-
   const clearContent = () => {
     console.log('[ReactBookRenderer] clearContent called, current chapterTitle:', chapterTitle);
     setFrames([]);

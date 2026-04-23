@@ -6,6 +6,7 @@ import { NodeLifecycleEngine, AutoTransitionError } from "./engine/node-lifecycl
 import { ChapterSystem } from "./engine/chapter-system";
 import { ProgressManager } from "./utils/progress";
 import { ImmersiveMode } from "./engine/immersive-mode";
+import "./styles.css";
 
 class InteractiveBookApp {
   private stateStore: StateStore;

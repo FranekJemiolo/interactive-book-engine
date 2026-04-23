@@ -181,12 +181,35 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     const hasUrlStateDynamic = hash.length > 0;
     console.log('[ReactBookRenderer] hasUrlState dynamic:', hasUrlStateDynamic, 'hash:', hash);
     
+    // Find current chapter title
+    const currentChapter = chapters.find((chapter: any) => {
+      const chapterId = typeof chapter === 'string' ? chapter : chapter.id;
+      return chapterId === localCurrentChapterId;
+    });
+    const currentChapterTitle = currentChapter ? (typeof currentChapter === 'string' ? currentChapter : (currentChapter.title || currentChapter.id)) : '';
+    
     return (
       <div className="home-screen" style={{ textAlign: 'center', padding: '3rem 1rem', backgroundColor: '#1a1a2e', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
         <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1rem', color: '#4a9eff' }}>Echoes of the Last Compiler</h1>
         <p style={{ fontSize: '1.2rem', color: '#e0e0e0', marginBottom: '3rem', maxWidth: '600px' }}>
           An interactive narrative exploring identity, consciousness, and the boundaries between human and artificial intelligence.
         </p>
+        
+        {/* Current Chapter Indicator */}
+        {currentChapterTitle && (
+          <div style={{
+            backgroundColor: '#2a2a4e',
+            border: '2px solid #4a9eff',
+            color: '#e0e0e0',
+            padding: '0.75rem 1.5rem',
+            borderRadius: '8px',
+            fontSize: '1rem',
+            fontWeight: 'bold',
+            marginBottom: '2rem'
+          }}>
+            ▸ {currentChapterTitle}
+          </div>
+        )}
         
         {/* Start/Continue Reading Button */}
         <button
@@ -243,76 +266,106 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
       <div style={{ position: 'fixed', top: '1rem', left: '1rem', zIndex: 1000 }}>
         <button 
           onClick={onBack} 
-          style={{ 
-            backgroundColor: '#4a9eff', 
-            border: 'none', 
-            color: '#1a1a2e', 
-            padding: '0.5rem 1rem', 
-            borderRadius: '8px', 
-            cursor: 'pointer', 
-            fontSize: '1rem',
+          style={{
+            backgroundColor: '#4a9eff',
+            border: 'none',
+            color: '#1a1a2e',
+            padding: '0.5rem 1rem',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontSize: '0.9rem',
             fontWeight: 'bold'
           }}
         >
-          ← Back to Menu
+          ← Back
         </button>
-        {chapters.length > 0 && (
-          <div style={{ marginTop: '0.5rem', backgroundColor: '#2d2d44', padding: '1rem', borderRadius: '8px', maxWidth: '200px' }}>
-            <h3 style={{ color: '#4a9eff', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Chapters</h3>
-            {chapters.map((chapter, index) => (
-              <div 
-                key={chapter.id} 
-                style={{ 
-                  padding: '0.25rem 0.5rem', 
+      </div>
+
+      {/* Chapter Indicator */}
+      {chapterTitle && (
+        <div style={{ 
+          position: 'fixed', 
+          top: '1rem', 
+          right: '1rem', 
+          backgroundColor: '#2a2a4e', 
+          border: '1px solid #4a9eff',
+          color: '#e0e0e0',
+          padding: '0.5rem 1rem',
+          borderRadius: '6px',
+          fontSize: '0.9rem',
+          fontWeight: 'bold',
+          zIndex: 1000
+        }}>
+          {chapterTitle}
+        </div>
+      )}
+
+      {/* Content */}
+      <div id="app-content" style={{ maxWidth: '800px', margin: '0 auto', paddingBottom: '4rem' }}>
+        {/* Chapter Title */}
+        {chapterTitle && (
+          <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1.5rem', color: '#4a9eff' }}>
+            {chapterTitle}
+          </h1>
+        )}
+
+        {/* Frames */}
+        {frames.map((frame, index) => renderFrame(frame, index))}
+
+        {/* Choices */}
+        {choices.length > 0 && (
+          <div style={{ marginTop: '2rem' }}>
+            {choices.map((choice, index) => (
+              <button
+                key={index}
+                onClick={() => onChoiceSelect(choice.goto)}
+                style={{
+                  backgroundColor: '#2a2a4e',
+                  border: '1px solid #4a9eff',
+                  color: '#e0e0e0',
+                  padding: '1rem 1.5rem',
+                  borderRadius: '8px',
                   cursor: 'pointer',
-                  color: currentChapterId === chapter.id ? '#4a9eff' : '#e0e0e0',
-                  fontWeight: currentChapterId === chapter.id ? 'bold' : 'normal',
-                  fontSize: '0.85rem'
+                  fontSize: '1rem',
+                  fontWeight: 'normal',
+                  width: '100%',
+                  marginBottom: '0.75rem',
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = '#4a9eff';
+                  e.currentTarget.style.color = '#1a1a2e';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = '#2a2a4e';
+                  e.currentTarget.style.color = '#e0e0e0';
                 }}
               >
-                {index + 1}. {chapter.title}
-              </div>
+                {choice.text}
+              </button>
             ))}
           </div>
         )}
       </div>
 
-      <div className="content-area" style={{ marginBottom: '2rem', backgroundColor: '#2d2d44', padding: '1rem' }}>
-        {chapterTitle && <h1 className="chapter-title" style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '2rem', color: '#4a9eff' }}>{chapterTitle}</h1>}
-        {frames.length === 0 && <p style={{ color: '#e0e0e0' }}>No frames loaded yet</p>}
-        {frames.map((frame, index) => renderFrame(frame, index))}
+      {/* Share Button */}
+      <div style={{ position: 'fixed', bottom: '1rem', right: '1rem', zIndex: 1000 }}>
+        <button 
+          onClick={onShare}
+          style={{
+            backgroundColor: '#2a2a4e',
+            border: '1px solid #4a9eff',
+            color: '#e0e0e0',
+            padding: '0.5rem 1rem',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontSize: '0.9rem',
+            fontWeight: 'bold'
+          }}
+        >
+          Share
+        </button>
       </div>
-      {choices.length > 0 && (
-        <div className="choices-area" style={{ marginTop: '2rem', backgroundColor: '#2d2d44', padding: '1rem', position: 'relative', zIndex: 10 }}>
-          <h3 style={{ color: '#4a9eff', marginBottom: '1rem', fontSize: '1.2rem' }}>What do you do?</h3>
-          {choices.map((choice, index) => (
-            <button
-              key={index}
-              className="choice-button"
-              onClick={() => onChoiceSelect(choice.text)}
-              style={{ 
-                display: 'block', 
-                marginBottom: '0.75rem', 
-                padding: '1.25rem', 
-                backgroundColor: '#4a9eff', 
-                border: '2px solid #4a9eff', 
-                color: '#1a1a2e', 
-                borderRadius: '8px', 
-                cursor: 'pointer', 
-                fontSize: '1.1rem',
-                fontWeight: 'bold',
-                width: '100%',
-                textAlign: 'left'
-              }}
-            >
-              {choice.text}
-            </button>
-          ))}
-        </div>
-      )}
-      <button className="share-button" onClick={onShare} style={{ position: 'fixed', bottom: '1rem', right: '1rem', backgroundColor: '#4a9eff', border: 'none', color: '#1a1a2e', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', zIndex: 1000, fontSize: '1rem' }}>
-        📤 Share
-      </button>
     </div>
   );
 };

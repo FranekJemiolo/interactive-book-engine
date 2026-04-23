@@ -69,6 +69,14 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [showHomeScreen, setShowHomeScreen] = React.useState(true);
+  const [localCurrentChapterId, setLocalCurrentChapterId] = useState<string>(currentChapterId || '');
+
+  // Update local current chapter ID when prop changes
+  useEffect(() => {
+    if (currentChapterId) {
+      setLocalCurrentChapterId(currentChapterId);
+    }
+  }, [currentChapterId]);
 
   console.log('[ReactBookRenderer] Render called', { frames: frames.length, choices: choices.length, chapterTitle, loading, error });
 
@@ -217,9 +225,10 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
         
         <ChapterList 
           chapters={chapters} 
-          currentChapterId={currentChapterId}
+          currentChapterId={localCurrentChapterId}
           onSelectChapter={(chapterId) => {
             console.log('[ReactBookRenderer] Chapter selected:', chapterId);
+            setLocalCurrentChapterId(chapterId);
             setShowHomeScreen(false);
             window.dispatchEvent(new CustomEvent('selectChapter', { detail: { chapterId } }));
           }}

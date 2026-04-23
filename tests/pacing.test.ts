@@ -36,7 +36,7 @@ describe("PacingSystem", () => {
 
   it("should apply suspense pause", async () => {
     const promise = pacingSystem.applySuspensePause();
-    vi.advanceTimersByTime(30000); // medium suspense = 30000ms (30 seconds)
+    vi.advanceTimersByTime(3000); // medium suspense = 3000ms (3 seconds)
     await promise;
   });
 
@@ -58,7 +58,7 @@ describe("PacingSystem", () => {
       pacing: { suspense: "high" },
     });
     const promise = pacingSystem.applySuspensePause();
-    vi.advanceTimersByTime(30000); // high suspense = 30000ms (30 seconds)
+    vi.advanceTimersByTime(3000); // high suspense = 3000ms (3 seconds)
     await promise;
   });
 
@@ -67,7 +67,7 @@ describe("PacingSystem", () => {
       pacing: { suspense: "low" },
     });
     const promise = pacingSystem.applySuspensePause();
-    vi.advanceTimersByTime(30000); // low suspense = 30000ms (30 seconds)
+    vi.advanceTimersByTime(3000); // low suspense = 3000ms (3 seconds)
     await promise;
   });
 

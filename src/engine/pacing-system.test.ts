@@ -30,11 +30,11 @@ describe('PacingSystem', () => {
     expect(end - start).toBeLessThan(100);
   });
 
-  it('should return 30 seconds as default frame delay', () => {
+  it('should return 3 seconds as default frame delay', () => {
     const pacingSystem = new PacingSystem();
     const delay = pacingSystem.getEffectiveDelay('frame');
-    // Default should be 30 seconds (30000ms)
-    expect(delay).toBe(30000);
+    // Default should be 3 seconds (3000ms)
+    expect(delay).toBe(3000);
   });
 
   it('should use arc pacing when available', () => {
@@ -62,10 +62,10 @@ describe('PacingSystem', () => {
     expect(promise).toBeInstanceOf(Promise);
   });
 
-  it('should return 30 seconds as default suspense delay', () => {
+  it('should return 3 seconds as default suspense delay', () => {
     const pacingSystem = new PacingSystem();
     const delay = pacingSystem.getEffectiveDelay('suspense');
-    // Default should be 30 seconds (30000ms)
-    expect(delay).toBe(30000);
+    // Default should be 3 seconds (3000ms)
+    expect(delay).toBe(3000);
   });
 });

@@ -57,28 +57,28 @@ export class PacingSystem {
 
     switch (type) {
       case "intro":
-        return nodePacing?.introDelay || arcPacing?.frameDelay || 30000; // Default 30 seconds
+        return nodePacing?.introDelay || arcPacing?.frameDelay || 3000; // Default 3 seconds
       case "frame":
-        const baseDelay = arcPacing?.frameDelay || 30000; // Default 30 seconds
+        const baseDelay = arcPacing?.frameDelay || 3000; // Default 3 seconds
         const multiplier = nodePacing?.frameDelayMultiplier || 1;
         return Math.floor(baseDelay * multiplier);
       case "suspense":
-        return nodePacing?.suspensePauseBeforeChoices || this.getSuspenseDelay(arcPacing?.suspense) || 30000;
+        return nodePacing?.suspensePauseBeforeChoices || this.getSuspenseDelay(arcPacing?.suspense) || 3000;
       default:
-        return 30000; // Default 30 seconds
+        return 3000; // Default 3 seconds
     }
   }
 
   private getSuspenseDelay(suspense?: "low" | "medium" | "high"): number {
     switch (suspense) {
       case "low":
-        return 30000; // 30 seconds for auto progression
+        return 3000; // 3 seconds
       case "medium":
-        return 30000; // 30 seconds for auto progression
+        return 3000; // 3 seconds
       case "high":
-        return 30000; // 30 seconds for auto progression
+        return 3000; // 3 seconds
       default:
-        return 30000; // Default to 30 seconds for auto progression
+        return 3000; // Default to 3 seconds
     }
   }
 

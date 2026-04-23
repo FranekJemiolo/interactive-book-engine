@@ -10,35 +10,35 @@ chapters:
 arcs:
   calm_intro:
     pacing:
-      frameDelay: 30000
+      frameDelay: 3000
       suspense: "low"
     visuals:
       tone: "subtle unease"
   
   tension_rise:
     pacing:
-      frameDelay: 30000
+      frameDelay: 3000
       suspense: "medium"
     visuals:
       tone: "breaking reality"
   
   revelation:
     pacing:
-      frameDelay: 30000
+      frameDelay: 3000
       suspense: "high"
     visuals:
       tone: "structural awareness"
   
   climax:
     pacing:
-      frameDelay: 30000
+      frameDelay: 3000
       suspense: "high"
     visuals:
       tone: "identity collapse"
   
   resolution:
     pacing:
-      frameDelay: 30000
+      frameDelay: 3000
       suspense: "none"
     visuals:
       tone: "transcendent"

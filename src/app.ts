@@ -196,9 +196,6 @@ class InteractiveBookApp {
   private renderReactComponent(chaptersOverride?: any[]): void {
     if (!this.reactRoot) return;
     
-    const urlState = URLStateManager.loadStateFromURL();
-    const hasUrlState = !!urlState;
-    
     this.reactRoot.render(
       React.createElement(ReactBookRenderer, {
         onChoiceSelect: (choiceId: string) => {
@@ -221,8 +218,7 @@ class InteractiveBookApp {
           this.returnToHome();
         },
         chapters: chaptersOverride || this.currentBook?.chapters || [],
-        currentChapterId: this.chapterSystem.getCurrentChapter()?.id,
-        hasUrlState
+        currentChapterId: this.chapterSystem.getCurrentChapter()?.id
       })
     );
     console.log('[App] ReactBookRenderer rendered');

@@ -56,8 +56,7 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
   onShare,
   onBack,
   chapters = [],
-  currentChapterId,
-  hasUrlState = false
+  currentChapterId
 }) => {
   const [frames, setFrames] = useState<Frame[]>([]);
   const [choices, setChoices] = useState<Choice[]>([]);
@@ -164,6 +163,11 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
 
   if (showHomeScreen) {
     console.log('[ReactBookRenderer] Rendering home screen');
+    // Check URL state dynamically
+    const urlState = new URLSearchParams(window.location.hash.slice(1)).get('state');
+    const hasUrlStateDynamic = !!urlState;
+    console.log('[ReactBookRenderer] hasUrlState dynamic:', hasUrlStateDynamic);
+    
     return (
       <div className="home-screen" style={{ textAlign: 'center', padding: '3rem 1rem', backgroundColor: '#1a1a2e', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
         <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1rem', color: '#4a9eff' }}>Echoes of the Last Compiler</h1>
@@ -174,9 +178,9 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
         {/* Start/Continue Reading Button */}
         <button
           onClick={() => {
-            console.log('[ReactBookRenderer] Start/Continue Reading clicked, hasUrlState:', hasUrlState);
+            console.log('[ReactBookRenderer] Start/Continue Reading clicked, hasUrlState:', hasUrlStateDynamic);
             setShowHomeScreen(false);
-            if (hasUrlState) {
+            if (hasUrlStateDynamic) {
               // Load state from URL and continue
               window.dispatchEvent(new CustomEvent('continueReading'));
             } else {
@@ -198,7 +202,7 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
             marginBottom: '2rem'
           }}
         >
-          {hasUrlState ? 'Continue Reading' : 'Start Reading'}
+          {hasUrlStateDynamic ? 'Continue Reading' : 'Start Reading'}
         </button>
         
         {/* Chapter List */}

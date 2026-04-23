@@ -117,6 +117,12 @@ class InteractiveBookApp {
     console.log('[App] Container innerHTML before:', container.innerHTML);
     console.log('[App] Container style:', window.getComputedStyle(container).cssText);
 
+    // Unmount existing React root if it exists
+    if (this.reactRoot) {
+      console.log('[App] Unmounting existing React root');
+      this.reactRoot.unmount();
+    }
+
     this.reactRoot = createRoot(container);
     console.log('[App] React root created, rendering ReactBookRenderer');
     

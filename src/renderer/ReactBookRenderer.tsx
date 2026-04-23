@@ -137,7 +137,38 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
         <p style={{ fontSize: '1.2rem', color: '#e0e0e0', marginBottom: '3rem', maxWidth: '600px' }}>
           An interactive narrative exploring identity, consciousness, and the boundaries between human and artificial intelligence.
         </p>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', marginBottom: '2rem' }}>
+        
+        {/* Start Reading Button */}
+        <button
+          onClick={() => {
+            console.log('[ReactBookRenderer] Start Reading clicked');
+            setShowHomeScreen(false);
+            // Trigger first chapter load via window event
+            const firstChapterId = chapters.length > 0 ? (typeof chapters[0] === 'string' ? chapters[0] : chapters[0].id) : 'chapter_1';
+            window.dispatchEvent(new CustomEvent('selectChapter', { detail: { chapterId: firstChapterId } }));
+          }}
+          style={{
+            backgroundColor: '#4a9eff',
+            border: 'none',
+            color: '#1a1a2e',
+            padding: '1rem 2.5rem',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            fontSize: '1.3rem',
+            fontWeight: 'bold',
+            minWidth: '300px',
+            marginBottom: '2rem'
+          }}
+        >
+          Start Reading
+        </button>
+        
+        {/* Chapter List */}
+        <div style={{ marginBottom: '1rem' }}>
+          <h2 style={{ fontSize: '1.5rem', color: '#e0e0e0', marginBottom: '1.5rem' }}>Chapters</h2>
+        </div>
+        
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center', marginBottom: '2rem' }}>
           {chapters.map((chapter: any) => (
             <button
               key={typeof chapter === 'string' ? chapter : chapter.id}
@@ -148,24 +179,30 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
                 window.dispatchEvent(new CustomEvent('selectChapter', { detail: { chapterId: typeof chapter === 'string' ? chapter : chapter.id } }));
               }}
               style={{
-                backgroundColor: '#4a9eff',
-                border: 'none',
-                color: '#1a1a2e',
-                padding: '1rem 2.5rem',
+                backgroundColor: '#2a2a4e',
+                border: '1px solid #4a9eff',
+                color: '#e0e0e0',
+                padding: '0.75rem 2rem',
                 borderRadius: '8px',
                 cursor: 'pointer',
-                fontSize: '1.2rem',
-                fontWeight: 'bold',
-                minWidth: '300px'
+                fontSize: '1rem',
+                fontWeight: 'normal',
+                minWidth: '300px',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.backgroundColor = '#4a9eff';
+                e.currentTarget.style.color = '#1a1a2e';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.backgroundColor = '#2a2a4e';
+                e.currentTarget.style.color = '#e0e0e0';
               }}
             >
               {typeof chapter === 'string' ? `Chapter ${chapter}` : chapter.title || chapter.id}
             </button>
           ))}
         </div>
-        <p style={{ fontSize: '0.9rem', color: '#888' }}>
-          Select a chapter to begin reading
-        </p>
       </div>
     );
   }

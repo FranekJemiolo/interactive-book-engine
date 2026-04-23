@@ -1,0 +1,13 @@
+id: node_2_1
+content:
+  - type: text
+    value: "Chapter 2: The Investigation"
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "You found yourself in the main hall. A mysterious figure stood in the shadows."
+choices:
+  - text: "Approach the figure"
+    goto: node_2_2
+  - text: "Hide and observe"
+    goto: node_2_2

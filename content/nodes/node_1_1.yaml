@@ -1,0 +1,13 @@
+id: node_1_1
+content:
+  - type: text
+    value: "It was raining when you arrived at the station."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "The lights flickered ominously as you stepped through the airlock."
+choices:
+  - text: "Look around"
+    goto: node_1_2
+  - text: "Check your equipment"
+    goto: node_1_3

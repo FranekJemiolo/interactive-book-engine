@@ -1,0 +1,11 @@
+id: node_1_3
+content:
+  - type: text
+    value: "Your equipment was intact. Everything seemed to be in order."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "But something felt wrong."
+choices:
+  - text: "Proceed to the main hall"
+    goto: node_2_1

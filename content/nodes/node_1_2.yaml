@@ -1,0 +1,13 @@
+id: node_1_2
+content:
+  - type: text
+    value: "The station was quiet. Too quiet."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You noticed a strange symbol on the wall."
+choices:
+  - text: "Investigate the symbol"
+    goto: node_2_1
+  - text: "Ignore it and continue"
+    goto: node_1_3

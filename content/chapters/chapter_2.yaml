@@ -1,0 +1,9 @@
+id: chapter_2
+title: "The Investigation"
+arc: investigation
+nodes:
+  - node_2_1
+  - node_2_2
+context:
+  location: "space_station"
+  time: "morning"

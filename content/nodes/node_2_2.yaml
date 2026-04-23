@@ -1,0 +1,13 @@
+id: node_2_2
+content:
+  - type: text
+    value: "The figure spoke: 'You shouldn't have come here.'"
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "Before you could react, everything went dark."
+  - type: pause
+    duration: 1500
+  - type: text
+    value: "To be continued..."
+choices: []

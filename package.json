@@ -1,0 +1,31 @@
+{
+  "name": "interactive-book-engine",
+  "version": "1.0.0",
+  "description": "Interactive Narrative Book Engine - GitHub Pages deployable interactive fiction engine",
+  "main": "dist/app.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:docker": "docker-compose up -d && npm test && docker-compose down"
+  },
+  "keywords": [
+    "interactive-fiction",
+    "visual-novel",
+    "book-engine",
+    "narrative"
+  ],
+  "author": "FranekJemiolo",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11",
+    "vitest": "^1.2.1"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

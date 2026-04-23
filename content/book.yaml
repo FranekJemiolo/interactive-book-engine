@@ -1,0 +1,18 @@
+title: "The Last Signal"
+chapters:
+  - chapter_1
+  - chapter_2
+
+arcs:
+  introduction:
+    pacing:
+      frameDelay: 500
+      suspense: "low"
+    visuals:
+      tone: "mysterious"
+  investigation:
+    pacing:
+      frameDelay: 300
+      suspense: "medium"
+    visuals:
+      tone: "tense"

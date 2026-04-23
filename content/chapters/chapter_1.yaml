@@ -1,0 +1,10 @@
+id: chapter_1
+title: "The Arrival"
+arc: introduction
+nodes:
+  - node_1_1
+  - node_1_2
+  - node_1_3
+context:
+  location: "space_station"
+  time: "night"

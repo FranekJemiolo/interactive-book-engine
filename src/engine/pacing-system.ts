@@ -14,8 +14,10 @@ export class PacingSystem {
     if (this.fastForwardMode) return;
 
     const delay = this.getEffectiveDelay("intro");
-    if (delay) {
-      await this.delay(delay);
+    // Don't wait at start for intro delay
+    if (delay && delay > 0) {
+      // Skip intro delay for immediate start
+      // await this.delay(delay);
     }
   }
 

@@ -167,7 +167,8 @@ class InteractiveBookApp {
     if (rendererAPI) {
       rendererAPI.clearContent();
     }
-    this.start();
+    // Reload the page to return to initial state
+    window.location.href = window.location.pathname + window.location.search;
   }
 
   async start(): Promise<void> {

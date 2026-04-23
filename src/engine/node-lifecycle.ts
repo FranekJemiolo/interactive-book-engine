@@ -105,6 +105,11 @@ export class NodeLifecycleEngine {
 
     // Handle pause frames with configurable multiplier
     if (frame.type === "pause") {
+      // Skip delay for the first frame to ensure immediate loading
+      if (index === 0) {
+        return;
+      }
+      
       let duration = frame.duration || 0;
       
       // If duration is 0 or very short (less than 1 second), use default pacing

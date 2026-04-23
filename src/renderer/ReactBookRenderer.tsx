@@ -80,9 +80,9 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     console.log('[ReactBookRenderer] renderFrame:', frame, index);
     switch (frame.type) {
       case 'text':
-        return <p key={index} className="text-frame" style={{ fontSize: '1.1rem', lineHeight: '1.8', color: '#e0e0e0', marginBottom: '1.5rem' }}>{(frame as any).value}</p>;
+        return <p key={index} className="text-frame" style={{ fontSize: '1.1rem', lineHeight: '1.8', color: '#e0e0e0', marginBottom: '0.25rem' }}>{(frame as any).value}</p>;
       case 'image':
-        return <img key={index} src={(frame as any).src} alt="" className="image-frame" style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', margin: '1rem 0', display: 'block' }} />;
+        return <img key={index} src={(frame as any).src} alt="" className="image-frame" style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', margin: '0.5rem 0', display: 'block' }} />;
       case 'pause':
         return <div key={index} className="pause-frame" style={{ height: (frame as any).duration + 'px' }} />;
       default:
@@ -154,13 +154,27 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
         {frames.map((frame, index) => renderFrame(frame, index))}
       </div>
       {choices.length > 0 && (
-        <div className="choices-area" style={{ marginTop: '2rem', backgroundColor: '#2d2d44', padding: '1rem' }}>
+        <div className="choices-area" style={{ marginTop: '2rem', backgroundColor: '#2d2d44', padding: '1rem', position: 'relative', zIndex: 10 }}>
+          <h3 style={{ color: '#4a9eff', marginBottom: '1rem', fontSize: '1.2rem' }}>What do you do?</h3>
           {choices.map((choice, index) => (
             <button
               key={index}
               className="choice-button"
               onClick={() => onChoiceSelect(choice.text)}
-              style={{ display: 'block', marginBottom: '0.5rem', padding: '1rem', backgroundColor: '#4a9eff', border: 'none', color: '#1a1a2e', borderRadius: '8px', cursor: 'pointer', fontSize: '1rem' }}
+              style={{ 
+                display: 'block', 
+                marginBottom: '0.75rem', 
+                padding: '1.25rem', 
+                backgroundColor: '#4a9eff', 
+                border: '2px solid #4a9eff', 
+                color: '#1a1a2e', 
+                borderRadius: '8px', 
+                cursor: 'pointer', 
+                fontSize: '1.1rem',
+                fontWeight: 'bold',
+                width: '100%',
+                textAlign: 'left'
+              }}
             >
               {choice.text}
             </button>

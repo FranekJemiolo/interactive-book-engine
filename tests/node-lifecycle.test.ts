@@ -13,8 +13,11 @@ describe('NodeLifecycleEngine', () => {
       stateStore,
       vi.fn(),
       vi.fn(),
-      vi.fn()
+      vi.fn(),
+      { pacing: { frameDelay: 100 } } // Use shorter delays for tests
     );
+    // Set fast-forward mode to skip delays in tests
+    (engine as any).pacingSystem.setFastForward(true);
   });
 
   describe('executeNode', () => {
@@ -39,8 +42,10 @@ describe('NodeLifecycleEngine', () => {
         stateStore,
         vi.fn(),
         mockRenderFrame,
-        vi.fn()
+        vi.fn(),
+        { pacing: { frameDelay: 100 } } // Use shorter delays for tests
       );
+      (engine as any).pacingSystem.setFastForward(true);
 
       const node: Node = {
         id: 'node_1',
@@ -63,8 +68,10 @@ describe('NodeLifecycleEngine', () => {
         stateStore,
         vi.fn(),
         vi.fn(),
-        mockRenderChoices
+        mockRenderChoices,
+        { pacing: { frameDelay: 100 } } // Use shorter delays for tests
       );
+      (engine as any).pacingSystem.setFastForward(true);
 
       const node: Node = {
         id: 'node_1',
@@ -89,8 +96,10 @@ describe('NodeLifecycleEngine', () => {
         stateStore,
         vi.fn(),
         vi.fn(),
-        mockRenderChoices
+        mockRenderChoices,
+        { pacing: { frameDelay: 100 } } // Use shorter delays for tests
       );
+      (engine as any).pacingSystem.setFastForward(true);
 
       const node: Node = {
         id: 'node_1',
@@ -111,8 +120,10 @@ describe('NodeLifecycleEngine', () => {
         stateStore,
         vi.fn(),
         vi.fn(),
-        vi.fn()
+        vi.fn(),
+        { pacing: { frameDelay: 100 } } // Use shorter delays for tests
       );
+      (engine as any).pacingSystem.setFastForward(true);
 
       const node: Node = {
         id: 'node_1',
@@ -131,7 +142,7 @@ describe('NodeLifecycleEngine', () => {
   });
 
   describe('makeChoice', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       const node: Node = {
         id: 'node_1',
         content: [{ type: 'text', value: 'Test' }],
@@ -140,7 +151,15 @@ describe('NodeLifecycleEngine', () => {
           { text: 'Choice 2', goto: 'node_3' }
         ]
       };
-      engine.executeNode(node);
+      engine = new NodeLifecycleEngine(
+        stateStore,
+        vi.fn(),
+        vi.fn(),
+        vi.fn(),
+        { pacing: { frameDelay: 100 } } // Use shorter delays for tests
+      );
+      (engine as any).pacingSystem.setFastForward(true);
+      await engine.executeNode(node);
     });
 
     it('should return goto for valid choice', async () => {
@@ -168,14 +187,16 @@ describe('NodeLifecycleEngine', () => {
   });
 
   describe('getCurrentPhase', () => {
-    it('should return current phase', () => {
+    it('should return current phase', async () => {
       const mockPhaseChange = vi.fn();
       engine = new NodeLifecycleEngine(
         stateStore,
         mockPhaseChange,
         vi.fn(),
-        vi.fn()
+        vi.fn(),
+        { pacing: { frameDelay: 100 } } // Use shorter delays for tests
       );
+      (engine as any).pacingSystem.setFastForward(true);
 
       const node: Node = {
         id: 'node_1',
@@ -183,7 +204,7 @@ describe('NodeLifecycleEngine', () => {
         choices: []
       };
 
-      engine.executeNode(node);
+      await engine.executeNode(node);
 
       expect(mockPhaseChange).toHaveBeenCalled();
     });

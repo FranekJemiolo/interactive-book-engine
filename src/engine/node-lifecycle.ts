@@ -73,7 +73,7 @@ export class NodeLifecycleEngine {
     }
 
     const state = this.stateStore.getState();
-    const choice = this.currentNode.choices?.find((c) => c.text === choiceId);
+    const choice = this.currentNode.choices?.find((c) => c.goto === choiceId);
 
     if (!choice) {
       throw new Error(`Choice not found: ${choiceId}`);
@@ -85,7 +85,7 @@ export class NodeLifecycleEngine {
     }
 
     // Record choice
-    this.stateStore.makeChoice(choiceId);
+    this.stateStore.makeChoice(choice.goto);
 
     // Apply choice effects (if any - for future expansion)
     // For now, choices only navigate

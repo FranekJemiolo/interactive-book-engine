@@ -218,7 +218,7 @@ class InteractiveBookApp {
           this.returnToHome();
         },
         chapters: chaptersOverride || this.currentBook?.chapters || [],
-        currentChapterId: this.chapterSystem.getCurrentChapter()?.id
+        currentChapterId: this.chapterSystem.getCurrentChapter()?.id || this.stateStore.getState().chapter?.id
       })
     );
     console.log('[App] ReactBookRenderer rendered');

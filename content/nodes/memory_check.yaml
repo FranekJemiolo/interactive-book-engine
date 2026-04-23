@@ -18,4 +18,4 @@ choices:
   - text: "Trace recursion origin"
     goto: log_deep
   - text: "Exit diagnostics"
-    goto: street_glitch
+    goto: ch1_to_ch2_bridge

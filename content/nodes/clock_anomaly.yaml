@@ -1,17 +1,21 @@
 id: clock_anomaly
 content:
   - type: text
-    value: "As you prepare to leave, you notice the clock on the wall. It's an analog clock, but the second hand doesn't move smoothly—it jumps in discrete increments, like a digital approximation of analog motion."
+    value: "You check the watch on your wrist. It shows 8:52 AM, but the second hand is moving erratically—not ticking smoothly, but stuttering as if it's struggling to maintain consistent time."
   - type: pause
     duration: 500
   - type: text
-    value: "You watch it for a moment. The jumps are irregular: sometimes it skips a second, sometimes it holds on one second longer than it should. Not broken, but... calculated."
+    value: "You watch it for a full minute. In that minute, the second hand completes only 55 ticks, but the watch face shows 8:53 AM when it should show 8:53 AM. Time is being compressed."
   - type: pause
     duration: 500
   - type: text
-    value: "When you look away and back, the time hasn't changed. It's as if time only progresses when you're observing it directly."
+    value: "When you try to set the time manually, the watch resists—not physically, but in the way the crown turns. It feels like you're trying to adjust something that doesn't want to be adjusted."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "The watch stops resisting suddenly. The second hand resumes smooth ticking. But now it shows 8:47 AM—you've lost time, and you're not sure how."
 choices:
-  - text: "Investigate the clock"
+  - text: "Investigate further"
     goto: clock_investigation
-  - text: "Leave anyway"
-    goto: street_glitch
+  - text: "Leave for work"
+    goto: ch1_to_ch2_bridge

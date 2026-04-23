@@ -1,9 +1,11 @@
 id: chapter_2
-title: "The Investigation"
-arc: investigation
+title: "Anomalies in the Code"
+arc: tension_rise
 nodes:
-  - node_2_1
-  - node_2_2
+  - street_glitch
+  - investigate
+  - trace_log
+  - ignore_glitch
 context:
-  location: "space_station"
+  location: "city_street"
   time: "morning"

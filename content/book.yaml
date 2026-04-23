@@ -1,18 +1,44 @@
-title: "The Last Signal"
+title: "Echoes of the Last Compiler"
 chapters:
   - chapter_1
   - chapter_2
+  - chapter_3
+  - chapter_4
+  - chapter_5
+  - chapter_endings
 
 arcs:
-  introduction:
+  calm_intro:
     pacing:
-      frameDelay: 500
+      frameDelay: 600
       suspense: "low"
     visuals:
-      tone: "mysterious"
-  investigation:
+      tone: "subtle unease"
+  
+  tension_rise:
     pacing:
-      frameDelay: 300
+      frameDelay: 500
       suspense: "medium"
     visuals:
-      tone: "tense"
+      tone: "breaking reality"
+  
+  revelation:
+    pacing:
+      frameDelay: 400
+      suspense: "high"
+    visuals:
+      tone: "structural awareness"
+  
+  climax:
+    pacing:
+      frameDelay: 300
+      suspense: "high"
+    visuals:
+      tone: "identity collapse"
+  
+  resolution:
+    pacing:
+      frameDelay: 1000
+      suspense: "none"
+    visuals:
+      tone: "transcendent"

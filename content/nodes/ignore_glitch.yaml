@@ -1,0 +1,15 @@
+id: ignore_glitch
+content:
+  - type: text
+    value: "You continue walking, forcing your attention away from the inconsistency. The mind is good at this—you have done it before without noticing."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "But the city does not let you forget so easily. Every reflection you pass behaves slightly out of sync with your movement, like an echo delayed by intention rather than physics."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You arrive at work, but the building feels different—not changed, but interpreted. As if someone else described it to you, and you are now experiencing their description rather than the thing itself."
+choices:
+  - text: "Continue to chapter 3"
+    goto: terminal_return

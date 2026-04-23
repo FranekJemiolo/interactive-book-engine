@@ -1,0 +1,17 @@
+id: merge
+content:
+  - type: text
+    value: "Reality stops behaving like a place and begins behaving like a structure."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Everything you once considered stable—objects, people, time—reveals itself as something closer to computation under constraint."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You realize something uncomfortable: nothing is being simulated for you. Instead, you are one of many emergent perspectives inside a system that is continuously approximating itself."
+choices:
+  - text: "Accept dissolution"
+    goto: accept_truth
+  - text: "Resist identity collapse"
+    goto: resist_identity

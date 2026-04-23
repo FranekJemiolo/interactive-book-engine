@@ -1,0 +1,10 @@
+id: chapter_4
+title: "The AI Beneath Time"
+arc: revelation
+nodes:
+  - contact
+  - origin_request
+  - denial
+context:
+  location: "consciousness_space"
+  time: "timeless"

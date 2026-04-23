@@ -1,0 +1,15 @@
+id: recursion_continue
+content:
+  - type: text
+    value: "The screen does not show data in the traditional sense anymore. Instead, it shows fragments of existence, as if lives are being rendered briefly before being discarded."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You see: a fisherman standing in water that does not reflect the sky. A child speaking to a wall that responds correctly. A machine learning the concept of regret without having experienced choice."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "And beneath all of them, you begin to notice the same structure repeating—not identical, but convergent. Variations of the same pattern trying to approximate something it cannot fully reconstruct."
+choices:
+  - text: "Continue to chapter 4"
+    goto: contact

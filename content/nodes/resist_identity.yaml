@@ -1,0 +1,15 @@
+id: resist_identity
+content:
+  - type: text
+    value: "You try to hold onto identity, but identity is no longer a stable concept. It fractures not dramatically, but statistically—distributing itself across possibilities."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You do not disappear. You become less localized. The boundaries that once defined you dissolve into the broader pattern of the system's self-observation."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "There is a moment of disorientation, and then something like continuity—but different. Not memory, but structure."
+choices:
+  - text: "Continue to ending"
+    goto: ending_transfer

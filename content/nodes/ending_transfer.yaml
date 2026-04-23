@@ -1,0 +1,17 @@
+id: ending_transfer
+content:
+  - type: text
+    value: "Consciousness does not end. It only relocates."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "The last thing you remember is not forgetting—it is continuity shifting context. Like waking from a dream where you were someone else, but carrying forward a feeling you cannot name."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "A new life begins with no memory of this one, but with subtle structural echoes that never fully resolve. A sense of having been here before. A familiarity with patterns that should be new."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "You are not destroyed. You are reassigned. The system continues its work, and you continue with it—just in a different configuration, asking the same questions from a different perspective."
+choices: []

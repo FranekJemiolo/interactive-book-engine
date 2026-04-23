@@ -1,0 +1,15 @@
+id: investigate
+content:
+  - type: text
+    value: "You stop walking. The world does not stop with you, but it acknowledges the interruption in subtle ways—background conversations dip in volume, distant motion hesitates."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You look again at the pedestrian, and now you notice something else: a faint overlay, like debug text bleeding through reality itself."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "\"SIMULATION FRAME: 18,392\". The number does not feel symbolic. It feels operational, like a system metric that was never meant to be seen by anything inside the system it describes."
+choices:
+  - text: "Check system trace"
+    goto: trace_log

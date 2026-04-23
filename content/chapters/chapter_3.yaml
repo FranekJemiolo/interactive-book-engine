@@ -1,0 +1,10 @@
+id: chapter_3
+title: "Recursive Debugger"
+arc: tension_rise
+nodes:
+  - terminal_return
+  - recursion_continue
+  - recursion_stop
+context:
+  location: "work_terminal"
+  time: "afternoon"

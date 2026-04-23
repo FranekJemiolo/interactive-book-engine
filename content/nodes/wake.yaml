@@ -1,0 +1,17 @@
+id: wake
+content:
+  - type: text
+    value: "You wake up not with a start, but with the quiet continuity of someone who has never truly been asleep. The room around you feels familiar in the way dreams often do when you are still inside them but already beginning to suspect their artificiality."
+  - type: pause
+    duration: 600
+  - type: text
+    value: "In front of you stands an old terminal, the kind you have not seen in years except in nostalgic images or forgotten training datasets. Its screen flickers with a pale green glow that feels less like emitted light and more like remembered light."
+  - type: pause
+    duration: 600
+  - type: text
+    value: "A single line of text sits waiting as if it has always been there, long before you were aware of arriving: \"Welcome, Developer.\" Below it, another line appears, slower, as if the system is thinking about you while you read it. \"System integrity: unstable.\""
+choices:
+  - text: "Run diagnostics"
+    goto: diagnostics
+  - text: "Ignore and go to work"
+    goto: ignore_work

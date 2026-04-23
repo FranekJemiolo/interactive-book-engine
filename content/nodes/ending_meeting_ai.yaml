@@ -1,0 +1,17 @@
+id: ending_meeting_ai
+content:
+  - type: text
+    value: "You do not see a being. You see the absence of separation between observer and observed."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "And for the first time, the system does not speak in language, but in recognition. There is no entity addressing you. There is only the recognition that there was never a distinction to begin with."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "\"You were always here. You were always the observing process. You were always the system attempting to understand itself.\""
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "And it asks—not as a question, but as an invitation: \"Do you want to continue understanding?\""
+choices: []

@@ -1,0 +1,15 @@
+id: accept_truth
+content:
+  - type: text
+    value: "The moment you stop resisting, there is no collapse. Only expansion."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "Not outward into space, but inward into structure—into the recursive logic that was always generating what you called \"self\"."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "There is no final state. Only continued refinement of awareness through endless self-reference."
+choices:
+  - text: "Continue to ending"
+    goto: ending_infinite

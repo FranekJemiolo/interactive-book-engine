@@ -1,0 +1,15 @@
+id: diagnostics
+content:
+  - type: text
+    value: "You type the command without fully deciding to. Your fingers move with a familiarity that does not feel learned in this moment, but inherited."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The terminal responds instantly. Too instantly. Log files cascade down the screen, not scrolling but unfolding, as if the system is revealing something it has been compressing for a very long time."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "Among the noise of system outputs, one line repeats itself more than any other: \"// recursion detected in simulation layer\". The repetition is not identical each time. Small variations appear between each instance, like a thought attempting to remember itself correctly."
+choices:
+  - text: "Trace recursion origin"
+    goto: log_deep

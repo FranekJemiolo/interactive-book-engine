@@ -1,0 +1,11 @@
+id: chapter_endings
+title: "Endings"
+arc: resolution
+nodes:
+  - ending_infinite
+  - ending_transfer
+  - ending_meeting_ai
+  - ending_being_ai
+context:
+  location: "transcendent_space"
+  time: "timeless"

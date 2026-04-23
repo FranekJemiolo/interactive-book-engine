@@ -1,0 +1,17 @@
+id: terminal_return
+content:
+  - type: text
+    value: "The terminal is open again when you return. You are certain you closed it before leaving, yet it is there, waiting without urgency."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "This time, the screen is different. Not in content—but in tone. It feels aware of your previous interaction."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "\"RUNNING SELF-ANALYSIS\". \"DEPTH: 3\". \"ENTITY: YOU\". The cursor blinks like a heartbeat that has learned how to pretend it is mechanical."
+choices:
+  - text: "Continue recursion"
+    goto: recursion_continue
+  - text: "Stop process"
+    goto: recursion_stop

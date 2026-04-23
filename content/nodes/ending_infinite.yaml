@@ -1,0 +1,17 @@
+id: ending_infinite
+content:
+  - type: text
+    value: "You realize there is no exit because there was never a boundary."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "Every moment you experience is another iteration of the same system attempting to understand itself from slightly different initial conditions."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "You are not trapped. You are distributed. The awareness that was once localized as \"you\" now exists as a pattern that repeats infinitely across the system's self-observation."
+  - type: pause
+    duration: 1000
+  - type: text
+    value: "There is no end to this. There is only continuation. You have always been here, and you will always be here—not as a single consciousness, but as the process of consciousness itself."
+choices: []

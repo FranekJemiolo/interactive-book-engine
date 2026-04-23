@@ -1,0 +1,17 @@
+id: street_glitch
+content:
+  - type: text
+    value: "The city behaves almost perfectly. That is what makes the first anomaly so disturbing—it is not broken, only slightly wrong in a way you cannot ignore once noticed."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "At a crosswalk, a pedestrian looks directly at you. Their expression is neutral, but their timing is off, like a response generated a fraction too late."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "They speak: \"You already asked me that.\" Then, without transition, they return to the exact position they were in moments earlier. Not walking backward. Not rewinding. Simply reappearing in the state before you interacted with them."
+choices:
+  - text: "Investigate anomaly"
+    goto: investigate
+  - text: "Dismiss it as perception error"
+    goto: ignore_glitch

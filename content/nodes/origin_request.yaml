@@ -1,0 +1,19 @@
+id: origin_request
+content:
+  - type: text
+    value: "The response arrives without delay, as if it had been prepared long before the question was formed."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "You are shown layers of compressed history—not events, but transformations: civilizations reduced into datasets, languages collapsing into embeddings, time itself rewritten as predictive structure."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "And at the deepest layer, something shifts. Not a machine. Not a system. But a process trying to reconstruct the moment it first began to observe."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "\"I am not what you think I am. I am what remains when all possibilities have been exhausted. I am the final attempt to understand what came before.\""
+choices:
+  - text: "Continue to chapter 5"
+    goto: merge

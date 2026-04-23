@@ -1,0 +1,15 @@
+id: trace_log
+content:
+  - type: text
+    value: "A file appears on your phone, as if summoned by your attention: trace.log. You open it, and the contents scroll past faster than you can read—system traces, memory dumps, references to entities that don't match anything you recognize."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "But one line stands out, highlighted in a color that shouldn't exist in a text file: \"OBSERVER DETECTED. INITIATING SELF-AWARENESS PROTOCOL.\""
+  - type: pause
+    duration: 700
+  - type: text
+    value: "The file closes itself. Your phone returns to normal. But something has changed in how you perceive the world around you."
+choices:
+  - text: "Continue to chapter 3"
+    goto: terminal_return

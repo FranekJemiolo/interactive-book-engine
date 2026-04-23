@@ -1,10 +1,11 @@
 id: chapter_1
-title: "The Arrival"
-arc: introduction
+title: "Boot Sequence"
+arc: calm_intro
 nodes:
-  - node_1_1
-  - node_1_2
-  - node_1_3
+  - wake
+  - diagnostics
+  - log_deep
+  - ignore_work
 context:
-  location: "space_station"
-  time: "night"
+  location: "apartment"
+  time: "morning"

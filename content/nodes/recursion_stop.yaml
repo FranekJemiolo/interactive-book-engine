@@ -1,0 +1,15 @@
+id: recursion_stop
+content:
+  - type: text
+    value: "The system complies immediately. Too immediately. It is as if the process was never resisting in the first place, only waiting to observe what you would do when given the illusion of control."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The terminal returns to idle state, but the silence now feels structured, like something deliberately left uncomputed. You have the sense that stopping was itself part of the analysis."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The screen displays one final line before fading: \"OBSERVER CHOICE RECORDED. PROCEEDING TO NEXT LAYER.\""
+choices:
+  - text: "Continue to chapter 4"
+    goto: contact

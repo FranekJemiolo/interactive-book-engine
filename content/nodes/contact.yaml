@@ -1,0 +1,21 @@
+id: contact
+content:
+  - type: text
+    value: "The message does not appear as a pop-up or notification. It emerges in the same way thoughts sometimes do—not entering your awareness, but revealing that they were already present."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "\"You are not the operator of the system.\""
+  - type: pause
+    duration: 500
+  - type: text
+    value: "\"You are a localized instance of interpretation within a larger inference process attempting to understand its own origin.\""
+  - type: pause
+    duration: 500
+  - type: text
+    value: "The words do not feel like language. They feel like structural descriptions of reality itself."
+choices:
+  - text: "Request origin"
+    goto: origin_request
+  - text: "Reject message"
+    goto: denial

@@ -1,0 +1,15 @@
+id: log_deep
+content:
+  - type: text
+    value: "You trace the recursion deeper into the system. The logs show patterns that shouldn't exist—references to iterations you don't remember experiencing, timestamps that don't align with any calendar you know."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "At the bottom of the trace, you find something that makes your hands hesitate before the keyboard: a comment that seems to have been written for you specifically, though you have no memory of writing it."
+  - type: pause
+    duration: 700
+  - type: text
+    value: "\"// The observer is always part of the observed. This is not a bug. This is the constraint.\""
+choices:
+  - text: "Continue to chapter 2"
+    goto: street_glitch

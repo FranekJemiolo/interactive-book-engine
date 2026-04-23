@@ -1,0 +1,15 @@
+id: ignore_work
+content:
+  - type: text
+    value: "You leave the apartment as if nothing unusual has happened. The hallway is normal. The elevator works. The city outside behaves correctly enough to avoid suspicion."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "But there is a subtle dissonance in motion itself. People move with continuity that feels slightly too smooth, like animations interpolated one frame too far."
+  - type: pause
+    duration: 500
+  - type: text
+    value: "On your wrist, your watch ticks forward, but every few seconds it hesitates—not breaking, not stopping, just reconsidering whether time should continue in exactly this way."
+choices:
+  - text: "Continue to chapter 2"
+    goto: street_glitch

@@ -70,6 +70,7 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [showHomeScreen, setShowHomeScreen] = React.useState(true);
   const [localCurrentChapterId, setLocalCurrentChapterId] = useState<string>(currentChapterId || '');
+  const [typingText, setTypingText] = useState<Record<number, string>>({});
 
   // Update local current chapter ID when prop changes
   useEffect(() => {
@@ -77,6 +78,30 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
       setLocalCurrentChapterId(currentChapterId);
     }
   }, [currentChapterId]);
+
+  // Typing animation effect
+  useEffect(() => {
+    frames.forEach((frame, index) => {
+      if (frame.type === 'text') {
+        const text = (frame as any).value;
+        if (!typingText[index]) {
+          let charIndex = 0;
+          const typeInterval = setInterval(() => {
+            if (charIndex <= text.length) {
+              setTypingText(prev => ({
+                ...prev,
+                [index]: text.slice(0, charIndex)
+              }));
+              charIndex++;
+            } else {
+              clearInterval(typeInterval);
+            }
+          }, 30); // Typing speed
+          return () => clearInterval(typeInterval);
+        }
+      }
+    });
+  }, [frames]);
 
   console.log('[ReactBookRenderer] Render called', { frames: frames.length, choices: choices.length, chapterTitle, loading, error });
 
@@ -112,6 +137,7 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     console.log('[ReactBookRenderer] clearContent called, current chapterTitle:', chapterTitle);
     setFrames([]);
     setChoices([]);
+    setTypingText({});
     // Don't clear chapter title when navigating within a chapter
     // setChapterTitle('');
     // setError('');
@@ -145,7 +171,8 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     console.log('[ReactBookRenderer] renderFrame:', frame, index);
     switch (frame.type) {
       case 'text':
-        return <p key={index} className="text-frame" style={{ fontSize: '1.1rem', lineHeight: '1.8', color: '#e0e0e0', marginBottom: '0.1rem' }}>{(frame as any).value}</p>;
+        const text = typingText[index] || (frame as any).value;
+        return <p key={index} className="text-frame" style={{ fontSize: '1.1rem', lineHeight: '1.8', color: '#e0e0e0', marginBottom: '0' }}>{text}</p>;
       case 'image':
         const imageSrc = (frame as any).src.startsWith('/') ? (frame as any).src : `/content/${(frame as any).src}`;
         return <img key={index} src={imageSrc} alt="" className="image-frame" style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', margin: '0.25rem 0', display: 'block' }} />;

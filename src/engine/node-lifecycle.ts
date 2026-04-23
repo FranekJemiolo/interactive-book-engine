@@ -21,8 +21,11 @@ export class NodeLifecycleEngine {
   async executeNode(node: Node): Promise<void> {
     this.currentNode = node;
     const state = this.stateStore.getState();
+    
+    // CHECK IF NODE WAS ALREADY VISITED BEFORE THIS EXECUTION
+    const wasAlreadyVisited = state.meta.visitedNodes.includes(node.id);
 
-    // Mark node as visited
+    // VISIT NODE
     this.stateStore.visitNode(node.id);
 
     // ENTER phase
@@ -41,7 +44,7 @@ export class NodeLifecycleEngine {
     this.setPhase("render");
     for (let i = 0; i < node.content.length; i++) {
       const frame = node.content[i];
-      await this.renderFrame(frame, i, node.id);
+      await this.renderFrame(frame, i, wasAlreadyVisited);
     }
 
     // RUN AUTO TRANSITIONS
@@ -95,17 +98,13 @@ export class NodeLifecycleEngine {
     this.onPhaseChange?.(phase);
   }
 
-  private async renderFrame(frame: any, index: number, nodeId: string): Promise<void> {
+  private async renderFrame(frame: any, index: number, wasAlreadyVisited: boolean): Promise<void> {
     this.onFrameRender?.(frame, index);
-
-    // Check if current node has been visited before
-    const state = this.stateStore.getState();
-    const isNodeVisited = state.meta.visitedNodes.includes(nodeId);
 
     // Handle frame delays using pacing system
     if (frame.delay) {
-      // Skip frame delays if node has been visited
-      if (!isNodeVisited) {
+      // Skip frame delays if node has been visited before this execution
+      if (!wasAlreadyVisited) {
         await this.pacingSystem.applyFrameDelay(frame.delay);
       }
     }
@@ -117,8 +116,8 @@ export class NodeLifecycleEngine {
         return;
       }
       
-      // Skip pauses if node has been visited before
-      if (isNodeVisited) {
+      // Skip pauses if node was already visited before this execution
+      if (wasAlreadyVisited) {
         return;
       }
       

@@ -94,6 +94,7 @@ export interface State {
     visitedNodes: string[];
     choicesMade: string[];
     startedAt: number;
+    path: string[]; // Track the sequence of nodes visited to detect loops
   };
 }
 

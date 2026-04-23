@@ -14,6 +14,7 @@ export class StateStore {
         visitedNodes: [],
         choicesMade: [],
         startedAt: Date.now(),
+        path: [],
       },
     };
   }
@@ -54,6 +55,8 @@ export class StateStore {
       id,
       context: context || {},
     };
+    // Clear path when starting a new chapter
+    this.state.meta.path = [];
     this.notify();
   }
 
@@ -65,15 +68,28 @@ export class StateStore {
   visitNode(nodeId: string): void {
     if (!this.state.meta.visitedNodes.includes(nodeId)) {
       this.state.meta.visitedNodes.push(nodeId);
-      this.notify();
     }
+    // Add node to path (track sequence for loop detection)
+    this.state.meta.path.push(nodeId);
+    this.notify();
+  }
+
+  isLoop(nodeId: string): boolean {
+    return this.state.meta.path.includes(nodeId);
   }
 
   makeChoice(choiceId: string): void {
     if (!this.state.meta.choicesMade.includes(choiceId)) {
       this.state.meta.choicesMade.push(choiceId);
-      this.notify();
     }
+    // Clear path when making a choice (new branch)
+    this.state.meta.path = [];
+    this.notify();
+  }
+
+  clearPath(): void {
+    this.state.meta.path = [];
+    this.notify();
   }
 
   subscribe(listener: (state: State) => void): () => void {
@@ -109,6 +125,7 @@ export class StateStore {
         visitedNodes: [],
         choicesMade: [],
         startedAt: Date.now(),
+        path: [],
       },
     };
     this.notify();

@@ -168,8 +168,12 @@ class InteractiveBookApp {
 
   private returnToHome(): void {
     console.log('[App] returnToHome called');
-    // Reload the page to return to initial state (shows first chapter)
-    window.location.href = window.location.pathname + window.location.search;
+    const rendererAPI = (window as any).rendererAPI;
+    if (rendererAPI) {
+      rendererAPI.showHomeScreen();
+    } else {
+      this.renderer.clearContent();
+    }
   }
 
   async start(): Promise<void> {

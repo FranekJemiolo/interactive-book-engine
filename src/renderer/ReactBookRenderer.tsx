@@ -21,6 +21,7 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
   const [chapterTitle, setChapterTitle] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [showHomeScreen, setShowHomeScreen] = React.useState(false);
 
   console.log('[ReactBookRenderer] Render called', { frames: frames.length, choices: choices.length, chapterTitle, loading, error });
 
@@ -71,16 +72,25 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     // setError('');
   };
 
+  const showHomeScreenHandler = () => {
+    console.log('[ReactBookRenderer] showHomeScreen called');
+    setShowHomeScreen(true);
+    setFrames([]);
+    setChoices([]);
+    setChapterTitle('');
+  };
+
   // Expose methods via window object for app to call
   useEffect(() => {
-    console.log('[ReactBookRenderer] Setting up rendererAPI on window');
+    console.log('[ReactBookRenderer] Setting up rendererAPI');
     const api = {
+      setLoading,
+      showError: setError,
+      showChapterTitle: showChapterTitleHandler,
       addFrame,
       setChoices: setChoicesHandler,
-      showChapterTitle: showChapterTitleHandler,
-      showError: showErrorHandler,
-      setLoading: setLoadingHandler,
-      clearContent
+      clearContent,
+      showHomeScreen: showHomeScreenHandler
     };
     (window as any).rendererAPI = api;
     console.log('[ReactBookRenderer] rendererAPI set:', api);
@@ -115,6 +125,37 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     return (
       <div className="error-message">
         <p>Error: {error}</p>
+      </div>
+    );
+  }
+
+  if (showHomeScreen) {
+    console.log('[ReactBookRenderer] Rendering home screen');
+    return (
+      <div className="home-screen" style={{ textAlign: 'center', padding: '3rem 1rem', backgroundColor: '#1a1a2e', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1rem', color: '#4a9eff' }}>Echoes of the Last Compiler</h1>
+        <p style={{ fontSize: '1.2rem', color: '#e0e0e0', marginBottom: '3rem', maxWidth: '600px' }}>
+          An interactive narrative exploring identity, consciousness, and the boundaries between human and artificial intelligence.
+        </p>
+        <button 
+          onClick={() => window.location.reload()} 
+          style={{ 
+            backgroundColor: '#4a9eff', 
+            border: 'none', 
+            color: '#1a1a2e', 
+            padding: '1rem 2.5rem', 
+            borderRadius: '8px', 
+            cursor: 'pointer', 
+            fontSize: '1.2rem',
+            fontWeight: 'bold',
+            marginBottom: '1rem'
+          }}
+        >
+          Start Reading
+        </button>
+        <p style={{ fontSize: '0.9rem', color: '#888' }}>
+          Click "Start Reading" to begin from the first chapter
+        </p>
       </div>
     );
   }

@@ -7,43 +7,48 @@ interface ReactBookRendererProps {
   onBack: () => void;
   chapters?: any[];
   currentChapterId?: string;
-  hasUrlState?: boolean;
 }
 
-const ChapterList: React.FC<{ chapters: any[]; onSelectChapter: (chapterId: string) => void }> = ({ chapters, onSelectChapter }) => {
+const ChapterList: React.FC<{ chapters: any[]; onSelectChapter: (chapterId: string) => void; currentChapterId?: string }> = ({ chapters, onSelectChapter, currentChapterId }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center', marginBottom: '2rem' }}>
       {chapters.map((chapter: any) => {
         const chapterTitle = typeof chapter === 'string' ? chapter : (chapter.title || chapter.id);
+        const chapterId = typeof chapter === 'string' ? chapter : chapter.id;
+        const isCurrent = currentChapterId === chapterId;
         return (
           <button
-            key={typeof chapter === 'string' ? chapter : chapter.id}
+            key={chapterId}
             onClick={() => {
-              console.log('[ChapterList] Chapter selected:', typeof chapter === 'string' ? chapter : chapter.id);
-              onSelectChapter(typeof chapter === 'string' ? chapter : chapter.id);
+              console.log('[ChapterList] Chapter selected:', chapterId);
+              onSelectChapter(chapterId);
             }}
             style={{
-              backgroundColor: '#2a2a4e',
-              border: '1px solid #4a9eff',
-              color: '#e0e0e0',
+              backgroundColor: isCurrent ? '#4a9eff' : '#2a2a4e',
+              border: isCurrent ? '2px solid #4a9eff' : '1px solid #4a9eff',
+              color: isCurrent ? '#1a1a2e' : '#e0e0e0',
               padding: '0.75rem 2rem',
               borderRadius: '8px',
               cursor: 'pointer',
               fontSize: '1rem',
-              fontWeight: 'normal',
+              fontWeight: isCurrent ? 'bold' : 'normal',
               minWidth: '300px',
               transition: 'all 0.2s ease'
             }}
             onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor = '#4a9eff';
-              e.currentTarget.style.color = '#1a1a2e';
+              if (!isCurrent) {
+                e.currentTarget.style.backgroundColor = '#4a9eff';
+                e.currentTarget.style.color = '#1a1a2e';
+              }
             }}
             onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = '#2a2a4e';
-              e.currentTarget.style.color = '#e0e0e0';
+              if (!isCurrent) {
+                e.currentTarget.style.backgroundColor = '#2a2a4e';
+                e.currentTarget.style.color = '#e0e0e0';
+              }
             }}
           >
-            {chapterTitle}
+            {isCurrent && '▸ '}{chapterTitle}
           </button>
         );
       })}
@@ -212,6 +217,7 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
         
         <ChapterList 
           chapters={chapters} 
+          currentChapterId={currentChapterId}
           onSelectChapter={(chapterId) => {
             console.log('[ReactBookRenderer] Chapter selected:', chapterId);
             setShowHomeScreen(false);

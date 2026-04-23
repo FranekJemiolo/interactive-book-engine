@@ -117,8 +117,14 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
           }
         }, 30); // Typing speed
         return () => clearInterval(typeInterval);
+      } else if (frame.type === 'pause') {
+        // Pause frame - wait for duration then move to next
+        const duration = (frame as any).duration || 1000;
+        setTimeout(() => {
+          setCurrentTypingFrame(currentTypingFrame + 1);
+        }, duration);
       } else {
-        // Non-text frame, move to next immediately
+        // Non-text, non-pause frame, move to next immediately
         setCurrentTypingFrame(currentTypingFrame + 1);
       }
     }
@@ -212,7 +218,8 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
         const imageSrc = (frame as any).src.startsWith('/') ? (frame as any).src : `/content/${(frame as any).src}`;
         return <img key={index} src={imageSrc} alt="" className="image-frame" style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', margin: '0.25rem 0', display: 'block' }} />;
       case 'pause':
-        return <div key={index} className="pause-frame" style={{ height: (frame as any).duration + 'px' }} />;
+        // Pause frames are invisible, they only delay content generation
+        return null;
       default:
         return null;
     }

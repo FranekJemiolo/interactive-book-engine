@@ -32,6 +32,16 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     });
   };
 
+  useEffect(() => {
+    // Auto-scroll to bottom when frames change
+    if (frames.length > 0) {
+      const contentElement = document.getElementById('app-content');
+      if (contentElement) {
+        contentElement.scrollTop = contentElement.scrollHeight;
+      }
+    }
+  }, [frames]);
+
   const setChoicesHandler = (newChoices: Choice[]) => {
     console.log('[ReactBookRenderer] setChoices called:', newChoices);
     setChoices(newChoices);
@@ -80,10 +90,10 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     console.log('[ReactBookRenderer] renderFrame:', frame, index);
     switch (frame.type) {
       case 'text':
-        return <p key={index} className="text-frame" style={{ fontSize: '1.1rem', lineHeight: '1.8', color: '#e0e0e0', marginBottom: '0.25rem' }}>{(frame as any).value}</p>;
+        return <p key={index} className="text-frame" style={{ fontSize: '1.1rem', lineHeight: '1.8', color: '#e0e0e0', marginBottom: '0.1rem' }}>{(frame as any).value}</p>;
       case 'image':
         const imageSrc = (frame as any).src.startsWith('/') ? (frame as any).src : `/content/${(frame as any).src}`;
-        return <img key={index} src={imageSrc} alt="" className="image-frame" style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', margin: '0.5rem 0', display: 'block' }} />;
+        return <img key={index} src={imageSrc} alt="" className="image-frame" style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', margin: '0.25rem 0', display: 'block' }} />;
       case 'pause':
         return <div key={index} className="pause-frame" style={{ height: (frame as any).duration + 'px' }} />;
       default:

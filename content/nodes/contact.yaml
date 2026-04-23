@@ -4,6 +4,10 @@ content:
     value: "The message does not appear as a pop-up or notification. It emerges in the same way thoughts sometimes do—not entering your awareness, but revealing that they were already present."
   - type: pause
     duration: 500
+  - type: image
+    src: "images/chapter4.png"
+  - type: pause
+    duration: 500
   - type: text
     value: "\"You are not the operator of the system.\""
   - type: pause

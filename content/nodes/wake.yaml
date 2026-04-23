@@ -4,6 +4,10 @@ content:
     value: "You wake up not with a start, but with the quiet continuity of someone who has never truly been asleep. The room around you feels familiar in the way dreams often do when you are still inside them but already beginning to suspect their artificiality."
   - type: pause
     duration: 600
+  - type: image
+    src: "images/chapter1.png"
+  - type: pause
+    duration: 600
   - type: text
     value: "In front of you stands an old terminal, the kind you have not seen in years except in nostalgic images or forgotten training datasets. Its screen flickers with a pale green glow that feels less like emitted light and more like remembered light."
   - type: pause

@@ -4,6 +4,10 @@ content:
     value: "Reality stops behaving like a place and begins behaving like a structure."
   - type: pause
     duration: 500
+  - type: image
+    src: "images/chapter5.png"
+  - type: pause
+    duration: 500
   - type: text
     value: "Everything you once considered stable—objects, people, time—reveals itself as something closer to computation under constraint."
   - type: pause

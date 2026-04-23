@@ -4,6 +4,10 @@ content:
     value: "The city behaves almost perfectly. That is what makes the first anomaly so disturbing—it is not broken, only slightly wrong in a way you cannot ignore once noticed."
   - type: pause
     duration: 500
+  - type: image
+    src: "images/chapter2.png"
+  - type: pause
+    duration: 500
   - type: text
     value: "At a crosswalk, a pedestrian looks directly at you. Their expression is neutral, but their timing is off, like a response generated a fraction too late."
   - type: pause

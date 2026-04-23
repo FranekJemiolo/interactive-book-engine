@@ -4,6 +4,10 @@ content:
     value: "You realize there is no exit because there was never a boundary."
   - type: pause
     duration: 1000
+  - type: image
+    src: "images/chapter6.png"
+  - type: pause
+    duration: 1000
   - type: text
     value: "Every moment you experience is another iteration of the same system attempting to understand itself from slightly different initial conditions."
   - type: pause

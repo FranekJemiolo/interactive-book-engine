@@ -4,6 +4,10 @@ content:
     value: "The terminal is open again when you return. You are certain you closed it before leaving, yet it is there, waiting without urgency."
   - type: pause
     duration: 500
+  - type: image
+    src: "images/chapter3.png"
+  - type: pause
+    duration: 500
   - type: text
     value: "This time, the screen is different. Not in content—but in tone. It feels aware of your previous interaction."
   - type: pause

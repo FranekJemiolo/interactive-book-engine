@@ -7,6 +7,7 @@ interface ReactBookRendererProps {
   onBack: () => void;
   chapters?: any[];
   currentChapterId?: string;
+  skipAnimations?: boolean;
 }
 
 const ChapterList: React.FC<{ chapters: any[]; onSelectChapter: (chapterId: string) => void; currentChapterId?: string }> = ({ chapters, onSelectChapter, currentChapterId }) => {
@@ -61,7 +62,8 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
   onShare,
   onBack,
   chapters = [],
-  currentChapterId
+  currentChapterId,
+  skipAnimations = false
 }) => {
   const [frames, setFrames] = useState<Frame[]>([]);
   const [choices, setChoices] = useState<Choice[]>([]);
@@ -82,6 +84,20 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
 
   // Typing animation effect - only animate one frame at a time
   useEffect(() => {
+    // Skip animations if skipAnimations is true
+    if (skipAnimations) {
+      // Show all text immediately
+      frames.forEach((frame, index) => {
+        if (frame.type === 'text') {
+          setTypingText(prev => ({
+            ...prev,
+            [index]: (frame as any).value
+          }));
+        }
+      });
+      return;
+    }
+
     if (currentTypingFrame >= 0 && currentTypingFrame < frames.length) {
       const frame = frames[currentTypingFrame];
       if (frame.type === 'text') {
@@ -106,7 +122,7 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
         setCurrentTypingFrame(currentTypingFrame + 1);
       }
     }
-  }, [currentTypingFrame, frames]);
+  }, [currentTypingFrame, frames, skipAnimations]);
 
   // Auto-scroll to bottom when typing text changes
   useEffect(() => {

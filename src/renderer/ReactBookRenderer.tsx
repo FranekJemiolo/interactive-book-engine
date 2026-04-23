@@ -71,6 +71,7 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
   const [showHomeScreen, setShowHomeScreen] = React.useState(true);
   const [localCurrentChapterId, setLocalCurrentChapterId] = useState<string>(currentChapterId || '');
   const [typingText, setTypingText] = useState<Record<number, string>>({});
+  const [currentTypingFrame, setCurrentTypingFrame] = useState<number>(-1);
 
   // Update local current chapter ID when prop changes
   useEffect(() => {
@@ -79,29 +80,33 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     }
   }, [currentChapterId]);
 
-  // Typing animation effect
+  // Typing animation effect - only animate one frame at a time
   useEffect(() => {
-    frames.forEach((frame, index) => {
+    if (currentTypingFrame >= 0 && currentTypingFrame < frames.length) {
+      const frame = frames[currentTypingFrame];
       if (frame.type === 'text') {
         const text = (frame as any).value;
-        if (!typingText[index]) {
-          let charIndex = 0;
-          const typeInterval = setInterval(() => {
-            if (charIndex <= text.length) {
-              setTypingText(prev => ({
-                ...prev,
-                [index]: text.slice(0, charIndex)
-              }));
-              charIndex++;
-            } else {
-              clearInterval(typeInterval);
-            }
-          }, 30); // Typing speed
-          return () => clearInterval(typeInterval);
-        }
+        let charIndex = 0;
+        const typeInterval = setInterval(() => {
+          if (charIndex <= text.length) {
+            setTypingText(prev => ({
+              ...prev,
+              [currentTypingFrame]: text.slice(0, charIndex)
+            }));
+            charIndex++;
+          } else {
+            clearInterval(typeInterval);
+            // Move to next frame
+            setCurrentTypingFrame(currentTypingFrame + 1);
+          }
+        }, 30); // Typing speed
+        return () => clearInterval(typeInterval);
+      } else {
+        // Non-text frame, move to next immediately
+        setCurrentTypingFrame(currentTypingFrame + 1);
       }
-    });
-  }, [frames]);
+    }
+  }, [currentTypingFrame, frames]);
 
   console.log('[ReactBookRenderer] Render called', { frames: frames.length, choices: choices.length, chapterTitle, loading, error });
 
@@ -109,7 +114,12 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     console.log('[ReactBookRenderer] addFrame called:', frame);
     setFrames(prev => {
       console.log('[ReactBookRenderer] Adding frame, current count:', prev.length);
-      return [...prev, frame];
+      const newFrames = [...prev, frame];
+      // Start typing animation if this is the first frame
+      if (prev.length === 0 && frame.type === 'text') {
+        setCurrentTypingFrame(0);
+      }
+      return newFrames;
     });
   };
 
@@ -138,6 +148,7 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
     setFrames([]);
     setChoices([]);
     setTypingText({});
+    setCurrentTypingFrame(-1);
     // Don't clear chapter title when navigating within a chapter
     // setChapterTitle('');
     // setError('');

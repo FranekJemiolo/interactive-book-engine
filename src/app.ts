@@ -192,24 +192,14 @@ class InteractiveBookApp {
 
       // Check for URL state first, then fall back to localStorage progress
       const urlState = URLStateManager.loadStateFromURL();
-      let progress = null;
 
       if (urlState) {
         // Load state from URL
         this.stateStore.deserialize(JSON.stringify(urlState));
-        progress = {
-          lastChapter: urlState.chapter.id || "",
-          lastNode: "",
-          chapters: {
-            [urlState.chapter.id]: {
-              visitedNodes: urlState.meta.visitedNodes
-            }
-          }
-        };
         console.log("Loaded state from URL");
       } else {
         // Check for saved progress from localStorage
-        progress = this.progressManager.loadProgress();
+        this.progressManager.loadProgress();
       }
 
       // Show home screen

@@ -137,24 +137,34 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
         <p style={{ fontSize: '1.2rem', color: '#e0e0e0', marginBottom: '3rem', maxWidth: '600px' }}>
           An interactive narrative exploring identity, consciousness, and the boundaries between human and artificial intelligence.
         </p>
-        <button 
-          onClick={() => window.location.reload()} 
-          style={{ 
-            backgroundColor: '#4a9eff', 
-            border: 'none', 
-            color: '#1a1a2e', 
-            padding: '1rem 2.5rem', 
-            borderRadius: '8px', 
-            cursor: 'pointer', 
-            fontSize: '1.2rem',
-            fontWeight: 'bold',
-            marginBottom: '1rem'
-          }}
-        >
-          Start Reading
-        </button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', marginBottom: '2rem' }}>
+          {chapters.map((chapter: any) => (
+            <button
+              key={typeof chapter === 'string' ? chapter : chapter.id}
+              onClick={() => {
+                console.log('[ReactBookRenderer] Chapter selected:', typeof chapter === 'string' ? chapter : chapter.id);
+                setShowHomeScreen(false);
+                // Trigger chapter load via window event
+                window.dispatchEvent(new CustomEvent('selectChapter', { detail: { chapterId: typeof chapter === 'string' ? chapter : chapter.id } }));
+              }}
+              style={{
+                backgroundColor: '#4a9eff',
+                border: 'none',
+                color: '#1a1a2e',
+                padding: '1rem 2.5rem',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontSize: '1.2rem',
+                fontWeight: 'bold',
+                minWidth: '300px'
+              }}
+            >
+              {typeof chapter === 'string' ? `Chapter ${chapter}` : chapter.title || chapter.id}
+            </button>
+          ))}
+        </div>
         <p style={{ fontSize: '0.9rem', color: '#888' }}>
-          Click "Start Reading" to begin from the first chapter
+          Select a chapter to begin reading
         </p>
       </div>
     );

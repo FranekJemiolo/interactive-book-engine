@@ -43,6 +43,21 @@ class InteractiveBookApp {
     this.setupImmersiveToggle();
     this.setupHomeScreen();
     this.setupShareHandler();
+    
+    // Setup chapter selection event listener
+    window.addEventListener('selectChapter', async (e: any) => {
+      console.log('[App] Chapter selection event:', e.detail);
+      if (!this.currentBook) {
+        console.log('[App] Book not loaded, loading...');
+        const book = await this.bookProvider.loadBook();
+        this.currentBook = book;
+      }
+      this.loadChapter(e.detail.chapterId, this.currentBook).then(() => {
+        this.startChapter();
+      }).catch((error) => {
+        console.error('[App] Failed to load chapter:', error);
+      });
+    });
   }
 
   private setupNodeEngine(): void {

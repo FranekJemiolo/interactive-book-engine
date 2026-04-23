@@ -285,11 +285,6 @@ class InteractiveBookApp {
         // Load state from URL
         this.stateStore.deserialize(JSON.stringify(urlState));
         console.log("Loaded state from URL");
-        // Don't auto-load chapter, show home screen instead
-        const rendererAPI = (window as any).rendererAPI;
-        if (rendererAPI) {
-          rendererAPI.showHomeScreen();
-        }
       } else {
         // Check for saved progress from localStorage
         this.progressManager.loadProgress();
@@ -298,16 +293,12 @@ class InteractiveBookApp {
       // Show home screen
       if (rendererAPI) {
         rendererAPI.setLoading(false);
+        rendererAPI.showHomeScreen();
       } else {
         this.renderer.setLoading(false);
       }
       
-      // Load the first chapter directly if no URL state
-      if (!urlState && book.chapters.length > 0) {
-        const firstChapterId = typeof book.chapters[0] === 'string' ? book.chapters[0] : book.chapters[0].id;
-        await this.loadChapter(firstChapterId, book);
-        await this.startChapter();
-      }
+      // Don't auto-load first chapter - always show menu first
     } catch (error) {
       console.error("Error starting app:", error);
       const rendererAPI = (window as any).rendererAPI;

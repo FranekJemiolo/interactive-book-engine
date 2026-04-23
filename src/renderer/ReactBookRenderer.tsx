@@ -195,10 +195,23 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
             setShowHomeScreen(false);
             if (hasUrlStateDynamic) {
               // Load state from URL and continue
+              // Try to get current chapter from URL state
+              const hash = window.location.hash.slice(1);
+              if (hash) {
+                try {
+                  const state = JSON.parse(atob(hash));
+                  if (state.chapter && state.chapter.id) {
+                    setLocalCurrentChapterId(state.chapter.id);
+                  }
+                } catch (e) {
+                  console.error('Failed to parse URL state:', e);
+                }
+              }
               window.dispatchEvent(new CustomEvent('continueReading'));
             } else {
               // Trigger first chapter load via window event
               const firstChapterId = chapters.length > 0 ? (typeof chapters[0] === 'string' ? chapters[0] : chapters[0].id) : 'chapter_1';
+              setLocalCurrentChapterId(firstChapterId);
               window.dispatchEvent(new CustomEvent('selectChapter', { detail: { chapterId: firstChapterId } }));
             }
           }}

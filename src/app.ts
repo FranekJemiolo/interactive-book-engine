@@ -285,6 +285,8 @@ class InteractiveBookApp {
         // Load state from URL
         this.stateStore.deserialize(JSON.stringify(urlState));
         console.log("Loaded state from URL");
+        // Clear URL hash after loading to prevent interference
+        URLStateManager.clearURLState();
       } else {
         // Check for saved progress from localStorage
         this.progressManager.loadProgress();

@@ -22,6 +22,7 @@ class InteractiveBookApp {
   private progressManager: ProgressManager;
   private immersiveMode: ImmersiveMode;
   private currentBook: any;
+  private chaptersWithTitles: any[] = [];
   private reactRoot: any;
 
   constructor() {
@@ -217,7 +218,7 @@ class InteractiveBookApp {
           console.log('[App] React onBack called');
           this.returnToHome();
         },
-        chapters: chaptersOverride || this.currentBook?.chapters || [],
+        chapters: chaptersOverride || this.chaptersWithTitles || this.currentBook?.chapters || [],
         currentChapterId: this.chapterSystem.getCurrentChapter()?.id || this.stateStore.getState().chapter?.id
       })
     );
@@ -265,7 +266,7 @@ class InteractiveBookApp {
       console.log("Book loaded:", book.title);
 
       // Load full chapter data with titles
-      const chaptersWithTitles = await Promise.all(
+      this.chaptersWithTitles = await Promise.all(
         book.chapters.map(async (chapter) => {
           if (typeof chapter === 'string') {
             const fullChapter = await this.bookProvider.getChapter(chapter);
@@ -276,7 +277,7 @@ class InteractiveBookApp {
       );
 
       // Update React component with loaded chapters
-      this.renderReactComponent(chaptersWithTitles);
+      this.renderReactComponent();
 
       // Check for URL state first, then fall back to localStorage progress
       const urlState = URLStateManager.loadStateFromURL();

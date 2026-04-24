@@ -71,6 +71,20 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
   const [showHomeScreen, setShowHomeScreen] = React.useState(true);
   const [localCurrentChapterId, setLocalCurrentChapterId] = useState<string>(currentChapterId || '');
 
+  // Detect base path for GitHub Pages
+  const getBasePath = () => {
+    const hostname = window.location.hostname;
+    if (hostname.includes('github.io')) {
+      const pathParts = window.location.pathname.split('/').filter(Boolean);
+      if (pathParts.length > 0) {
+        return `/${pathParts[0]}/`;
+      }
+    }
+    return '/';
+  };
+
+  const basePath = getBasePath();
+
   // Update local current chapter ID when prop changes
   useEffect(() => {
     if (currentChapterId) {
@@ -170,7 +184,7 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
       case 'text':
         return <p key={index} className="text-frame" style={{ fontSize: '1.1rem', lineHeight: '1.8', color: '#e0e0e0', marginBottom: '0' }}>{(frame as any).value}</p>;
       case 'image':
-        const imageSrc = (frame as any).src.startsWith('/') ? (frame as any).src : `/content/${(frame as any).src}`;
+        const imageSrc = (frame as any).src.startsWith('/') ? (frame as any).src : `${basePath}${(frame as any).src}`;
         return <img key={index} src={imageSrc} alt="" className="image-frame" style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', margin: '0.25rem 0', display: 'block' }} />;
       case 'pause':
         // Pause frames are invisible, they only delay content generation

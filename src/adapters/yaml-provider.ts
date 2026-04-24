@@ -6,7 +6,7 @@ export class YAMLProvider implements BookProvider {
   private nodeCache: Map<string, Node> = new Map();
   private chapterCache: Map<string, Chapter> = new Map();
 
-  constructor(private basePath: string = "") {}
+  constructor(private basePath: string = "/interactive-book-engine/") {}
 
   async loadBook(): Promise<Book> {
     if (this.bookCache) {

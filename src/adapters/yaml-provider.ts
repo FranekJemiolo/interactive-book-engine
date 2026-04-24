@@ -6,7 +6,17 @@ export class YAMLProvider implements BookProvider {
   private nodeCache: Map<string, Node> = new Map();
   private chapterCache: Map<string, Chapter> = new Map();
 
-  constructor(private basePath: string = "/interactive-book-engine/") {}
+  constructor(private basePath: string = "/") {
+    // Automatically detect base path from current URL
+    const hostname = window.location.hostname;
+    if (hostname.includes('github.io')) {
+      // Extract the repo name from the path (e.g., /interactive-book-engine/)
+      const pathParts = window.location.pathname.split('/').filter(Boolean);
+      if (pathParts.length > 0) {
+        this.basePath = `/${pathParts[0]}/`;
+      }
+    }
+  }
 
   async loadBook(): Promise<Book> {
     if (this.bookCache) {

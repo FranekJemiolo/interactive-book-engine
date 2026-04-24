@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Frame, Choice, Chapter } from '../types';
+import { getBasePath } from '../utils/base-path';
 
 interface ReactBookRendererProps {
   onChoiceSelect: (choiceId: string) => void;
@@ -70,18 +71,6 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [showHomeScreen, setShowHomeScreen] = React.useState(true);
   const [localCurrentChapterId, setLocalCurrentChapterId] = useState<string>(currentChapterId || '');
-
-  // Detect base path for GitHub Pages
-  const getBasePath = () => {
-    const hostname = window.location.hostname;
-    if (hostname.includes('github.io')) {
-      const pathParts = window.location.pathname.split('/').filter(Boolean);
-      if (pathParts.length > 0) {
-        return `/${pathParts[0]}/`;
-      }
-    }
-    return '/';
-  };
 
   const basePath = getBasePath();
 

@@ -381,6 +381,26 @@ class InteractiveBookApp {
   private async navigateToNode(nodeId: string): Promise<void> {
     console.log('[App] navigateToNode called:', nodeId);
     try {
+      // Check if node belongs to a different chapter
+      const currentChapter = this.chapterSystem.getCurrentChapter();
+      const node = await this.bookProvider.getNode(nodeId);
+      
+      // Find which chapter this node belongs to
+      let targetChapterId = currentChapter?.id;
+      if (currentChapter && !currentChapter.nodes.includes(nodeId)) {
+        // Node is not in current chapter, find the chapter it belongs to
+        for (const chapterId of this.currentBook?.chapters || []) {
+          const chapter = await this.bookProvider.getChapter(chapterId);
+          if (chapter.nodes.includes(nodeId)) {
+            targetChapterId = chapter.id;
+            console.log('[App] Node belongs to different chapter:', targetChapterId);
+            // Load the new chapter
+            await this.loadChapter(targetChapterId, this.currentBook);
+            break;
+          }
+        }
+      }
+
       // Clear content using React renderer API
       const rendererAPI = (window as any).rendererAPI;
       console.log('[App] rendererAPI available:', !!rendererAPI);
@@ -392,7 +412,6 @@ class InteractiveBookApp {
         this.renderer.clearContent();
       }
 
-      const node = await this.bookProvider.getNode(nodeId);
       console.log('[App] Node loaded:', node.id);
       await this.nodeEngine.executeNode(node);
       console.log('[App] Node executed');

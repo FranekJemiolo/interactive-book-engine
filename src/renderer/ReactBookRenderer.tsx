@@ -252,10 +252,37 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
             fontSize: '1.3rem',
             fontWeight: 'bold',
             minWidth: '300px',
-            marginBottom: '2rem'
+            marginBottom: '1rem'
           }}
         >
           {hasUrlStateDynamic ? 'Continue Reading' : 'Start Reading'}
+        </button>
+
+        {/* Clear State Button */}
+        <button
+          onClick={() => {
+            console.log('[ReactBookRenderer] Clear State clicked');
+            // Clear localStorage
+            localStorage.clear();
+            // Clear URL hash
+            window.location.hash = '';
+            // Reload page to start fresh
+            window.location.reload();
+          }}
+          style={{
+            backgroundColor: '#ff4a4a',
+            border: 'none',
+            color: '#1a1a2e',
+            padding: '0.8rem 2rem',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            fontSize: '1rem',
+            fontWeight: 'bold',
+            minWidth: '300px',
+            marginBottom: '2rem'
+          }}
+        >
+          Clear State & Start Over
         </button>
         
         {/* Chapter List */}

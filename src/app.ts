@@ -343,6 +343,10 @@ class InteractiveBookApp {
     try {
       const chapter = await this.chapterSystem.loadChapter(chapterId);
       
+      // Set chapter ID in state store
+      this.stateStore.setChapter(chapterId, chapter.context);
+      console.log('[App] Chapter set in state store:', chapterId);
+      
       // Use React renderer API for chapter title
       const rendererAPI = (window as any).rendererAPI;
       if (rendererAPI) {

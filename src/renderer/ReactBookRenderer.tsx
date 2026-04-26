@@ -38,7 +38,8 @@ const StateSummaryModal: React.FC<{
       }
       return value ? 'True' : 'False';
     }
-    return 'N/A';
+    // Default value when no choice was made
+    return 'Default path chosen';
   };
 
   // Handle backdrop click to close

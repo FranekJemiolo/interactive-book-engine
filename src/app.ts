@@ -242,6 +242,9 @@ class InteractiveBookApp {
     );
     console.log('[App] renderReactComponent called with stateMappings:', this.currentBook?.stateMappings);
     console.log('[App] renderReactComponent called with currentState:', this.stateStore.getState());
+    console.log('[App] renderReactComponent called with currentChapterId:', this.chapterSystem.getCurrentChapter()?.id || this.stateStore.getState().chapter?.id);
+    console.log('[App] chapterSystem.getCurrentChapter():', this.chapterSystem.getCurrentChapter());
+    console.log('[App] stateStore.getState().chapter:', this.stateStore.getState().chapter);
     console.log('[App] ReactBookRenderer rendered');
     
     const container = document.getElementById('app');

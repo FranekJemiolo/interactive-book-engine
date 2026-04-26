@@ -20,7 +20,7 @@ class InteractiveBookApp {
   private nodeEngine!: NodeLifecycleEngine;
   private chapterSystem: ChapterSystem;
   private progressManager: ProgressManager;
-  private immersiveMode: ImmersiveMode;
+  private immersiveMode!: ImmersiveMode;
   private currentBook: any;
   private chaptersWithTitles: any[] = [];
   private reactRoot: any;
@@ -34,7 +34,7 @@ class InteractiveBookApp {
     this.homeScreen.setBookProvider(this.bookProvider);
     this.chapterSystem = new ChapterSystem(this.bookProvider, this.stateStore);
     this.progressManager = new ProgressManager();
-    this.immersiveMode = new ImmersiveMode("app");
+    // Don't create immersiveMode here, create it in setupImmersiveToggle with callback
 
     console.log('[App] Setting up React renderer in constructor');
     this.setupReactRenderer();

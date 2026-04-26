@@ -521,12 +521,11 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
             hasStateMappings: !!stateMappings,
             stateMappingsLength: stateMappings?.length,
             hasCurrentState: !!currentState,
-            framesLength: frames.length,
             currentChapterId,
             isEndingsChapter,
-            shouldShow: choices.length === 0 && stateMappings && stateMappings.length > 0 && currentState && frames.length > 0 && isEndingsChapter
+            shouldShow: choices.length === 0 && stateMappings && stateMappings.length > 0 && currentState && isEndingsChapter
           });
-          return choices.length === 0 && stateMappings && stateMappings.length > 0 && currentState && frames.length > 0 && isEndingsChapter;
+          return choices.length === 0 && stateMappings && stateMappings.length > 0 && currentState && isEndingsChapter;
         })() && (
           <div style={{ marginTop: '3rem', textAlign: 'center' }}>
             <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#4a9eff', marginBottom: '1rem' }}>

@@ -417,30 +417,6 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
           Clear State & Start Over
         </button>
 
-        {/* Show State Summary Button */}
-        {stateMappings && stateMappings.length > 0 && currentState && (
-          <button
-            onClick={() => {
-              console.log('[ReactBookRenderer] Show State Summary clicked');
-              setShowStateSummary(true);
-            }}
-            style={{
-              backgroundColor: '#4a9eff',
-              border: 'none',
-              color: '#1a1a2e',
-              padding: '0.8rem 2rem',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontSize: '1rem',
-              fontWeight: 'bold',
-              minWidth: '300px',
-              marginBottom: '2rem'
-            }}
-          >
-            Show My Final State
-          </button>
-        )}
-        
         {/* Chapter List */}
         <div style={{ marginBottom: '1rem' }}>
           <h2 style={{ fontSize: '1.5rem', color: '#e0e0e0', marginBottom: '1.5rem' }}>Chapters</h2>
@@ -540,7 +516,6 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
         {/* End of Book - Show State Summary Button */}
         {(() => {
           const isEndingsChapter = currentChapterId === 'chapter_endings';
-          const hasVisitedEnding = currentState?.meta?.visitedNodes?.some((nodeId: string) => nodeId.startsWith('ending_'));
           console.log('[ReactBookRenderer] End of book check:', {
             choicesLength: choices.length,
             hasStateMappings: !!stateMappings,
@@ -549,11 +524,9 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
             framesLength: frames.length,
             currentChapterId,
             isEndingsChapter,
-            hasVisitedEnding,
-            visitedNodes: currentState?.meta?.visitedNodes,
-            shouldShow: choices.length === 0 && stateMappings && stateMappings.length > 0 && currentState && frames.length > 0 && hasVisitedEnding
+            shouldShow: choices.length === 0 && stateMappings && stateMappings.length > 0 && currentState && frames.length > 0 && isEndingsChapter
           });
-          return choices.length === 0 && stateMappings && stateMappings.length > 0 && currentState && frames.length > 0 && hasVisitedEnding;
+          return choices.length === 0 && stateMappings && stateMappings.length > 0 && currentState && frames.length > 0 && isEndingsChapter;
         })() && (
           <div style={{ marginTop: '3rem', textAlign: 'center' }}>
             <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#4a9eff', marginBottom: '1rem' }}>

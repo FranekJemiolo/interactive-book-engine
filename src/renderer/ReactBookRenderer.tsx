@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Frame, Choice, Chapter } from '../types';
+import { Frame, Choice, Chapter, StateMapping, State } from '../types';
 import { getBasePath } from '../utils/base-path';
 
 interface ReactBookRendererProps {
@@ -8,7 +8,112 @@ interface ReactBookRendererProps {
   onBack: () => void;
   chapters?: any[];
   currentChapterId?: string;
+  stateMappings?: StateMapping[];
+  currentState?: State;
 }
+
+const StateSummaryModal: React.FC<{ 
+  stateMappings: StateMapping[]; 
+  currentState: State;
+  onClose: () => void;
+}> = ({ stateMappings, currentState, onClose }) => {
+  const getMappedValue = (mapping: StateMapping): string => {
+    if (mapping.var && currentState.vars[mapping.var] !== undefined) {
+      const value = currentState.vars[mapping.var];
+      if (mapping.ranges) {
+        for (const range of mapping.ranges) {
+          if ((range.min === undefined || value >= range.min) && 
+              (range.max === undefined || value <= range.max)) {
+            return range.label;
+          }
+        }
+        return value.toString();
+      }
+      return value.toString();
+    }
+    if (mapping.flag && currentState.flags[mapping.flag] !== undefined) {
+      const value = currentState.flags[mapping.flag];
+      if (mapping.booleanValues) {
+        return value ? mapping.booleanValues.true : mapping.booleanValues.false;
+      }
+      return value ? 'True' : 'False';
+    }
+    return 'N/A';
+  };
+
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.8)',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      zIndex: 2000
+    }}>
+      <div style={{
+        backgroundColor: '#1a1a2e',
+        padding: '2rem',
+        borderRadius: '12px',
+        maxWidth: '600px',
+        width: '90%',
+        maxHeight: '80vh',
+        overflowY: 'auto',
+        border: '2px solid #4a9eff'
+      }}>
+        <h2 style={{ fontSize: '1.8rem', fontWeight: 'bold', marginBottom: '1.5rem', color: '#4a9eff' }}>
+          Your Final State
+        </h2>
+        {stateMappings.length === 0 ? (
+          <p style={{ color: '#e0e0e0' }}>No state mappings defined.</p>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {stateMappings.map((mapping, index) => (
+              <div key={index} style={{
+                backgroundColor: '#2a2a4e',
+                padding: '1rem',
+                borderRadius: '8px',
+                border: '1px solid #4a9eff'
+              }}>
+                <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#4a9eff', marginBottom: '0.5rem' }}>
+                  {mapping.label}
+                </div>
+                {mapping.description && (
+                  <div style={{ fontSize: '0.9rem', color: '#a0a0a0', marginBottom: '0.5rem' }}>
+                    {mapping.description}
+                  </div>
+                )}
+                <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#e0e0e0' }}>
+                  {getMappedValue(mapping)}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        <button
+          onClick={onClose}
+          style={{
+            marginTop: '1.5rem',
+            backgroundColor: '#4a9eff',
+            border: 'none',
+            color: '#1a1a2e',
+            padding: '0.75rem 2rem',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            fontSize: '1rem',
+            fontWeight: 'bold',
+            width: '100%'
+          }}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const ChapterList: React.FC<{ chapters: any[]; onSelectChapter: (chapterId: string) => void; currentChapterId?: string }> = ({ chapters, onSelectChapter, currentChapterId }) => {
   return (
@@ -62,7 +167,9 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
   onShare,
   onBack,
   chapters = [],
-  currentChapterId
+  currentChapterId,
+  stateMappings = [],
+  currentState
 }) => {
   const [frames, setFrames] = useState<Frame[]>([]);
   const [choices, setChoices] = useState<Choice[]>([]);
@@ -71,6 +178,7 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [showHomeScreen, setShowHomeScreen] = React.useState(true);
   const [localCurrentChapterId, setLocalCurrentChapterId] = useState<string>(currentChapterId || '');
+  const [showStateSummary, setShowStateSummary] = useState<boolean>(false);
 
   const basePath = getBasePath();
 
@@ -279,11 +387,35 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
             fontSize: '1rem',
             fontWeight: 'bold',
             minWidth: '300px',
-            marginBottom: '2rem'
+            marginBottom: '1rem'
           }}
         >
           Clear State & Start Over
         </button>
+
+        {/* Show State Summary Button */}
+        {stateMappings && stateMappings.length > 0 && currentState && (
+          <button
+            onClick={() => {
+              console.log('[ReactBookRenderer] Show State Summary clicked');
+              setShowStateSummary(true);
+            }}
+            style={{
+              backgroundColor: '#4a9eff',
+              border: 'none',
+              color: '#1a1a2e',
+              padding: '0.8rem 2rem',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontSize: '1rem',
+              fontWeight: 'bold',
+              minWidth: '300px',
+              marginBottom: '2rem'
+            }}
+          >
+            Show My Final State
+          </button>
+        )}
         
         {/* Chapter List */}
         <div style={{ marginBottom: '1rem' }}>
@@ -306,6 +438,15 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
 
   return (
     <div className="book-container" style={{ display: 'block', padding: '2rem', backgroundColor: '#1a1a2e', minHeight: '100vh' }}>
+      {/* State Summary Modal */}
+      {showStateSummary && currentState && (
+        <StateSummaryModal
+          stateMappings={stateMappings}
+          currentState={currentState}
+          onClose={() => setShowStateSummary(false)}
+        />
+      )}
+
       {/* Navigation Menu */}
       <div style={{ position: 'fixed', top: '1rem', left: '1rem', zIndex: 1000 }}>
         <button 

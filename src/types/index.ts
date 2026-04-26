@@ -76,10 +76,27 @@ export interface Arc {
   };
 }
 
+export interface StateMapping {
+  var?: string;
+  flag?: string;
+  label: string;
+  description?: string;
+  ranges?: {
+    min?: number;
+    max?: number;
+    label: string;
+  }[];
+  booleanValues?: {
+    true: string;
+    false: string;
+  };
+}
+
 export interface Book {
   title: string;
   chapters: Chapter[];
   arcs: Record<string, Arc>;
+  stateMappings?: StateMapping[];
 }
 
 export interface State {

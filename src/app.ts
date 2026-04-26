@@ -219,7 +219,9 @@ class InteractiveBookApp {
           this.returnToHome();
         },
         chapters: chaptersOverride || this.chaptersWithTitles || this.currentBook?.chapters || [],
-        currentChapterId: this.chapterSystem.getCurrentChapter()?.id || this.stateStore.getState().chapter?.id
+        currentChapterId: this.chapterSystem.getCurrentChapter()?.id || this.stateStore.getState().chapter?.id,
+        stateMappings: this.currentBook?.stateMappings || [],
+        currentState: this.stateStore.getState()
       })
     );
     console.log('[App] ReactBookRenderer rendered');

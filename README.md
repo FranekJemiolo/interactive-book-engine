@@ -165,6 +165,81 @@ Logical structure:
 - `any: []` - OR
 - `not: {}` - invert
 
+## State Summary Feature
+
+The engine supports displaying a summary of the player's final state at the end of the book. This feature allows you to map internal state variables and flags to meaningful labels that players can understand.
+
+### Configuration
+
+Add a `stateMappings` array to your `book.yaml` file:
+
+```yaml
+title: "The Last Signal"
+chapters:
+  - chapter_1
+  - chapter_2
+
+arcs:
+  introduction:
+    pacing:
+      frameDelay: 500
+      suspense: "low"
+
+stateMappings:
+  - var: "trust"
+    label: "Trust Level"
+    description: "How much the characters trust you"
+    ranges:
+      - min: 0
+        max: 2
+        label: "Suspicious"
+      - min: 3
+        max: 5
+        label: "Neutral"
+      - min: 6
+        max: 10
+        label: "Trusted"
+  - flag: "has_key"
+    label: "Key Status"
+    description: "Whether you found the secret key"
+    booleanValues:
+      true: "Found"
+      false: "Missing"
+```
+
+### State Mapping Schema
+
+Each state mapping can define:
+
+- `var` (optional): The numeric variable name to map
+- `flag` (optional): The boolean flag name to map
+- `label` (required): Display name for the state
+- `description` (optional): Additional context about what this state represents
+- `ranges` (optional): For numeric variables, define ranges with labels
+  - `min` (optional): Minimum value for this range
+  - `max` (optional): Maximum value for this range
+  - `label` (required): Label to display when value falls in this range
+- `booleanValues` (optional): For boolean flags, define labels for true/false
+  - `true` (required): Label when flag is true
+  - `false` (required): Label when flag is false
+
+### Usage
+
+When the player reaches the end of the book, a "Show My Final State" button will appear on the home screen if state mappings are defined. Clicking this button opens a modal displaying the player's final state with meaningful labels based on the mappings.
+
+### Example
+
+If the player has `trust: 7` and `has_key: true`, the modal would display:
+
+- **Trust Level** (How much the characters trust you): Trusted
+- **Key Status** (Whether you found the secret key): Found
+
+This feature is particularly useful for:
+- Showing moral alignment
+- Displaying relationship status
+- Summarizing achievements
+- Providing closure on character development
+
 ## Deployment
 
 ### GitHub Pages

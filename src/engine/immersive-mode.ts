@@ -7,6 +7,20 @@ export class ImmersiveMode {
   constructor(containerId: string, onStateChange?: (isImmersive: boolean) => void) {
     this.container = document.getElementById(containerId);
     this.onStateChange = onStateChange;
+    
+    // Sync internal state with actual DOM state on initialization
+    if (this.container) {
+      this.isImmersive = this.container.classList.contains("immersive");
+    }
+    this.uiHidden = document.body.classList.contains("ui-hidden");
+    
+    console.log('[ImmersiveMode] Initial state:', {
+      isImmersive: this.isImmersive,
+      uiHidden: this.uiHidden,
+      hasImmersiveClass: this.container?.classList.contains("immersive"),
+      hasUiHiddenClass: document.body.classList.contains("ui-hidden")
+    });
+    
     this.setupEventListeners();
   }
 

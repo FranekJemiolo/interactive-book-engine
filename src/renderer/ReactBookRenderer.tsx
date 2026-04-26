@@ -538,14 +538,18 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
 
         {/* End of Book - Show State Summary Button */}
         {(() => {
+          const isEndingsChapter = currentChapterId === 'chapter_endings';
           console.log('[ReactBookRenderer] End of book check:', {
             choicesLength: choices.length,
             hasStateMappings: !!stateMappings,
             stateMappingsLength: stateMappings?.length,
             hasCurrentState: !!currentState,
-            shouldShow: choices.length === 0 && stateMappings && stateMappings.length > 0 && currentState
+            framesLength: frames.length,
+            currentChapterId,
+            isEndingsChapter,
+            shouldShow: choices.length === 0 && stateMappings && stateMappings.length > 0 && currentState && frames.length > 0 && isEndingsChapter
           });
-          return choices.length === 0 && stateMappings && stateMappings.length > 0 && currentState;
+          return choices.length === 0 && stateMappings && stateMappings.length > 0 && currentState && frames.length > 0 && isEndingsChapter;
         })() && (
           <div style={{ marginTop: '3rem', textAlign: 'center' }}>
             <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#4a9eff', marginBottom: '1rem' }}>

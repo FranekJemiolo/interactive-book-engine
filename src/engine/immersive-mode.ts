@@ -60,24 +60,31 @@ export class ImmersiveMode {
   }
 
   private exitImmersiveMode(): void {
-    if (!this.container) return;
-
-    // Exit fullscreen
-    if (document.exitFullscreen) {
-      document.exitFullscreen().catch((err: Error) => {
-        console.log("Fullscreen exit failed:", err);
-      });
-    } else if ((document as any).webkitExitFullscreen) {
-      (document as any).webkitExitFullscreen().catch((err: Error) => {
-        console.log("Fullscreen exit failed:", err);
-      });
-    }
-
-    // Show UI elements
+    console.log('[ImmersiveMode] exitImmersiveMode called');
+    
+    // Show UI elements first
     this.showUI();
 
     // Remove immersive class from container
-    this.container.classList.remove("immersive");
+    if (this.container) {
+      this.container.classList.remove("immersive");
+      console.log('[ImmersiveMode] Removed immersive class from container');
+    } else {
+      console.log('[ImmersiveMode] Container is null, cannot remove immersive class');
+    }
+
+    // Exit fullscreen (this might fail if not in fullscreen, which is fine)
+    if (document.fullscreenElement) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch((err: Error) => {
+          console.log("Fullscreen exit failed:", err);
+        });
+      } else if ((document as any).webkitExitFullscreen) {
+        (document as any).webkitExitFullscreen().catch((err: Error) => {
+          console.log("Fullscreen exit failed:", err);
+        });
+      }
+    }
   }
 
   private hideUI(): void {

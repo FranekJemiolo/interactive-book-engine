@@ -127,25 +127,32 @@ class InteractiveBookApp {
   }
 
   private setupImmersiveToggle(): void {
+    // Create immersive mode first
+    const updateButton = () => {
+      const button = document.querySelector('.immersive-toggle') as HTMLButtonElement;
+      if (button) {
+        button.textContent = this.immersiveMode.isEnabled()
+          ? "✕ Exit Immersive"
+          : "📖 Immersive";
+      }
+    };
+    
+    this.immersiveMode = new ImmersiveMode("app", updateButton);
+    
+    // Then create button
     const button = document.createElement("button");
     button.className = "immersive-toggle";
     button.textContent = "📖 Immersive";
     
-    // Update button when immersive state changes
-    const updateButton = () => {
-      button.textContent = this.immersiveMode.isEnabled()
-        ? "✕ Exit Immersive"
-        : "📖 Immersive";
-    };
-    
     button.onclick = () => {
+      console.log('[App] Immersive button clicked, current state:', this.immersiveMode.isEnabled());
       this.immersiveMode.toggle();
     };
     
     document.body.appendChild(button);
     
-    // Recreate immersive mode with callback
-    this.immersiveMode = new ImmersiveMode("app", updateButton);
+    // Initial button update
+    updateButton();
   }
 
   private setupHomeScreen(): void {

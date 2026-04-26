@@ -94,6 +94,7 @@ export class YAMLProvider implements BookProvider {
       title: data.title,
       chapters: data.chapters || [],
       arcs: data.arcs || {},
+      stateMappings: data.stateMappings || [],
     };
   }
 

@@ -283,6 +283,8 @@ class InteractiveBookApp {
       const book = await this.bookProvider.loadBook();
       this.currentBook = book;
       console.log("Book loaded:", book.title);
+      console.log("Book stateMappings:", book.stateMappings);
+      console.log("Book keys:", Object.keys(book));
 
       // Load full chapter data with titles
       this.chaptersWithTitles = await Promise.all(

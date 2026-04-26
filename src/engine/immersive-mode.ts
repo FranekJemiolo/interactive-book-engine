@@ -2,29 +2,40 @@ export class ImmersiveMode {
   private isImmersive: boolean = false;
   private uiHidden: boolean = false;
   private container: HTMLElement | null = null;
+  private onStateChange?: (isImmersive: boolean) => void;
 
-  constructor(containerId: string) {
+  constructor(containerId: string, onStateChange?: (isImmersive: boolean) => void) {
     this.container = document.getElementById(containerId);
+    this.onStateChange = onStateChange;
     this.setupEventListeners();
   }
 
   toggle(): void {
     this.isImmersive = !this.isImmersive;
     this.applyImmersiveMode();
+    this.notifyStateChange();
   }
 
   enable(): void {
     this.isImmersive = true;
     this.applyImmersiveMode();
+    this.notifyStateChange();
   }
 
   disable(): void {
     this.isImmersive = false;
     this.exitImmersiveMode();
+    this.notifyStateChange();
   }
 
   isEnabled(): boolean {
     return this.isImmersive;
+  }
+
+  private notifyStateChange(): void {
+    if (this.onStateChange) {
+      this.onStateChange(this.isImmersive);
+    }
   }
 
   private applyImmersiveMode(): void {
@@ -88,6 +99,7 @@ export class ImmersiveMode {
         if (this.container) {
           this.container.classList.remove("immersive");
         }
+        this.notifyStateChange();
       }
     });
 

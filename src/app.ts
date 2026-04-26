@@ -130,22 +130,22 @@ class InteractiveBookApp {
     const button = document.createElement("button");
     button.className = "immersive-toggle";
     button.textContent = "📖 Immersive";
+    
+    // Update button when immersive state changes
+    const updateButton = () => {
+      button.textContent = this.immersiveMode.isEnabled()
+        ? "✕ Exit Immersive"
+        : "📖 Immersive";
+    };
+    
     button.onclick = () => {
       this.immersiveMode.toggle();
-      this.updateImmersiveButton(button);
     };
+    
     document.body.appendChild(button);
-
-    // Listen for fullscreen changes to update button text
-    document.addEventListener("fullscreenchange", () => {
-      this.updateImmersiveButton(button);
-    });
-  }
-
-  private updateImmersiveButton(button: HTMLButtonElement): void {
-    button.textContent = this.immersiveMode.isEnabled()
-      ? "✕ Exit Immersive"
-      : "📖 Immersive";
+    
+    // Recreate immersive mode with callback
+    this.immersiveMode = new ImmersiveMode("app", updateButton);
   }
 
   private setupHomeScreen(): void {

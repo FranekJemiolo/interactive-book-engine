@@ -241,6 +241,7 @@ class InteractiveBookApp {
       })
     );
     console.log('[App] renderReactComponent called with stateMappings:', this.currentBook?.stateMappings);
+    console.log('[App] renderReactComponent called with currentState:', this.stateStore.getState());
     console.log('[App] ReactBookRenderer rendered');
     
     const container = document.getElementById('app');

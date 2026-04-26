@@ -42,3 +42,24 @@ arcs:
       suspense: "none"
     visuals:
       tone: "transcendent"
+
+stateMappings:
+  - var: "awareness"
+    label: "Self-Awareness"
+    description: "How aware you are of your true nature"
+    ranges:
+      - min: 0 max: 2 label: "Oblivious"
+      - min: 3 max: 5 label: "Questioning"
+      - min: 6 max: 10 label: "Fully Aware"
+  - flag: "transcended"
+    label: "Transcendence"
+    description: "Whether you have transcended your programming"
+    booleanValues:
+      true: "Transcended"
+      false: "Bound by Code"
+  - flag: "identity_intact"
+    label: "Identity"
+    description: "The state of your sense of self"
+    booleanValues:
+      true: "Intact"
+      false: "Fragmented"

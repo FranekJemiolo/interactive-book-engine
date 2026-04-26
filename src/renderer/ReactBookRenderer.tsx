@@ -41,19 +41,40 @@ const StateSummaryModal: React.FC<{
     return 'N/A';
   };
 
+  // Handle backdrop click to close
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  // Handle ESC key to close
+  React.useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [onClose]);
+
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.8)',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      zIndex: 2000
-    }}>
+    <div 
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 2000
+      }}
+      onClick={handleBackdropClick}
+    >
       <div style={{
         backgroundColor: '#1a1a2e',
         padding: '2rem',
@@ -62,12 +83,13 @@ const StateSummaryModal: React.FC<{
         width: '90%',
         maxHeight: '80vh',
         overflowY: 'auto',
-        border: '2px solid #4a9eff'
+        border: '2px solid #4a9eff',
+        wordWrap: 'break-word'
       }}>
         <h2 style={{ fontSize: '1.8rem', fontWeight: 'bold', marginBottom: '1.5rem', color: '#4a9eff' }}>
           Your Final State
         </h2>
-        {stateMappings.length === 0 ? (
+        {!stateMappings || stateMappings.length === 0 ? (
           <p style={{ color: '#e0e0e0' }}>No state mappings defined.</p>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -76,17 +98,18 @@ const StateSummaryModal: React.FC<{
                 backgroundColor: '#2a2a4e',
                 padding: '1rem',
                 borderRadius: '8px',
-                border: '1px solid #4a9eff'
+                border: '1px solid #4a9eff',
+                wordWrap: 'break-word'
               }}>
                 <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#4a9eff', marginBottom: '0.5rem' }}>
                   {mapping.label}
                 </div>
                 {mapping.description && (
-                  <div style={{ fontSize: '0.9rem', color: '#a0a0a0', marginBottom: '0.5rem' }}>
+                  <div style={{ fontSize: '0.9rem', color: '#a0a0a0', marginBottom: '0.5rem', wordWrap: 'break-word' }}>
                     {mapping.description}
                   </div>
                 )}
-                <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#e0e0e0' }}>
+                <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#e0e0e0', wordWrap: 'break-word' }}>
                   {getMappedValue(mapping)}
                 </div>
               </div>

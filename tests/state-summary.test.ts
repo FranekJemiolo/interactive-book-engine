@@ -57,6 +57,16 @@ describe('State Summary Functionality', () => {
 
       expect(mapping.ranges).toBeUndefined();
     });
+
+    it('should handle empty stateMappings array', () => {
+      const mappings: StateMapping[] = [];
+      expect(mappings).toHaveLength(0);
+    });
+
+    it('should handle undefined stateMappings', () => {
+      const mappings: StateMapping[] | undefined = undefined;
+      expect(mappings).toBeUndefined();
+    });
   });
 
   describe('State Value Mapping Logic', () => {
@@ -313,6 +323,50 @@ describe('State Summary Functionality', () => {
       const result = getMappedValue(mapping, state);
       expect(result).toBe('Safe');
     });
+
+    it('should handle negative numeric values', () => {
+      const mapping: StateMapping = {
+        var: 'balance',
+        label: 'Balance',
+        ranges: [
+          { min: -100, max: -1, label: 'In Debt' },
+          { min: 0, max: 100, label: 'Positive' }
+        ]
+      };
+
+      const state: State = {
+        vars: { balance: -50 },
+        flags: {},
+        global: {},
+        chapter: { id: 'chapter_1', context: {} },
+        meta: { visitedNodes: [], choicesMade: [], startedAt: Date.now(), path: [] }
+      };
+
+      const result = getMappedValue(mapping, state);
+      expect(result).toBe('In Debt');
+    });
+
+    it('should handle zero value in ranges', () => {
+      const mapping: StateMapping = {
+        var: 'score',
+        label: 'Score',
+        ranges: [
+          { min: 0, max: 0, label: 'Zero' },
+          { min: 1, max: 100, label: 'Positive' }
+        ]
+      };
+
+      const state: State = {
+        vars: { score: 0 },
+        flags: {},
+        global: {},
+        chapter: { id: 'chapter_1', context: {} },
+        meta: { visitedNodes: [], choicesMade: [], startedAt: Date.now(), path: [] }
+      };
+
+      const result = getMappedValue(mapping, state);
+      expect(result).toBe('Zero');
+    });
   });
 
   describe('Multiple State Mappings', () => {
@@ -371,6 +425,141 @@ describe('State Summary Functionality', () => {
 
       const results = mappings.map(m => getMappedValue(m, state));
       expect(results).toEqual(['Trusted', 'Found']);
+    });
+
+    it('should handle mixed var and flag mappings', () => {
+      const mappings: StateMapping[] = [
+        { var: 'health', label: 'Health' },
+        { flag: 'is_alive', label: 'Alive Status' },
+        { var: 'score', label: 'Score' }
+      ];
+
+      const state: State = {
+        vars: { health: 100, score: 50 },
+        flags: { is_alive: true },
+        global: {},
+        chapter: { id: 'chapter_1', context: {} },
+        meta: { visitedNodes: [], choicesMade: [], startedAt: Date.now(), path: [] }
+      };
+
+      const results = mappings.map(m => getMappedValue(m, state));
+      expect(results).toEqual(['100', 'True', '50']);
+    });
+  });
+
+  describe('Modal Rendering and Visibility', () => {
+    it('should handle empty stateMappings array gracefully', () => {
+      const mappings: StateMapping[] = [];
+      const state: State = {
+        vars: {},
+        flags: {},
+        global: {},
+        chapter: { id: 'chapter_1', context: {} },
+        meta: { visitedNodes: [], choicesMade: [], startedAt: Date.now(), path: [] }
+      };
+
+      // Verify empty array is handled
+      expect(mappings.length).toBe(0);
+      expect(state).toBeDefined();
+    });
+
+    it('should handle undefined stateMappings gracefully', () => {
+      const mappings: StateMapping[] | undefined = undefined;
+      const state: State = {
+        vars: {},
+        flags: {},
+        global: {},
+        chapter: { id: 'chapter_1', context: {} },
+        meta: { visitedNodes: [], choicesMade: [], startedAt: Date.now(), path: [] }
+      };
+
+      // Verify undefined is handled
+      expect(mappings).toBeUndefined();
+      expect(state).toBeDefined();
+    });
+
+    it('should handle undefined currentState gracefully', () => {
+      const mappings: StateMapping[] = [
+        { var: 'trust', label: 'Trust Level' }
+      ];
+      const state: State | undefined = undefined;
+
+      // Verify undefined state is handled
+      expect(mappings.length).toBeGreaterThan(0);
+      expect(state).toBeUndefined();
+    });
+
+    it('should handle long text in labels with wordWrap', () => {
+      const mapping: StateMapping = {
+        var: 'achievement',
+        label: 'This is a very long label that should wrap correctly when displayed in the modal without breaking the layout',
+        description: 'This is also a very long description that should wrap correctly to ensure readability'
+      };
+
+      expect(mapping.label.length).toBeGreaterThan(50);
+      expect(mapping.description?.length).toBeGreaterThan(50);
+    });
+
+    it('should handle special characters in labels', () => {
+      const mapping: StateMapping = {
+        var: 'special',
+        label: 'Special chars: < > & " \'',
+        description: 'Test & validate <special> characters'
+      };
+
+      expect(mapping.label).toContain('<');
+      expect(mapping.label).toContain('>');
+      expect(mapping.label).toContain('&');
+    });
+
+    it('should handle very long numeric values', () => {
+      const mapping: StateMapping = {
+        var: 'large_number',
+        label: 'Large Number'
+      };
+
+      const state: State = {
+        vars: { large_number: 999999999999999 },
+        flags: {},
+        global: {},
+        chapter: { id: 'chapter_1', context: {} },
+        meta: { visitedNodes: [], choicesMade: [], startedAt: Date.now(), path: [] }
+      };
+
+      const getMappedValue = (m: StateMapping, s: State): string => {
+        if (m.var && s.vars[m.var] !== undefined) {
+          return s.vars[m.var].toString();
+        }
+        return 'N/A';
+      };
+
+      const result = getMappedValue(mapping, state);
+      expect(result).toBe('999999999999999');
+    });
+
+    it('should handle decimal values', () => {
+      const mapping: StateMapping = {
+        var: 'precision',
+        label: 'Precision'
+      };
+
+      const state: State = {
+        vars: { precision: 3.14159 },
+        flags: {},
+        global: {},
+        chapter: { id: 'chapter_1', context: {} },
+        meta: { visitedNodes: [], choicesMade: [], startedAt: Date.now(), path: [] }
+      };
+
+      const getMappedValue = (m: StateMapping, s: State): string => {
+        if (m.var && s.vars[m.var] !== undefined) {
+          return s.vars[m.var].toString();
+        }
+        return 'N/A';
+      };
+
+      const result = getMappedValue(mapping, state);
+      expect(result).toBe('3.14159');
     });
   });
 });

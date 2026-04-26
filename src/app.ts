@@ -311,6 +311,7 @@ class InteractiveBookApp {
         // Load state from URL
         this.stateStore.deserialize(JSON.stringify(urlState));
         console.log("Loaded state from URL");
+        console.log("State after deserialization:", this.stateStore.getState());
       } else {
         // Check for saved progress from localStorage
         this.progressManager.loadProgress();

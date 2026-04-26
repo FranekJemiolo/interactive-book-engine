@@ -535,6 +535,34 @@ export const ReactBookRenderer: React.FC<ReactBookRendererProps> = ({
             ))}
           </div>
         )}
+
+        {/* End of Book - Show State Summary Button */}
+        {choices.length === 0 && frames.length > 0 && stateMappings && stateMappings.length > 0 && currentState && (
+          <div style={{ marginTop: '3rem', textAlign: 'center' }}>
+            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#4a9eff', marginBottom: '1rem' }}>
+              📖 The End
+            </div>
+            <button
+              onClick={() => {
+                console.log('[ReactBookRenderer] Show State Summary clicked');
+                setShowStateSummary(true);
+              }}
+              style={{
+                backgroundColor: '#4a9eff',
+                border: 'none',
+                color: '#1a1a2e',
+                padding: '1rem 2rem',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontSize: '1.1rem',
+                fontWeight: 'bold',
+                minWidth: '250px'
+              }}
+            >
+              View Your Final State
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Share Button */}

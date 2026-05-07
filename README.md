@@ -21,6 +21,97 @@ The system is divided into 4 layers:
 3. **UX Layer** (rendering + interaction)
 4. **Tooling Layer** (graph, replay, analytics - optional)
 
+### Architecture Diagram
+
+```mermaid
+graph TD
+    A[Browser] --> B[Interactive Book Engine]
+    
+    B --> C[Content Layer]
+    B --> D[Engine Layer]
+    B --> E[UX Layer]
+    B --> F[Tooling Layer]
+    
+    subgraph "Content Layer"
+        C --> G[YAML Adapter]
+        C --> H[Database Adapter]
+        G --> I[Book.yaml]
+        G --> J[Chapters/]
+        G --> K[Nodes/]
+        H --> L[External Database]
+    end
+    
+    subgraph "Engine Layer"
+        D --> M[State Manager]
+        D --> N[Node Lifecycle]
+        D --> O[Chapter System]
+        D --> P[Condition Evaluator]
+        D --> Q[Progress Tracker]
+        
+        M --> R[Variables Store]
+        M --> S[Flags Store]
+        M --> T[Player Progress]
+        N --> U[Node Execution]
+        O --> V[Chapter Navigation]
+        P --> W[Conditional Logic]
+        Q --> X[Save System]
+    end
+    
+    subgraph "UX Layer"
+        E --> Y[DOM Renderer]
+        E --> Z[Input Handler]
+        E --> AA[UI Components]
+        E --> BB[Responsive Design]
+        
+        Y --> CC[Text Display]
+        Y --> DD[Choice Buttons]
+        Z --> EE[Click Events]
+        Z --> FF[Keyboard Events]
+        AA --> GG[Navigation]
+        AA --> HH[Progress Bar]
+        BB --> II[Mobile Layout]
+        BB --> JJ[Desktop Layout]
+    end
+    
+    subgraph "Tooling Layer"
+        F --> KK[Story Graph]
+        F --> LL[Replay System]
+        F --> MM[Analytics]
+        F --> NN[Debug Tools]
+        
+        KK --> OO[Node Connections]
+        KK --> PP[Path Visualization]
+        LL --> QQ[Session Recording]
+        LL --> RR[Playback Engine]
+        MM --> SS[Choice Analytics]
+        MM --> TT[Progress Metrics]
+        NN --> UU[Variable Inspector]
+        NN --> VV[Condition Debugger]
+    end
+    
+    subgraph "Storage"
+        X --> WW[localStorage]
+        Q --> WW
+        T --> XX[Session Storage]
+    end
+    
+    subgraph "Content Structure"
+        I --> YY[Book Metadata]
+        J --> ZZ[Chapter Definitions]
+        K --> AAA[Node Content]
+        AAA --> BBB[Text Content]
+        AAA --> CCC[Choice Options]
+        AAA --> DDD[Conditions]
+        AAA --> EEE[Effects]
+    end
+    
+    subgraph "Build System"
+        FFF[Vite Build] --> GGG[TypeScript]
+        FFF --> HHH[Single File Output]
+        FFF --> III[GitHub Pages Ready]
+    end
+```
+
 ## Project Structure
 
 ```

@@ -1,7 +1,7 @@
 {
   "name": "interactive-book-engine",
   "version": "1.0.0",
-  "description": "Interactive Narrative Book Engine - GitHub Pages deployable interactive fiction engine",
+  "description": "A simple tool for making choose-your-own-adventure stories. Write content in YAML files and deploy to GitHub Pages.",
   "main": "dist/app.js",
   "scripts": {
     "dev": "vite",
